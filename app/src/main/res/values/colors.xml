@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="nav_background">#5B6BF5</color>
+    <color name="nav_background_dark">#374192</color>
+
+    <color name="hover">#D17300</color>
+    <color name="hover_dark">#8F4E00</color>
+
+    <color name="main_background">#E2E2E2</color>
+    <color name="main_background_dark">#727272</color>
+
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+</resources>

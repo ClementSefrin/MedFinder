@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SAE_DAM</string>
+    <string name="title_home">Home</string>
+    <string name="title_scan">Scan</string>
+    <string name="title_cip">CIP</string>
+    <string name="title_account">Account</string>
+</resources>
