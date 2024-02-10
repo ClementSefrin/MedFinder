@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import iut.dam.sae_dam.databinding.FragmentAccountBinding;
 
-
 public class AccountFragment extends Fragment {
     private FragmentAccountBinding binding;
 

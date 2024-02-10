@@ -13,13 +13,11 @@ import androidx.lifecycle.ViewModelProvider;
 import iut.dam.sae_dam.databinding.FragmentCipBinding;
 
 public class CipFragment extends Fragment {
-
     private FragmentCipBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        CipViewModel cipViewModel =
-                new ViewModelProvider(this).get(CipViewModel.class);
+        CipViewModel cipViewModel = new ViewModelProvider(this).get(CipViewModel.class);
 
         binding = FragmentCipBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

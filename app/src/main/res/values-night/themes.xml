@@ -2,11 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.SAE_DAM" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
 
-        <item name="colorPrimary">@color/nav_background</item>
-        <item name="colorPrimaryVariant">@color/hover</item>
+        <item name="colorPrimary">@color/nav_background_dark</item>
+        <item name="colorPrimaryVariant">@color/hover_dark</item>
         <item name="android:navigationBarColor">?attr/colorPrimary</item>
-        <item name="background">@color/main_background</item>
+        <item name="background">@color/main_background_dark</item>
 
         <item name="android:statusBarColor">?attr/colorPrimary</item>
+
     </style>
 </resources>

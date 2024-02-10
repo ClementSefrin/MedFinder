@@ -4,9 +4,10 @@
 
         <item name="colorPrimary">@color/nav_background</item>
         <item name="colorPrimaryVariant">@color/hover</item>
-        <item name="android:navigationBarColor">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/colorPrimary</item> <!--La barre en haut de l'écran-->
         <item name="background">@color/main_background</item>
 
-        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item> <!--La barre en bas de l'écran-->
+
     </style>
 </resources>
