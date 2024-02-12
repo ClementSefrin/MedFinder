@@ -1,0 +1,42 @@
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cv"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/cardBackgroundColor"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/nomMedicamentTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nom du medicament"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/codeCipTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nomMedicamentTV"
+            android:text="Code cip"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/dateSaisieTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/codeCipTV"
+            android:layout_marginTop="5dp"
+            android:text="Date de saisie"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

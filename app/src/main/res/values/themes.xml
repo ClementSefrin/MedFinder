@@ -8,6 +8,7 @@
         <item name="background">@color/main_background</item>
 
         <item name="android:statusBarColor">?attr/colorPrimary</item> <!--La barre en bas de l'écran-->
+        <item name="cardBackgroundColor">@color/histo_saisie_background</item>
 
     </style>
 </resources>

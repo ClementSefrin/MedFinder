@@ -24,7 +24,7 @@ public class ScanFragment extends Fragment {
         binding = FragmentScanBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textAccount;
+        final TextView textView = binding.textScan;
         scanViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
