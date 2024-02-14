@@ -10,5 +10,9 @@
         <item name="android:statusBarColor">?attr/colorPrimary</item> <!--La barre en bas de l'écran-->
         <item name="cardBackgroundColor">@color/histo_saisie_background</item>
 
+        <item name="android:textColor">@color/text</item>
+
+        <item name="buttonBackground">@color/button</item>
+
     </style>
 </resources>

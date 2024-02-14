@@ -7,10 +7,17 @@
     <color name="hover_dark">#8F4E00</color>
 
     <color name="main_background">#E2E2E2</color>
-    <color name="main_background_dark">#474747</color>
+    <color name="main_background_dark">@color/black</color>
 
     <color name="histo_saisie_background">@color/white</color>
-    <color name="histo_saisie_background_dark">#727272</color>
+    <color name="histo_saisie_background_dark">#191919</color>
+
+
+    <color name="button">#293EF4</color>
+    <color name="button_dark">#1E2CA9</color>
+
+    <color name="text">@color/black</color>
+    <color name="text_dark">#D1D1D1</color>
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
