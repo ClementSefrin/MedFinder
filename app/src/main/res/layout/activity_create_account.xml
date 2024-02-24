@@ -68,6 +68,7 @@
                 android:autofillHints="InputNom"
                 android:hint="@string/FisrtName"
                 android:inputType="textPersonName"
+                android:drawableStart="@drawable/ic_edit"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -78,6 +79,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
                 android:autofillHints="InputNom"
+                android:drawableStart="@drawable/ic_edit"
                 android:hint="@string/editText_SecondName"
                 android:inputType="text"
                 android:textSize="20sp" />
@@ -89,6 +91,8 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
                 android:autofillHints="InputMail"
+                android:drawableStart="@drawable/ic_mail"
+
                 android:hint="@string/EditTextMail"
                 android:inputType="textEmailAddress" />
 
