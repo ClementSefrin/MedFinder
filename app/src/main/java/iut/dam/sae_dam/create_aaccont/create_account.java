@@ -1,8 +1,10 @@
-package iut.dam.sae_dam;
+package iut.dam.sae_dam.create_aaccont;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import iut.dam.sae_dam.R;
 
 public class create_account extends AppCompatActivity {
 

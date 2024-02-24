@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SAE_DAM">
         <activity
-            android:name=".create_account"
+            android:name=".create_aaccont.create_account"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

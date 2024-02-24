@@ -8,13 +8,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import iut.dam.sae_dam.create_aaccont.create_account;
 import iut.dam.sae_dam.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,8 +23,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /* accées à la page de création de compte */
+        /*
         Intent intent = new Intent(this, create_account.class);
         startActivity(intent);
+        */
 
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
