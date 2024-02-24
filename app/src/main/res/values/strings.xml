@@ -5,8 +5,8 @@
     <string name="title_cip">CIP</string>
     <string name="title_account">Account</string>
     <string name="create_account">Create account</string>
-    <string name="personal_information">Personal Information\n</string>
-    <string name="FisrtName">First Name\n</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="FisrtName">First Name</string>
     <string name="editText_SecondName">Second Name</string>
     <string name="EditTextMail">Mail</string>
     <string name="Commune">City</string>
