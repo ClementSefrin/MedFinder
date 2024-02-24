@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".create_aaccont.create_account">
+    tools:context=".create_account.create_account">
 
     <LinearLayout
         android:id="@+id/linearLayout"

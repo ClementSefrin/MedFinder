@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-
+    implementation(files("libs/mariadb-java-client-1.8.0.jar"))
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
