@@ -60,8 +60,8 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_width="290dp"
+                android:layout_height="58dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
@@ -103,6 +103,8 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
                 android:autofillHints="InputCommune"
+                android:drawableStart="@drawable/ic_city"
+
                 android:hint="@string/Commune"
                 android:inputType="text"
                 android:textColorHint="#546E7A" />
@@ -116,6 +118,8 @@
                 android:autofillHints="InputMdp"
                 android:ems="10"
                 android:hint="@string/EditText_Mdp"
+                android:drawableStart="@drawable/ic_password"
+
                 android:inputType="textPassword"
                 android:textColorHint="#546E7A" />
 
@@ -128,6 +132,8 @@
                 android:autofillHints="InputMdp"
                 android:ems="10"
                 android:hint="@string/EditText_MdpVerify"
+                android:drawableStart="@drawable/ic_lock"
+
                 android:inputType="textPassword"
                 android:textColorHint="#546E7A" />
 
