@@ -4,4 +4,13 @@
     <string name="title_scan">Scan</string>
     <string name="title_cip">CIP</string>
     <string name="title_account">Account</string>
+    <string name="create_account">Create account</string>
+    <string name="personal_information">Personal Information\n</string>
+    <string name="FisrtName">First Name\n</string>
+    <string name="editText_SecondName">Second Name</string>
+    <string name="EditTextMail">Mail</string>
+    <string name="Commune">City</string>
+    <string name="EditText_Mdp">Password</string>
+    <string name="EditText_MdpVerify">Verify Password</string>
+    <string name="Btn_Validation">Create</string>
 </resources>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".create_account">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:background="@drawable/top_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        android:orientation="horizontal">
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_account"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        tools:ignore="MissingConstraints" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="540dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="30dp"
+        app:cardElevation="21dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="540dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@string/personal_information"
+                android:textColor="@color/black"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:autofillHints="InputNom"
+                android:hint="@string/FisrtName"
+                android:inputType="textPersonName"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/editText_SecondName"
+                android:layout_width="290dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:autofillHints="InputNom"
+                android:hint="@string/editText_SecondName"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/EditText_Mail"
+                android:layout_width="311dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:autofillHints="InputMail"
+                android:hint="@string/EditTextMail"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/EditText_Commune"
+                android:layout_width="290dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:autofillHints="InputCommune"
+                android:hint="@string/Commune"
+                android:inputType="text"
+                android:textColorHint="#546E7A" />
+
+            <EditText
+                android:id="@+id/EditText_Mdp"
+                android:layout_width="290dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:autofillHints="InputMdp"
+                android:ems="10"
+                android:hint="@string/EditText_Mdp"
+                android:inputType="textPassword"
+                android:textColorHint="#546E7A" />
+
+            <EditText
+                android:id="@+id/EditText_MdpVerify"
+                android:layout_width="290dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:autofillHints="InputMdp"
+                android:ems="10"
+                android:hint="@string/EditText_MdpVerify"
+                android:inputType="textPassword"
+                android:textColorHint="#546E7A" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/Btn_Validation"
+        android:layout_width="311dp"
+        android:layout_height="74dp"
+        android:text="@string/Btn_Validation"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintVertical_bias="0.171" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
