@@ -10,8 +10,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import data.DatabaseConnection;
 import iut.dam.sae_dam.R;
-import iut.dam.sae_dam.data.DatabaseConnection;
+
 public class create_account extends Activity {
     Connection connect;
     String ConnectionResult = "";
