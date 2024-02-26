@@ -26,13 +26,23 @@
                 android:text="Code CIP"
                 android:textSize="20sp" />
 
-            <EditText
-                android:id="@+id/codeCipET"
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView"
                 android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_height"
                 android:layout_below="@id/codeCipTV"
-                android:layout_height="@dimen/edit_text_height"/>
+                android:hint="Chercher un médicament..."
+                android:inputType="text" />
 
+            <TextView
+                android:id="@+id/medicamentTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/autoCompleteTextView"
+                android:gravity="center"
+                android:textSize="20sp" />
         </RelativeLayout>
+
 
         <RelativeLayout
             android:id="@+id/pharmacieRL"
@@ -51,11 +61,14 @@
                 android:gravity="center"
                 android:text="Pharmacie"
                 android:textSize="20sp" />
-            <EditText
-                android:id="@+id/pharmacieET"
+
+            <AutoCompleteTextView
+                android:id="@+id/pharmacieACTV"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edit_text_height"
-                android:layout_below="@id/pharmacieTV" />
+                android:layout_below="@id/pharmacieTV"
+                android:hint="Chercher une pharmacie..."
+                android:inputType="text" />
 
         </RelativeLayout>
 
@@ -66,9 +79,9 @@
             android:layout_below="@id/pharmacieRL"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:textColor="@color/text_dark"
             android:backgroundTint="?attr/buttonBackground"
             android:text="Signaler"
+            android:textColor="@color/text_dark"
             app:cornerRadius="50dp" />
 
     </RelativeLayout>
