@@ -43,8 +43,12 @@ public class AccountFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
-                        HomeFragment.supprimerHisto();
-                        Toast.makeText(getContext(), "Historique supprimé", Toast.LENGTH_SHORT).show();
+                        boolean test = HomeFragment.supprimerHisto();
+                        if (test)
+                            Toast.makeText(requireContext(), "Historique supprimé", Toast.LENGTH_SHORT).show();
+                        else {
+                            Toast.makeText(requireContext(), "Erreur dans la suppression de l'historique", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 
@@ -67,31 +71,4 @@ public class AccountFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
-    /*
-    public static class DialogDeleteHisto extends DialogFragment {
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the Builder class for convenient dialog construction.
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage("Ce changement est irreversible")
-                    .setPositiveButton("Confirmer", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            HomeFragment.supprimerHisto();
-                            Toast.makeText(getContext(), "Historique supprimé", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    })
-                    .setTitle("Supprimer l'historique");
-            // Create the AlertDialog object and return it.
-            return builder.create();
-        }
-
-    }
-    */
 }

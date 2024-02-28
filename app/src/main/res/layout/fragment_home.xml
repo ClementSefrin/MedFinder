@@ -4,29 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="5dp"
+    android:layout_marginStart="10dp"
     android:layout_marginTop="5dp"
-    android:layout_marginEnd="5dp"
+    android:layout_marginEnd="10dp"
     android:layout_marginBottom="5dp"
     tools:context=".ui.home.HomeFragment">
-
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Afficher saisies" />
-
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btn" />
 
     <ListView
         android:id="@+id/histoSaisieLV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/text"
         android:divider="?attr/background"
         android:dividerHeight="20dp" />
 

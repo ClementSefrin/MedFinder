@@ -2,7 +2,6 @@ package iut.dam.sae_dam.ui.cis;
 // CipFragment.java
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,25 +15,30 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import iut.dam.sae_dam.DataHandling;
 import iut.dam.sae_dam.databinding.FragmentCisBinding;
-import iut.dam.sae_dam.ui.cis.medicaments.Medicament;
-import iut.dam.sae_dam.ui.cis.medicaments.MedicamentAdapter;
-import iut.dam.sae_dam.ui.cis.pharmacies.Pharmacie;
-import iut.dam.sae_dam.ui.cis.pharmacies.PharmacieAdapter;
+import iut.dam.sae_dam.medicaments.Medicament;
+import iut.dam.sae_dam.medicaments.MedicamentAdapter;
+import iut.dam.sae_dam.pharmacies.Pharmacie;
+import iut.dam.sae_dam.pharmacies.PharmacieAdapter;
 import iut.dam.sae_dam.ui.home.HomeFragment;
-import iut.dam.sae_dam.ui.home.saisies.Saisie;
+import iut.dam.sae_dam.saisies.Saisie;
 
 public class CisFragment extends Fragment {
-
     private FragmentCisBinding binding;
     private CisViewModel cisViewModel;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         binding = FragmentCisBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         cisViewModel = new ViewModelProvider(this, new CisViewModel.Factory(requireContext())).get(CisViewModel.class);
+
+        cisViewModel.setMedicineList(DataHandling.getMedicineList());
+        cisViewModel.setPharmacieList(DataHandling.getPharmacieList());
 
         // Code autocomplete //
         AutoCompleteTextView codeCompleteTextView = binding.autoCompleteTextView;
@@ -101,10 +105,8 @@ public class CisFragment extends Fragment {
             }
         });
 
-
         return root;
     }
-
 
     @Override
     public void onDestroyView() {

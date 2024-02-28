@@ -1,4 +1,4 @@
-package iut.dam.sae_dam.ui.cis.pharmacies;
+package iut.dam.sae_dam.pharmacies;
 
 import java.util.Objects;
 

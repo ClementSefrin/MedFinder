@@ -8,7 +8,7 @@
     <string name="pharmacy_title">Pharmacie</string>
     <string name="pharmacy_search">Chercher une pharmacie…</string>
     <string name="report">Signaler</string>
-    <string name="delete_history_dialog_confirm">Voules-vous vraiment supprimer l\'historique des saisies?</string>
+    <string name="delete_history_dialog_confirm">Voulez-vous vraiment supprimer l\'historique des saisies?</string>
     <string name="cancel">Annuler</string>
     <string name="delete">Supprimer</string>
     <string name="delete_history">Supprimer l\'historique</string>

@@ -12,8 +12,6 @@ import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-import java.util.HashMap;
-
 import iut.dam.sae_dam.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +26,12 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        DataHandling d = new DataHandling(this.getApplicationContext());
+        d.init();
+        /*
+        Thread t = new Thread(d);
+        t.start();*/
+
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
         // Passing each menu ID as a set of Ids because each
@@ -39,9 +43,8 @@ public class MainActivity extends AppCompatActivity {
         //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        // Update header text dynamically
-        final TextView headerTextView = findViewById(R.id.header_title);
 
+        final TextView headerTextView = findViewById(R.id.header_title);
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController controller,
