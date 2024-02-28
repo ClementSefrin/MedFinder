@@ -1,7 +1,16 @@
 <resources>
-    <string name="app_name">SAE_DAM</string>
+    <string name="app_name" translatable="false">SAE_DAM</string>
     <string name="title_home">Home</string>
-    <string name="title_scan">Scan</string>
-    <string name="title_cip">CIP</string>
+    <string name="title_scan" translatable="false">Scan</string>
+    <string name="title_cis">New entry</string>
     <string name="title_account">Account</string>
+    <string name="code_cis_title">CIS Code</string>
+    <string name="code_cis_search">Search for a medicine…</string>
+    <string name="pharmacy_title">Pharmacy</string>
+    <string name="pharmacy_search">Search for a pharmacy…</string>
+    <string name="report">Report</string>
+    <string name="delete_history_dialog_confirm">Are you sure you want to delete your history?</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="delete_history">Delete history</string>
 </resources>

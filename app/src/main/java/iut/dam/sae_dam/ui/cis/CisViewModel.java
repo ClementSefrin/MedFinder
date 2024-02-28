@@ -1,4 +1,4 @@
-package iut.dam.sae_dam.ui.cip;
+package iut.dam.sae_dam.ui.cis;
 // CipViewModel.java
 
 import android.content.Context;
@@ -16,19 +16,20 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import iut.dam.sae_dam.ui.cip.medicaments.Medicament;
-import iut.dam.sae_dam.ui.cip.pharmacies.Pharmacie;
+import iut.dam.sae_dam.ui.cis.medicaments.Medicament;
+import iut.dam.sae_dam.ui.cis.pharmacies.Pharmacie;
 
-public class CipViewModel extends ViewModel {
+public class CisViewModel extends ViewModel {
 
     private List<Medicament> medicineList = new ArrayList<>();
     private List<Pharmacie> pharmacieList = new ArrayList<>();
 
-    public CipViewModel(Context context) {
+    public CisViewModel(Context context) {
         loadDataFromJson(context);
     }
 
-    private void loadDataFromJson(Context context) {
+
+    public void loadDataFromJson(Context context) {
         try {
             // Medicaments //
             InputStream inputStream = context.getAssets().open("medicaments.json");
@@ -44,9 +45,7 @@ public class CipViewModel extends ViewModel {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                Medicament medicine = new Medicament();
-                medicine.setCIS(jsonObject.getInt("CIS"));
-                medicine.setDenomination(jsonObject.getString("denomination"));
+                Medicament medicine = new Medicament(jsonObject.getInt("CIS"), jsonObject.getString("denomination"));
 
                 medicineList.add(medicine);
             }
@@ -65,9 +64,7 @@ public class CipViewModel extends ViewModel {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                Pharmacie pharmacie = new Pharmacie();
-                pharmacie.setId(jsonObject.getString("FID"));
-                pharmacie.setName(jsonObject.getString("name"));
+                Pharmacie pharmacie = new Pharmacie(jsonObject.getString("name"));
 
                 pharmacieList.add(pharmacie);
             }
@@ -97,7 +94,7 @@ public class CipViewModel extends ViewModel {
 
         @Override
         public <T extends ViewModel> T create(Class<T> modelClass) {
-            return (T) new CipViewModel(context);
+            return (T) new CisViewModel(context);
         }
     }
 }

@@ -1,5 +1,5 @@
-package iut.dam.sae_dam.ui.cip.medicaments;
-// MedicineAdapter.java
+package iut.dam.sae_dam.ui.cis.pharmacies;
+
 import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
@@ -10,36 +10,41 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicamentAdapter extends ArrayAdapter<Medicament> implements Filterable {
 
-    private List<Medicament> medicineListFull;  // Full list of medicines for filtering
+public class PharmacieAdapter extends ArrayAdapter<Pharmacie> implements Filterable {
 
-    public MedicamentAdapter(Context context, List<Medicament> medicineList) {
-        super(context, android.R.layout.simple_dropdown_item_1line, medicineList);
-        medicineListFull = new ArrayList<>(medicineList);
+    private List<Pharmacie> pharmaciesListFull;  // Full list of medicines for filtering
+
+    public PharmacieAdapter(Context context, List<Pharmacie> pharmaciesList) {
+        super(context, android.R.layout.simple_dropdown_item_1line, pharmaciesList);
+        pharmaciesListFull = new ArrayList<>(pharmaciesList);
+    }
+
+
+    public boolean contains(String name) {
+        return pharmaciesListFull.contains(new Pharmacie(name));
     }
 
     @NonNull
     @Override
     public Filter getFilter() {
-        return medicineFilter;
+        return pharmacieFilter;
     }
 
-    private Filter medicineFilter = new Filter() {
+    private Filter pharmacieFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
-            List<Medicament> suggestions = new ArrayList<>();
+            List<Pharmacie> suggestions = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
-                suggestions.addAll(medicineListFull);
+                suggestions.addAll(pharmaciesListFull);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (Medicament medicine : medicineListFull) {
-                    if (String.valueOf(medicine.getCIS()).contains(filterPattern) ||
-                            medicine.getDenomination().toLowerCase().contains(filterPattern)) {
-                        suggestions.add(medicine);
+                for (Pharmacie pharmacie : pharmaciesListFull) {
+                    if (pharmacie.getName().toLowerCase().contains(filterPattern)) {
+                        suggestions.add(pharmacie);
                     }
                 }
             }
@@ -58,7 +63,8 @@ public class MedicamentAdapter extends ArrayAdapter<Medicament> implements Filte
 
         @Override
         public CharSequence convertResultToString(Object resultValue) {
-            return String.valueOf(((Medicament) resultValue).getCIS());
+            return String.valueOf(((Pharmacie) resultValue).getName());
         }
     };
+
 }

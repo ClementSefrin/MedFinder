@@ -8,14 +8,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textAccount"
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:layout_height="2dp" />
+
+        <TextView
+            android:id="@+id/supprimerHistoTV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:layout_below="@id/divider1"
+            android:text="@string/delete_history"
+            android:textColor="#F00"
+            android:textSize="30sp"
+            android:textStyle="bold"></TextView>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/supprimerHistoTV" />
 
     </RelativeLayout>
 </ScrollView>

@@ -7,16 +7,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import java.util.HashMap;
 
 import iut.dam.sae_dam.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+
 
     private ActivityMainBinding binding;
 
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         /*AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_scan, R.id.navigation_cip, R.id.navigation_account)
+                R.id.navigation_home, R.id.navigation_scan, R.id.navigation_cis, R.id.navigation_account)
                 .build();*/
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -45,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDestinationChanged(@NonNull NavController controller,
                                              @NonNull NavDestination destination, Bundle arguments) {
-                // Set the header text based on the destination's label
                 headerTextView.setText(destination.getLabel());
             }
         });

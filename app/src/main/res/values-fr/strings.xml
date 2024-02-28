@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_home">Menu principal</string>
+    <string name="title_cis">Nouvelle saisie</string>
+    <string name="title_account">Compte</string>
+    <string name="code_cis_title">Code CIS</string>
+    <string name="code_cis_search">Chercher un médicament…</string>
+    <string name="pharmacy_title">Pharmacie</string>
+    <string name="pharmacy_search">Chercher une pharmacie…</string>
+    <string name="report">Signaler</string>
+    <string name="delete_history_dialog_confirm">Voules-vous vraiment supprimer l\'historique des saisies?</string>
+    <string name="cancel">Annuler</string>
+    <string name="delete">Supprimer</string>
+    <string name="delete_history">Supprimer l\'historique</string>
+</resources>

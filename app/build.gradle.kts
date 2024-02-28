@@ -45,4 +45,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     implementation("org.json:json:20210307")
+    implementation("com.google.code.gson:gson:2.10")
+
 }

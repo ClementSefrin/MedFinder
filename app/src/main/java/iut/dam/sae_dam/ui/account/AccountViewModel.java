@@ -6,14 +6,8 @@ import androidx.lifecycle.ViewModel;
 
 
 public class AccountViewModel extends ViewModel {
-    private final MutableLiveData<String> mText;
 
     public AccountViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("Account fragment");
     }
 
-    public LiveData<String> getText() {
-        return mText;
-    }
 }
