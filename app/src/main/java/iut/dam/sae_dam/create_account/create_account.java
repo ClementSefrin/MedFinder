@@ -59,7 +59,7 @@ public class create_account extends AppCompatActivity {
                 return null;
             }
         }
-    
+
         @Override
         protected void onPostExecute(Connection connection) {
             super.onPostExecute(connection);
