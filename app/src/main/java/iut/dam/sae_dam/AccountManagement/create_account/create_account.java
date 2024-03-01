@@ -1,4 +1,4 @@
-package iut.dam.sae_dam.create_account;
+package iut.dam.sae_dam.AccountManagement.create_account;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -22,8 +22,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import data.DatabaseConnection;
+import iut.dam.sae_dam.AccountManagement.login.login;
 import iut.dam.sae_dam.R;
-import iut.dam.sae_dam.login.login;
 
 public class create_account extends AppCompatActivity {
     Connection connect;

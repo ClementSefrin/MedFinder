@@ -1,6 +1,5 @@
-package iut.dam.sae_dam.login;
+package iut.dam.sae_dam.AccountManagement.login;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -10,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import iut.dam.sae_dam.MainActivity;
 import iut.dam.sae_dam.R;
-import iut.dam.sae_dam.create_account.create_account;
+import iut.dam.sae_dam.AccountManagement.create_account.create_account;
 
 
 public class login extends AppCompatActivity {

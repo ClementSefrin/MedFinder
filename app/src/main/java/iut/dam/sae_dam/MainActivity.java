@@ -1,6 +1,5 @@
 package iut.dam.sae_dam;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -13,9 +12,7 @@ import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-import iut.dam.sae_dam.create_account.create_account;
 import iut.dam.sae_dam.databinding.ActivityMainBinding;
-import iut.dam.sae_dam.login.login;
 
 public class MainActivity extends AppCompatActivity {
 

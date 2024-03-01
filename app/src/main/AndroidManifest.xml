@@ -16,10 +16,10 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".create_account.create_account"
+            android:name=".AccountManagement.create_account.create_account"
             android:exported="false" />
         <activity
-            android:name=".login.login"
+            android:name=".AccountManagement.login.login"
             android:exported="true">
 
             <intent-filter>
