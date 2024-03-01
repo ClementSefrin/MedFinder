@@ -2,12 +2,10 @@ package data;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
 public class DatabaseConnection {
-
-    private static final String DATABASE_URL = "";
-    private static final String USERNAME = "";
-    private static final String PASSWORD = "";
+    private static final String DATABASE_URL = "jdbc:mariadb://194.164.50.105:3306/NicoWeb";
+    private static final String USERNAME = "nicolas";
+    private static final String PASSWORD = "Nicolas2001";
 
     public static Connection getConnection() throws SQLException {
         try {
@@ -17,7 +15,6 @@ public class DatabaseConnection {
             e.printStackTrace();
             return null;
         }
-
     }
 
     public static void closeConnection(Connection connection) {

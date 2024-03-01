@@ -13,4 +13,11 @@
     <string name="EditText_Mdp">Password</string>
     <string name="EditText_MdpVerify">Verify Password</string>
     <string name="Btn_Validation">Create</string>
-</resources>
+   <string name="textView_Connexion">Connection</string>
+<string name="Btn_forget_password">Forgot password ?</string>
+<string name="Btn_Inscription">No account ? Sign in</string>
+<string name="Connection">Sign up</string>
+<string name="textView_login">Login</string>
+<string name="Btn_AlreadyHaveAccount">Already have account ?</string>
+
+    </resources>

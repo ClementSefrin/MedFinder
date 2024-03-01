@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".create_account.create_account">
+    tools:context=".login.login">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -22,7 +22,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/create_account"
+        android:text="@string/textView_login"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -35,9 +35,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="540dp"
+        android:layout_height="450dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="30dp"
         app:cardElevation="21dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,92 +47,43 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="540dp"
+            android:layout_height="450dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:text="@string/personal_information"
+                android:text="@string/textView_Connexion"
                 android:textColor="@color/black"
                 android:textSize="32sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/editText_FirstName"
-                android:layout_width="290dp"
-                android:layout_height="58dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:autofillHints="InputNom"
-                android:hint="@string/FisrtName"
-                android:inputType="textPersonName"
-                android:drawableStart="@drawable/ic_edit"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/editText_SecondName"
-                android:layout_width="290dp"
-                android:layout_height="58dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
-                android:autofillHints="InputNom"
-                android:drawableStart="@drawable/ic_edit"
-                android:hint="@string/editText_SecondName"
-                android:inputType="text"
-                android:textSize="20sp" />
+                android:textStyle="bold"
+                />
 
             <EditText
                 android:id="@+id/EditText_Mail"
                 android:layout_width="290dp"
                 android:layout_height="58dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
                 android:autofillHints="InputMail"
                 android:drawableStart="@drawable/ic_mail"
-
                 android:hint="@string/EditTextMail"
                 android:inputType="textEmailAddress" />
 
-            <EditText
-                android:id="@+id/EditText_City"
-                android:layout_width="290dp"
-                android:layout_height="58dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
-                android:autofillHints="InputCommune"
-                android:drawableStart="@drawable/ic_city"
-                android:hint="@string/Commune"
-                android:inputType="text"
-                android:textColorHint="#546E7A" />
+
 
             <EditText
                 android:id="@+id/EditText_Mdp"
                 android:layout_width="290dp"
                 android:layout_height="58dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="25dp"
                 android:autofillHints="InputMdp"
+                android:drawableStart="@drawable/ic_password"
                 android:ems="10"
                 android:hint="@string/EditText_Mdp"
-                android:drawableStart="@drawable/ic_password"
-
-                android:inputType="textPassword"
-                android:textColorHint="#546E7A" />
-
-            <EditText
-                android:id="@+id/EditText_MdpVerify"
-                android:layout_width="290dp"
-                android:layout_height="58dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
-                android:autofillHints="InputMdp"
-                android:ems="10"
-                android:hint="@string/EditText_MdpVerify"
-                android:drawableStart="@drawable/ic_lock"
 
                 android:inputType="textPassword"
                 android:textColorHint="#546E7A" />
@@ -140,32 +91,50 @@
             <Button
                 android:id="@+id/Btn_AlreadyAccount"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="58dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
                 android:background="@android:color/transparent"
                 android:drawableEnd="@drawable/ic_redirection_arrow"
                 android:gravity="center_vertical"
-                android:text="@string/Btn_AlreadyHaveAccount"
+                android:text="@string/Btn_Inscription"
+                android:textAllCaps="false"
+                android:textColor="@color/blue"
+                android:textSize="14sp"
+
+                />
+
+            <Button
+                android:id="@+id/Btn_forget_password"
+                android:layout_width="290dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:text="@string/Btn_forget_password"
                 android:textAllCaps="false"
                 android:textColor="@color/blue"
                 android:textSize="14sp" />
+
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/Btn_Validation"
+        android:id="@+id/Btn_Connexion"
         android:layout_width="311dp"
         android:layout_height="74dp"
-        android:text="@string/Btn_Validation"
+        android:text="@string/Connection"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.171" />
+        app:layout_constraintVertical_bias="0.322"
+
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

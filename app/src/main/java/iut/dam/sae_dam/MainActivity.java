@@ -15,6 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import iut.dam.sae_dam.create_account.create_account;
 import iut.dam.sae_dam.databinding.ActivityMainBinding;
+import iut.dam.sae_dam.login.login;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,10 +26,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         /* accées à la page de création de compte */
         /*
-        Intent intent = new Intent(this, create_account.class);
+          Intent intent = new Intent(this, login.class);
         startActivity(intent);
         */
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

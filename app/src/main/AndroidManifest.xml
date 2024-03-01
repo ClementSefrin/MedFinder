@@ -13,11 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SAE_DAM">
         <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".create_account.create_account"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".login.login"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
