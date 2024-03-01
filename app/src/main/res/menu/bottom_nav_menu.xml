@@ -6,15 +6,18 @@
         android:icon="@drawable/ic_home"
         android:title="@string/title_home" />
 
+    <!--
     <item
         android:id="@+id/navigation_scan"
         android:icon="@drawable/ic_scan"
         android:title="@string/title_scan" />
+    -->
 
     <item
-        android:id="@+id/navigation_cip"
-        android:icon="@drawable/ic_cip"
-        android:title="@string/title_cip" />
+        android:id="@+id/navigation_cis"
+        android:icon="@drawable/ic_cis"
+        android:title="@string/title_cis" />
+
     <item
         android:id="@+id/navigation_account"
         android:icon="@drawable/ic_account"

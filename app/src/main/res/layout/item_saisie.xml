@@ -1,42 +1,61 @@
-
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/cv"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="wrap_content"
+    android:background="#00000000">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/cardBackgroundColor"
-        android:padding="5dp">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/dialog_background"
+        android:backgroundTint="?attr/cardBackgroundColor"
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/nomMedicamentTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nom du medicament"
-            android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/codeCipTV"
+            android:id="@+id/codeCisTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/nomMedicamentTV"
-            android:text="Code cip"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:text="Code cis"
+            android:textSize="12sp" />
 
-        <TextView
-            android:id="@+id/dateSaisieTV"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/codeCipTV"
-            android:layout_marginTop="5dp"
-            android:text="Date de saisie"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:layout_below="@id/codeCisTV"
+            android:layout_marginTop="10dp">
 
+            <TextView
+                android:id="@+id/pharmacieTV"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7"
+                android:gravity="bottom"
+                android:text="Pharmacie"
+                android:textSize="15sp" />
+
+
+            <TextView
+                android:id="@+id/dateSaisieTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:background="@drawable/dialog_background"
+                android:backgroundTint="?attr/background"
+                android:padding="10dp"
+                android:text="01/01/01"
+                android:textSize="10sp" />
+        </LinearLayout>
     </RelativeLayout>
-</androidx.cardview.widget.CardView>
+</RelativeLayout>

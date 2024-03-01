@@ -1,16 +1,24 @@
 package iut.dam.sae_dam.ui.account;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import iut.dam.sae_dam.R;
 import iut.dam.sae_dam.databinding.FragmentAccountBinding;
+import iut.dam.sae_dam.ui.home.HomeFragment;
 
 public class AccountFragment extends Fragment {
     private FragmentAccountBinding binding;
@@ -22,8 +30,39 @@ public class AccountFragment extends Fragment {
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textAccount;
-        accountViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.supprimerHistoTV;
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //new DialogDeleteHisto().show(getChildFragmentManager(), "SUPPRIMER_HISTO");
+                final Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.dialog_signin);
+
+                Button positiveButton = (Button) dialog.findViewById(R.id.positiveButton);
+                positiveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        boolean test = HomeFragment.supprimerHisto();
+                        if (test)
+                            Toast.makeText(requireContext(), "Historique supprimé", Toast.LENGTH_SHORT).show();
+                        else {
+                            Toast.makeText(requireContext(), "Erreur dans la suppression de l'historique", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                Button negativeButton = (Button) dialog.findViewById(R.id.negativeButton);
+                negativeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+            }
+        });
+
         return root;
     }
 

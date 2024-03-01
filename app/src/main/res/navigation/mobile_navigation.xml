@@ -18,10 +18,10 @@
         tools:layout="@layout/fragment_scan" />
 
     <fragment
-        android:id="@+id/navigation_cip"
-        android:name="iut.dam.sae_dam.ui.cip.CipFragment"
-        android:label="@string/title_cip"
-        tools:layout="@layout/fragment_cip" />
+        android:id="@+id/navigation_cis"
+        android:name="iut.dam.sae_dam.ui.cis.CisFragment"
+        android:label="@string/title_cis"
+        tools:layout="@layout/fragment_cis" />
 
     <fragment
         android:id="@+id/navigation_account"
