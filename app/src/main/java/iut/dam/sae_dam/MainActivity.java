@@ -22,7 +22,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        /* accées à la page de création de compte */
+        /*
+          Intent intent = new Intent(this, login.class);
+        startActivity(intent);
+        */
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

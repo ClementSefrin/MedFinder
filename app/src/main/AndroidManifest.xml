@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,7 +14,14 @@
         android:theme="@style/Theme.SAE_DAM">
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AccountManagement.create_account.create_account"
+            android:exported="false" />
+        <activity
+            android:name=".AccountManagement.login.login"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
