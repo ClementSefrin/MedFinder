@@ -2,24 +2,24 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/createAccountRL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.CreateAccount">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/createAccount_backgroundIV"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:background="@drawable/top_background"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        android:orientation="horizontal">
-    </LinearLayout>
+        tools:ignore="MissingConstraints"></LinearLayout>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/createAccount_headerTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_account"
@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/createAccount_headerTV">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout2"
@@ -65,29 +65,29 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editText_SecondName"
+                android:id="@+id/createAccount_lastNameET"
                 android:layout_width="196dp"
                 android:layout_height="51dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="152dp"
                 android:autofillHints="InputNom"
-                android:hint="@string/editText_SecondName"
                 android:drawableStart="@drawable/ic_edit"
+                android:hint="@string/editText_SecondName"
                 android:inputType="text"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <EditText
-                android:id="@+id/EditText_MdpVerify"
+                android:id="@+id/createAccount_verifyPasswordET"
                 android:layout_width="196dp"
                 android:layout_height="51dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="152dp"
                 android:autofillHints="InputMdp"
+                android:drawableStart="@drawable/ic_lock"
                 android:ems="10"
                 android:hint="@string/EditText_MdpVerify"
-                android:drawableStart="@drawable/ic_lock"
                 android:inputType="textPassword"
                 android:textColorHint="#546E7A"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -101,22 +101,22 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="152dp"
                 android:autofillHints="InputCommune"
-                android:hint="@string/Commune"
                 android:drawableStart="@drawable/ic_city"
+                android:hint="@string/Commune"
                 android:inputType="text"
                 android:textColorHint="#546E7A"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText_SecondName" />
+                app:layout_constraintTop_toBottomOf="@+id/createAccount_lastNameET" />
 
             <EditText
-                android:id="@+id/EditText_Mail"
+                android:id="@+id/createAccount_mailET"
                 android:layout_width="196dp"
                 android:layout_height="51dp"
                 android:layout_marginStart="84dp"
                 android:layout_marginTop="16dp"
                 android:autofillHints="InputMail"
-                android:hint="@string/EditTextMail"
                 android:drawableStart="@drawable/ic_mail"
+                android:hint="@string/EditTextMail"
                 android:inputType="textEmailAddress"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText" />
@@ -128,28 +128,28 @@
                 android:layout_marginStart="84dp"
                 android:layout_marginTop="12dp"
                 android:autofillHints="InputNom"
+                android:drawableStart="@drawable/ic_edit"
                 android:hint="@string/FisrtName"
                 android:inputType="textPersonName"
-                android:drawableStart="@drawable/ic_edit"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <EditText
-                android:id="@+id/EditText_Mdp"
+                android:id="@+id/createAccount_passwordET"
                 android:layout_width="196dp"
                 android:layout_height="51dp"
                 android:layout_marginStart="84dp"
                 android:layout_marginTop="12dp"
                 android:autofillHints="InputMdp"
+                android:drawableStart="@drawable/ic_password"
                 android:ems="10"
                 android:hint="@string/EditText_Mdp"
-                android:drawableStart="@drawable/ic_password"
                 android:inputType="textPassword"
                 android:textColorHint="#546E7A"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/EditText_Mail"
+                app:layout_constraintTop_toBottomOf="@+id/createAccount_mailET"
                 tools:ignore="TextContrastCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -157,7 +157,7 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/Btn_Validation"
+        android:id="@+id/createAccount_signUpBTN"
         android:layout_width="434dp"
         android:layout_height="69dp"
         android:layout_marginTop="2dp"

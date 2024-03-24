@@ -5,7 +5,7 @@
         <item name="colorPrimary">@color/nav_background_dark</item>
         <item name="colorPrimaryVariant">@color/hover_dark</item>
         <item name="android:navigationBarColor">?attr/colorPrimary</item>
-        <item name="background">@color/black</item>
+        <item name="background">@color/main_background_dark</item>
 
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <item name="cardBackgroundColor">@color/histo_saisie_background_dark</item>

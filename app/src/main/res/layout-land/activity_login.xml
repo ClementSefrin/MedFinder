@@ -7,7 +7,7 @@
     tools:context=".activities.Login">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/createAccount_backgroundIV"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:background="@drawable/top_background"
@@ -19,7 +19,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/createAccount_headerTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/textView_login"
@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/createAccount_headerTV">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout2"
@@ -67,7 +67,7 @@
 
 
             <EditText
-                android:id="@+id/EditText_MdpVerify"
+                android:id="@+id/createAccount_verifyPasswordET"
                 android:layout_width="196dp"
                 android:layout_height="51dp"
                 android:layout_marginTop="16dp"
@@ -82,7 +82,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <EditText
-                android:id="@+id/EditText_Mail"
+                android:id="@+id/createAccount_mailET"
                 android:layout_width="196dp"
                 android:layout_height="51dp"
                 android:layout_marginStart="84dp"
@@ -96,7 +96,7 @@
 
 
             <Button
-                android:id="@+id/Btn_AlreadyAccount"
+                android:id="@+id/createAccount_alreadySignedUpBTN"
                 android:layout_width="225dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="84dp"
@@ -109,7 +109,7 @@
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/EditText_Mail"
+                app:layout_constraintTop_toBottomOf="@+id/createAccount_mailET"
                 tools:ignore="TextContrastCheck" />
 
             <Button
@@ -125,7 +125,7 @@
                 android:textAllCaps="false"
                 android:text="@string/Btn_forget_password"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Btn_AlreadyAccount"
+                app:layout_constraintTop_toBottomOf="@+id/createAccount_alreadySignedUpBTN"
                 tools:ignore="TextContrastCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -133,7 +133,7 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/Btn_Validation"
+        android:id="@+id/createAccount_signUpBTN"
         android:layout_width="434dp"
         android:layout_height="69dp"
         android:layout_marginTop="2dp"

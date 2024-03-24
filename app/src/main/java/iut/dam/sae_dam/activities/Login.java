@@ -24,9 +24,9 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        EditText_Mail = findViewById(R.id.EditText_Mail);
-        EditText_Mdp = findViewById(R.id.EditText_Mdp);
-        Btn_Inscription = findViewById(R.id.Btn_AlreadyAccount);
+        EditText_Mail = findViewById(R.id.createAccount_mailET);
+        EditText_Mdp = findViewById(R.id.createAccount_passwordET);
+        Btn_Inscription = findViewById(R.id.createAccount_alreadySignedUpBTN);
         Btn_forget_password = findViewById(R.id.Btn_forget_password);
         Btn_Connexion = findViewById(R.id.Btn_Connexion);
         Btn_Inscription.setOnClickListener(v -> {
