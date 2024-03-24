@@ -1,4 +1,4 @@
-package iut.dam.sae_dam;
+package iut.dam.sae_dam.activities;
 
 import android.os.Bundle;
 import android.widget.TextView;
@@ -12,6 +12,8 @@ import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import iut.dam.sae_dam.DataHandling;
+import iut.dam.sae_dam.R;
 import iut.dam.sae_dam.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
