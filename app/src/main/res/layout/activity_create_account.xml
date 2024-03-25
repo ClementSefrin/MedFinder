@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_infosHeaderTV"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="@dimen/baseMarginTop"
                     android:autofillHints="InputNom"
                     android:drawableStart="@drawable/ic_edit"
                     android:hint="@string/hintFirstName"
@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_firstNameET"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="@dimen/baseMarginTop"
                     android:autofillHints="InputNom"
                     android:drawableStart="@drawable/ic_edit"
                     android:hint="@string/hintLastName"
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_lastNameET"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="@dimen/baseMarginTop"
                     android:autofillHints="InputMail"
                     android:drawableStart="@drawable/ic_mail"
                     android:hint="@string/hintMail"
@@ -111,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_mailET"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="@dimen/baseMarginTop"
                     android:autofillHints="InputCommune"
                     android:drawableStart="@drawable/ic_city"
                     android:hint="@string/hintCity"
@@ -124,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_cityET"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="@dimen/baseMarginTop"
                     android:autofillHints="InputMdp"
                     android:drawableStart="@drawable/ic_password"
                     android:hint="@string/hintPassword"
@@ -137,18 +137,39 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_passwordET"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="@dimen/baseMarginTop"
                     android:autofillHints="InputMdp"
                     android:drawableStart="@drawable/ic_lock"
                     android:hint="@string/hintPasswordVerify"
                     android:inputType="textPassword"
                     android:textSize="@dimen/accountTextSize" />
 
+                <Spinner
+                    android:id="@+id/createAccount_secretQuestionSP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/createAccount_verifyPasswordET"
+                    android:layout_marginTop="@dimen/baseMarginTop"
+                    android:entries="@array/questionsSecretes" />
+
+                <EditText
+                    android:id="@+id/createAccount_secretAnswerET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/createAccount_secretQuestionSP"
+                    android:layout_marginTop="@dimen/baseMarginTop"
+                    android:autofillHints="InputSecretAnswer"
+                    android:drawableStart="@drawable/ic_secret_answer"
+                    android:hint="@string/hintSecretAnswer"
+                    android:inputType="text"
+                    android:textSize="@dimen/accountTextSize" />
+
+
                 <Button
                     android:id="@+id/createAccount_alreadySignedUpBTN"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_below="@id/createAccount_verifyPasswordET"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/createAccount_secretAnswerET"
                     android:layout_marginTop="20dp"
                     android:background="@android:color/transparent"
                     android:drawableEnd="@drawable/ic_redirection_arrow"
@@ -171,6 +192,6 @@
         android:layout_marginStart="@dimen/accountCardViewMarginStart"
         android:layout_marginEnd="@dimen/accountCardViewMarginEnd"
         android:layout_marginBottom="@dimen/baseMarginBottom"
-        android:text="@string/signUpButton" />
+        android:text="@string/signUpTitle" />
 
 </RelativeLayout>

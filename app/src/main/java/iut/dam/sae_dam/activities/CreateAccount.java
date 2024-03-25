@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,9 +26,12 @@ import iut.dam.sae_dam.data.DatabaseConnection;
 import iut.dam.sae_dam.R;
 
 public class CreateAccount extends AppCompatActivity {
-    EditText EditText_FirstName, EditText_SecondName, EditText_Mail, EditText_City, EditText_Mdp, EditText_MdpVerify;
-    Button Btn_Validation, Btn_AlreadyAccount;
-    private List<EditText> invalidFields, editTexts;
+    EditText firstNameET, lastNameET, mailET, cityET, passwordET, passwordVerifyEt, secretAnswerET;
+    Spinner secretQuestionSP;
+    Button signUpBTN, Btn_AlreadyAccount;
+    private List<EditText> editTexts;
+    private List<View> invalidFields;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,20 +43,22 @@ public class CreateAccount extends AppCompatActivity {
             startActivity(intent);
         });
 
-        Btn_Validation = findViewById(R.id.createAccount_signUpBTN);
-        Btn_Validation.setOnClickListener(v -> {
+        signUpBTN = findViewById(R.id.createAccount_signUpBTN);
+        signUpBTN.setOnClickListener(v -> {
             createAccount();
         });
     }
 
     private void createAccount() {
-        EditText_FirstName = findViewById(R.id.createAccount_firstNameET);
-        EditText_SecondName = findViewById(R.id.createAccount_lastNameET);
-        EditText_Mail = findViewById(R.id.createAccount_mailET);
-        EditText_City = findViewById(R.id.createAccount_cityET);
-        EditText_Mdp = findViewById(R.id.createAccount_passwordET);
-        EditText_MdpVerify = findViewById(R.id.createAccount_verifyPasswordET);
-        Btn_Validation = findViewById(R.id.createAccount_signUpBTN);
+        firstNameET = findViewById(R.id.createAccount_firstNameET);
+        lastNameET = findViewById(R.id.createAccount_lastNameET);
+        mailET = findViewById(R.id.createAccount_mailET);
+        cityET = findViewById(R.id.createAccount_cityET);
+        passwordET = findViewById(R.id.createAccount_passwordET);
+        passwordVerifyEt = findViewById(R.id.createAccount_verifyPasswordET);
+        secretQuestionSP = findViewById(R.id.createAccount_secretQuestionSP);
+        secretAnswerET = findViewById(R.id.createAccount_secretAnswerET);
+        signUpBTN = findViewById(R.id.createAccount_signUpBTN);
 
         ViewGroup layout = findViewById(R.id.createAccountRL);
         editTexts = getAllEditTexts(layout);
@@ -73,6 +79,11 @@ public class CreateAccount extends AppCompatActivity {
                 field.setBackgroundResource(R.drawable.valid_edittext_border);
             }
         }
+        if (invalidFields.contains(secretQuestionSP)) {
+            secretQuestionSP.setBackgroundResource(R.drawable.invalid_edittext_border);
+        } else {
+            secretQuestionSP.setBackgroundResource(R.drawable.valid_edittext_border);
+        }
     }
 
     private List<EditText> getAllEditTexts(ViewGroup viewGroup) {
@@ -88,30 +99,36 @@ public class CreateAccount extends AppCompatActivity {
         return editTexts;
     }
 
-    private List<EditText> getInvalidFields() {
-        List<EditText> invalidFields = new ArrayList<>();
-        if (EditText_FirstName.getText().toString().isEmpty()) {
-            invalidFields.add(EditText_FirstName);
+    private List<View> getInvalidFields() {
+        List<View> invalidFields = new ArrayList<>();
+        if (firstNameET.getText().toString().isEmpty()) {
+            invalidFields.add(firstNameET);
         }
-        if (EditText_SecondName.getText().toString().isEmpty()) {
-            invalidFields.add(EditText_SecondName);
+        if (lastNameET.getText().toString().isEmpty()) {
+            invalidFields.add(lastNameET);
         }
-        if (EditText_City.getText().toString().isEmpty()) {
-            invalidFields.add(EditText_City);
+        if (cityET.getText().toString().isEmpty()) {
+            invalidFields.add(cityET);
         }
-        switch (checkPassword(EditText_Mdp.getText().toString(), EditText_MdpVerify.getText().toString())) {
+        switch (checkPassword(passwordET.getText().toString(), passwordVerifyEt.getText().toString())) {
             case -1:
-                invalidFields.add(EditText_Mdp);
-                invalidFields.add(EditText_MdpVerify);
+                invalidFields.add(passwordET);
+                invalidFields.add(passwordVerifyEt);
                 break;
             case 1:
-                invalidFields.add(EditText_MdpVerify);
+                invalidFields.add(passwordVerifyEt);
                 break;
             default:
                 break;
         }
-        if (!checkEmail(EditText_Mail.getText().toString())) {
-            invalidFields.add(EditText_Mail);
+        if (!checkEmail(mailET.getText().toString())) {
+            invalidFields.add(mailET);
+        }
+        if (secretQuestionSP.getSelectedItemPosition() == 0) {
+            invalidFields.add(secretQuestionSP);
+        }
+        if (secretAnswerET.getText().toString().isEmpty()) {
+            invalidFields.add(secretAnswerET);
         }
         return invalidFields;
     }
@@ -141,7 +158,7 @@ public class CreateAccount extends AppCompatActivity {
                 String query = "SELECT * FROM user WHERE Email = ?";
 
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1, EditText_Mail.getText().toString());
+                preparedStatement.setString(1, mailET.getText().toString());
                 ResultSet resultSet = preparedStatement.executeQuery();
                 if (resultSet.next()) {
                     Log.e("Database Connection", "Un compte existe déjà avec cet email!");
@@ -163,10 +180,11 @@ public class CreateAccount extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             if (exists) {
-                invalidFields.add(EditText_Mail);
+                invalidFields.add(mailET);
                 updateBorder();
                 Toast.makeText(CreateAccount.this, "Un compte existe déjà avec cet email!", Toast.LENGTH_SHORT).show();
             } else {
+                updateBorder();
                 new CreateAccountTask().execute();
             }
         }
@@ -179,15 +197,18 @@ public class CreateAccount extends AppCompatActivity {
             try {
                 Connection connection = DatabaseConnection.getConnection();
 
-                String query = "INSERT INTO user (FirstName, SecondName, Email, Password, Administrator, City) VALUES (?, ?, ?, ?, ?, ?)";
+                String query = "INSERT INTO user (FirstName, SecondName, Email, Password, Administrator, City, QuestionSecrete, ReponseSecrete) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1, EditText_FirstName.getText().toString());
-                preparedStatement.setString(2, EditText_SecondName.getText().toString());
-                preparedStatement.setString(3, EditText_Mail.getText().toString());
-                preparedStatement.setString(4, EditText_Mdp.getText().toString());
+                preparedStatement.setString(1, firstNameET.getText().toString());
+                preparedStatement.setString(2, lastNameET.getText().toString());
+                preparedStatement.setString(3, mailET.getText().toString());
+                preparedStatement.setString(4, passwordET.getText().toString());
                 preparedStatement.setInt(5, 1);
-                preparedStatement.setString(6, EditText_City.getText().toString());
+                preparedStatement.setString(6, cityET.getText().toString());
+                //TODO : mettre dans la base de données la question dans une langue précise
+                preparedStatement.setString(7, secretQuestionSP.getSelectedItem().toString());
+                preparedStatement.setString(8, secretAnswerET.getText().toString());
                 preparedStatement.executeUpdate();
                 preparedStatement.close();
                 Log.e("Database Connection", "Compte créé avec succès!");

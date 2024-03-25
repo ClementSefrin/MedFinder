@@ -23,13 +23,26 @@
     <string name="hintCity">City</string>
     <string name="hintPassword">Password</string>
     <string name="hintPasswordVerify">Verify Password</string>
-    <string name="signUpButton">Sign up</string>
     <string name="signUpAlreadySignedUp">Already have account ? Log in.</string>
+    <string-array name="questionsSecretes">
+        <item>-</item>
+        <item>What is the name of your pet ?</item>
+        <item>What is the name of your first teacher ?</item>
+        <item>What is the name of your first school ?</item>
+        <item>What is the name of your best friend ?</item>
+    </string-array>
+    <string name="hintSecretAnswer">Secret answer</string>
 
     <!--Log in-->
     <string name="logInTitle">Log in</string>
     <string name="logInHeader">Connection</string>
     <string name="logInForgotPassword">Forgot password ?</string>
     <string name="logInSignUp">No account ? Sign up.</string>
-    <string name="logInLogIn">Log in</string>
+
+    <!--Forgot password-->
+    <string name="forgotPasswordTitle">Reset password</string>
+    <string name="forgotPasswordHeader">Reset your password</string>
+    <string name="hintNewPassword">New password</string>
+
+
 </resources>

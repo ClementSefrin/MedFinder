@@ -13,6 +13,7 @@
 
     <dimen name="accountPadding">20dp</dimen>
     <dimen name="accountTextSize">25dp</dimen>
+    <dimen name="accountTextHeight">50dp</dimen>
     <dimen name="accountSmallTextSize">15dp</dimen>
 
     <dimen name="accountCardViewMarginStart">30dp</dimen>
