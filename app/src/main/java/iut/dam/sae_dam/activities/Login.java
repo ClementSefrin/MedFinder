@@ -24,11 +24,12 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        EditText_Mail = findViewById(R.id.createAccount_mailET);
-        EditText_Mdp = findViewById(R.id.createAccount_passwordET);
-        Btn_Inscription = findViewById(R.id.createAccount_alreadySignedUpBTN);
-        Btn_forget_password = findViewById(R.id.Btn_forget_password);
-        Btn_Connexion = findViewById(R.id.Btn_Connexion);
+        EditText_Mail = findViewById(R.id.login_mailET);
+        EditText_Mdp = findViewById(R.id.login_passwordET);
+        Btn_Inscription = findViewById(R.id.login_noAccountBTN);
+        Btn_forget_password = findViewById(R.id.login_forgotPasswordBTN);
+        Btn_Connexion = findViewById(R.id.login_logInBTN);
+
         Btn_Inscription.setOnClickListener(v -> {
             Intent intent = new Intent(Login.this, CreateAccount.class);
             startActivity(intent);

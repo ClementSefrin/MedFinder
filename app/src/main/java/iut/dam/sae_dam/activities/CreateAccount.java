@@ -31,7 +31,7 @@ public class CreateAccount extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.createlay);
+        setContentView(R.layout.activity_create_account);
 
         Btn_AlreadyAccount = findViewById(R.id.createAccount_alreadySignedUpBTN);
         Btn_AlreadyAccount.setOnClickListener(v -> {

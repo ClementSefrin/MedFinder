@@ -13,20 +13,23 @@
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
     <string name="delete_history">Delete history</string>
-    <string name="create_account">Create account</string>
-    <string name="personal_information">Personal Information</string>
-    <string name="FisrtName">First Name</string>
-    <string name="editText_SecondName">Second Name</string>
-    <string name="EditTextMail">Mail</string>
-    <string name="Commune">City</string>
-    <string name="EditText_Mdp">Password</string>
-    <string name="EditText_MdpVerify">Verify Password</string>
-    <string name="Btn_Validation">Create</string>
-   <string name="textView_Connexion">Connection</string>
-<string name="Btn_forget_password">Forgot password ?</string>
-<string name="Btn_Inscription">No account ? Sign in</string>
-<string name="Connection">Sign up</string>
-<string name="textView_login">Login</string>
-<string name="Btn_AlreadyHaveAccount">Already have account ?</string>
 
-    </resources>
+    <!--Sign up-->
+    <string name="signUpTitle">Sign up</string>
+    <string name="signUpHeader">Personal informations</string>
+    <string name="hintFirstName">First name</string>
+    <string name="hintLastName">Last name</string>
+    <string name="hintMail">Mail</string>
+    <string name="hintCity">City</string>
+    <string name="hintPassword">Password</string>
+    <string name="hintPasswordVerify">Verify Password</string>
+    <string name="signUpButton">Sign up</string>
+    <string name="signUpAlreadySignedUp">Already have account ? Log in.</string>
+
+    <!--Log in-->
+    <string name="logInTitle">Log in</string>
+    <string name="logInHeader">Connection</string>
+    <string name="logInForgotPassword">Forgot password ?</string>
+    <string name="logInSignUp">No account ? Sign up.</string>
+    <string name="logInLogIn">Log in</string>
+</resources>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/createAccountRL"
@@ -7,166 +7,170 @@
     android:layout_height="match_parent"
     tools:context=".activities.CreateAccount">
 
-    <LinearLayout
+    <!-- TODO : généraliser la taille du texte, hauteur, second name -->
+
+    <ImageView
         android:id="@+id/createAccount_backgroundIV"
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        android:background="@drawable/top_background"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"></LinearLayout>
+        android:background="@drawable/top_background" />
 
     <TextView
         android:id="@+id/createAccount_headerTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/create_account"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/baseMarginTop"
+        android:text="@string/signUpTitle"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/createAccount_backgroundIV"
         tools:ignore="MissingConstraints" />
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/createAccount_infosCV"
         android:layout_width="match_parent"
-        android:layout_height="540dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="30dp"
-        app:cardElevation="21dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createAccount_headerTV">
+        android:layout_height="match_parent"
+        android:layout_above="@id/createAccount_signUpBTN"
+        android:layout_below="@id/createAccount_headerTV"
+        android:layout_marginStart="@dimen/accountCardViewMarginStart"
+        android:layout_marginTop="@dimen/baseMarginTop"
+        android:layout_marginEnd="@dimen/accountCardViewMarginEnd"
+        android:layout_marginBottom="@dimen/baseMarginBottom"
+        app:cardElevation="@dimen/accountCardViewElevation">
 
-        <LinearLayout
+        <ScrollView
+            android:id="@+id/createAccount_infosSV"
             android:layout_width="match_parent"
-            android:layout_height="540dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="@string/personal_information"
-                android:textColor="@color/black"
-                android:textSize="32sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/createAccount_firstNameET"
-                android:layout_width="290dp"
-                android:layout_height="58dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:autofillHints="InputNom"
-                android:drawableStart="@drawable/ic_edit"
-                android:hint="@string/FisrtName"
-                android:inputType="textPersonName"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/createAccount_lastNameET"
-                android:layout_width="290dp"
-                android:layout_height="58dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
-                android:autofillHints="InputNom"
-                android:drawableStart="@drawable/ic_edit"
-                android:hint="@string/editText_SecondName"
-                android:inputType="text"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/createAccount_mailET"
-                android:layout_width="290dp"
-                android:layout_height="58dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
-                android:autofillHints="InputMail"
-                android:drawableStart="@drawable/ic_mail"
-
-                android:hint="@string/EditTextMail"
-                android:inputType="textEmailAddress" />
-
-            <EditText
-                android:id="@+id/createAccount_cityET"
-                android:layout_width="290dp"
-                android:layout_height="58dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
-                android:autofillHints="InputCommune"
-                android:drawableStart="@drawable/ic_city"
-                android:hint="@string/Commune"
-                android:inputType="text"
-                android:textColorHint="#546E7A" />
-
-            <EditText
-                android:id="@+id/createAccount_passwordET"
-                android:layout_width="290dp"
-                android:layout_height="58dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
-                android:autofillHints="InputMdp"
-                android:drawableStart="@drawable/ic_password"
-                android:ems="10"
-                android:hint="@string/EditText_Mdp"
-
-                android:inputType="textPassword"
-                android:textColorHint="#546E7A" />
-
-            <EditText
-                android:id="@+id/createAccount_verifyPasswordET"
-                android:layout_width="290dp"
-                android:layout_height="58dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
-                android:autofillHints="InputMdp"
-                android:drawableStart="@drawable/ic_lock"
-                android:ems="10"
-                android:hint="@string/EditText_MdpVerify"
-
-                android:inputType="textPassword"
-                android:textColorHint="#546E7A" />
-
-            <Button
-                android:id="@+id/createAccount_alreadySignedUpBTN"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginStart="20dp"
+            <RelativeLayout
+                android:id="@+id/createAccount_infosRL"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@android:color/transparent"
-                android:drawableEnd="@drawable/ic_redirection_arrow"
-                android:gravity="center_vertical"
-                android:text="@string/Btn_AlreadyHaveAccount"
-                android:textAllCaps="false"
-                android:textColor="@color/blue"
-                android:textSize="14sp" />
+                android:paddingStart="10dp"
+                android:paddingTop="@dimen/accountPadding"
+                android:paddingEnd="10dp"
+                android:paddingBottom="@dimen/accountPadding">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/createAccount_infosHeaderTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/signUpHeader"
+                    android:textAlignment="center"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/createAccount_firstNameET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/createAccount_infosHeaderTV"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:autofillHints="InputNom"
+                    android:drawableStart="@drawable/ic_edit"
+                    android:hint="@string/hintFirstName"
+                    android:inputType="textPersonName"
+                    android:textSize="@dimen/accountTextSize" />
+
+                <EditText
+                    android:id="@+id/createAccount_lastNameET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/createAccount_firstNameET"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:autofillHints="InputNom"
+                    android:drawableStart="@drawable/ic_edit"
+                    android:hint="@string/hintLastName"
+                    android:inputType="textPersonName"
+                    android:textSize="@dimen/accountTextSize" />
+
+                <EditText
+                    android:id="@+id/createAccount_mailET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/createAccount_lastNameET"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:autofillHints="InputMail"
+                    android:drawableStart="@drawable/ic_mail"
+                    android:hint="@string/hintMail"
+                    android:inputType="textEmailAddress"
+                    android:textSize="@dimen/accountTextSize" />
+
+                <EditText
+                    android:id="@+id/createAccount_cityET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/createAccount_mailET"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:autofillHints="InputCommune"
+                    android:drawableStart="@drawable/ic_city"
+                    android:hint="@string/hintCity"
+                    android:inputType="text"
+                    android:textSize="@dimen/accountTextSize" />
+
+                <EditText
+                    android:id="@+id/createAccount_passwordET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/createAccount_cityET"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:autofillHints="InputMdp"
+                    android:drawableStart="@drawable/ic_password"
+                    android:hint="@string/hintPassword"
+                    android:inputType="textPassword"
+                    android:textSize="@dimen/accountTextSize" />
+
+                <EditText
+                    android:id="@+id/createAccount_verifyPasswordET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/createAccount_passwordET"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:autofillHints="InputMdp"
+                    android:drawableStart="@drawable/ic_lock"
+                    android:hint="@string/hintPasswordVerify"
+                    android:inputType="textPassword"
+                    android:textSize="@dimen/accountTextSize" />
+
+                <Button
+                    android:id="@+id/createAccount_alreadySignedUpBTN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/createAccount_verifyPasswordET"
+                    android:layout_marginTop="20dp"
+                    android:background="@android:color/transparent"
+                    android:drawableEnd="@drawable/ic_redirection_arrow"
+                    android:text="@string/signUpAlreadySignedUp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/accountSmallTextSize" />
+            </RelativeLayout>
+
+        </ScrollView>
 
     </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/createAccount_signUpBTN"
-        android:layout_width="311dp"
-        android:layout_height="74dp"
-        android:text="@string/Btn_Validation"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.171" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="@dimen/accountCardViewMarginStart"
+        android:layout_marginEnd="@dimen/accountCardViewMarginEnd"
+        android:layout_marginBottom="@dimen/baseMarginBottom"
+        android:text="@string/signUpButton" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
-
-
+</RelativeLayout>
