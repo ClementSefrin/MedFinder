@@ -76,7 +76,7 @@ public class CisFragment extends Fragment {
                 String pharmacie = pharmacieCompleteTextView.getText().toString();
 
                 boolean error = false;
-                if (!codeAdapter.contains(Integer.parseInt(code), medicament)) {
+                if (code.isEmpty() || (!code.isEmpty() && !codeAdapter.contains(Integer.parseInt(code), medicament))) {
                     Toast.makeText(requireContext(), "Médicament inconnu", Toast.LENGTH_SHORT).show();
                     codeCompleteTextView.setText("");
                     error = true;

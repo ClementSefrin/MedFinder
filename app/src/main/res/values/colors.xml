@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="nav_background">#5B6BF5</color>
-    <color name="nav_background_dark">#374192</color>
+    <color name="primary">#5B6BF5</color>
+    <color name="primary_dark">#374192</color>
+
+    <color name="secondary">#658EF1</color>
+    <color name="secondary_dark">#3D548D</color>
+
+    <color name="account_icon">#C82323</color>
+    <color name="account_icon_dark">#941A1A</color>
 
     <color name="hover">#D17300</color>
     <color name="hover_dark">#8F4E00</color>
@@ -12,20 +18,22 @@
     <color name="histo_saisie_background">@color/white</color>
     <color name="histo_saisie_background_dark">#191919</color>
 
+    <color name="button_background">@color/primary</color>
+    <color name="button_background_dark">@color/primary_dark</color>
+    <color name="account_button_text">@color/blue</color>
 
-    <color name="button">#293EF4</color>
-    <color name="button_dark">#1E2CA9</color>
+    <color name="error_message">@color/red</color>
 
     <color name="text">@color/black</color>
     <color name="text_dark">#D1D1D1</color>
 
+
+
+
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="primary">#0857F7</color>
-    <color name="secondary">#517FEE</color>
     <color name="red">#FF0000</color>
     <color name="green">#00FF00</color>
     <color name="blue">#0277BD</color>
-    <color name="redgray">#546E7A</color>
-
+    <color name="dark_blue">#014A76</color>
 </resources>

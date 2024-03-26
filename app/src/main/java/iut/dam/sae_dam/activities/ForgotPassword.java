@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,11 +22,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import iut.dam.sae_dam.R;
 import iut.dam.sae_dam.data.DatabaseConnection;
@@ -34,8 +33,10 @@ public class ForgotPassword extends AppCompatActivity {
 
     private EditText mailET, newPasswordET, verifyNewPasswordET, secretAnswerET;
     private TextView errorMailTV, errorPasswordTV, errorPasswordVerifyTV, errorSecretQuestion, errorSecretAnswerTV;
+    private LinearLayout passwordLL;
     private Spinner secretQuestionSP;
     private Button resetPasswordBTN, signUpBTN;
+    private ImageButton passwordVisibilityBTN;
     private HashMap<View, TextView> errorMessagesViews;
     private HashMap<View, Errors> errors;
     int step = 1;
@@ -55,12 +56,15 @@ public class ForgotPassword extends AppCompatActivity {
 
         setFirstStep();
 
-        resetPasswordBTN = findViewById(R.id.forgotPassword_resetPasswordBTN);
         resetPasswordBTN.setOnClickListener(v -> {
             resetPassword();
         });
 
-        signUpBTN = findViewById(R.id.forgotPassword_signUpBTN);
+
+        passwordVisibilityBTN.setOnClickListener(v -> {
+            changePasswordVisibility();
+        });
+
         signUpBTN.setOnClickListener(v -> {
             Intent intent = new Intent(ForgotPassword.this, CreateAccount.class);
             startActivity(intent);
@@ -169,6 +173,12 @@ public class ForgotPassword extends AppCompatActivity {
         secretQuestionSP = findViewById(R.id.forgotPassword_secretQuestionSP);
         secretAnswerET = findViewById(R.id.forgotPassword_secretAnswerET);
 
+        resetPasswordBTN = findViewById(R.id.forgotPassword_resetPasswordBTN);
+        signUpBTN = findViewById(R.id.forgotPassword_signUpBTN);
+        passwordVisibilityBTN = findViewById(R.id.forgotPassword_passwordVisibilityBTN);
+
+        passwordLL = findViewById(R.id.forgotPassword_passwordLL);
+
         defaultBackground = mailET.getBackground();
 
         errorMailTV = findViewById(R.id.forgotPassword_errorMailTV);
@@ -195,7 +205,7 @@ public class ForgotPassword extends AppCompatActivity {
         mailET.setBackground(defaultBackground);
         secretQuestionSP.setVisibility(View.GONE);
         secretAnswerET.setVisibility(View.GONE);
-        newPasswordET.setVisibility(View.GONE);
+        passwordLL.setVisibility(View.GONE);
         verifyNewPasswordET.setVisibility(View.GONE);
     }
 
@@ -206,7 +216,7 @@ public class ForgotPassword extends AppCompatActivity {
         secretQuestionSP.setBackgroundResource(0);
         secretAnswerET.setVisibility(View.VISIBLE);
         secretAnswerET.setBackground(defaultBackground);
-        newPasswordET.setVisibility(View.GONE);
+        passwordLL.setVisibility(View.GONE);
         verifyNewPasswordET.setVisibility(View.GONE);
     }
 
@@ -238,7 +248,7 @@ public class ForgotPassword extends AppCompatActivity {
         mailET.setVisibility(View.GONE);
         secretQuestionSP.setVisibility(View.GONE);
         secretAnswerET.setVisibility(View.GONE);
-        newPasswordET.setVisibility(View.VISIBLE);
+        passwordLL.setVisibility(View.VISIBLE);
         newPasswordET.setBackground(defaultBackground);
         verifyNewPasswordET.setVisibility(View.VISIBLE);
         verifyNewPasswordET.setBackground(defaultBackground);
@@ -261,6 +271,27 @@ public class ForgotPassword extends AppCompatActivity {
             ErrorManager.updateBorder(this, errors, errorMessagesViews);
             new ResetPasswordTask().execute();
         }
+    }
+
+    private void changePasswordVisibility() {
+        int passwordSelectionStart = newPasswordET.getSelectionStart();
+        int passwordSelectionEnd = newPasswordET.getSelectionEnd();
+
+        int passwordVerifySelectionStart = verifyNewPasswordET.getSelectionStart();
+        int passwordVerifySelectionEnd = verifyNewPasswordET.getSelectionEnd();
+
+        if (newPasswordET.getTransformationMethod() == PasswordTransformationMethod.getInstance()) {
+            newPasswordET.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            verifyNewPasswordET.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            passwordVisibilityBTN.setBackgroundResource(R.drawable.ic_hide_password);
+        } else {
+            newPasswordET.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            verifyNewPasswordET.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            passwordVisibilityBTN.setBackgroundResource(R.drawable.ic_show_password);
+        }
+
+        newPasswordET.setSelection(passwordSelectionStart, passwordSelectionEnd);
+        verifyNewPasswordET.setSelection(passwordVerifySelectionStart, passwordVerifySelectionEnd);
     }
 }
 
