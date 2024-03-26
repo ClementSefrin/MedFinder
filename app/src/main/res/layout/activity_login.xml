@@ -77,24 +77,60 @@
                     android:inputType="textEmailAddress"
                     android:textSize="@dimen/accountTextSize" />
 
-                <EditText
-                    android:id="@+id/login_passwordET"
+                <TextView
+                    android:id="@+id/login_errorMailTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/login_mailET"
+                    android:text="@string/errorEmptyField"
+                    android:textColor="?attr/errorMessageColor"
+                    android:textSize="@dimen/accountSmallTextSize" />
+
+                <LinearLayout
+                    android:id="@+id/login_passwordLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/login_errorMailTV"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
-                    android:autofillHints="InputMdp"
-                    android:drawableStart="@drawable/ic_password"
-                    android:hint="@string/hintPassword"
-                    android:inputType="textPassword"
-                    android:textSize="@dimen/accountTextSize" />
+                    android:layout_marginTop="@dimen/baseMarginTop"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/login_passwordET"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:autofillHints="InputMdp"
+                        android:drawableStart="@drawable/ic_password"
+                        android:hint="@string/hintPassword"
+                        android:inputType="textPassword"
+                        android:textSize="@dimen/accountTextSize" />
+
+                    <ImageButton
+                        android:id="@+id/login_passwordVisibilityBTN"
+                        android:layout_width="@dimen/passwordVisibilityIconSize"
+                        android:layout_height="@dimen/passwordVisibilityIconSize"
+                        android:layout_alignTop="@id/createAccount_passwordET"
+                        android:layout_toRightOf="@id/createAccount_passwordET"
+                        android:background="@drawable/ic_show_password" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/login_errorPasswordTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/login_passwordLL"
+                    android:text="@string/errorEmptyField"
+                    android:textColor="?attr/errorMessageColor"
+                    android:textSize="@dimen/accountSmallTextSize" />
 
                 <Button
                     android:id="@+id/login_noAccountBTN"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:layout_below="@id/login_passwordET"
+                    android:layout_below="@id/login_errorPasswordTV"
                     android:layout_marginTop="@dimen/baseMarginTop"
                     android:background="@android:color/transparent"
                     android:drawableEnd="@drawable/ic_redirection_arrow"
@@ -128,6 +164,6 @@
         android:layout_marginStart="@dimen/accountCardViewMarginStart"
         android:layout_marginEnd="@dimen/accountCardViewMarginEnd"
         android:layout_marginBottom="@dimen/baseMarginBottom"
-        android:text="@string/logInTitle"/>
+        android:text="@string/logInTitle" />
 
 </RelativeLayout>

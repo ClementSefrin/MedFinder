@@ -47,11 +47,15 @@
     <string name="hintNewPassword">New password</string>
 
     <!-- Error messages -->
-    <string name="errorEmptyField">This field is required</string>
-    <string name="errorInvalidMailFormat">The mail should follow the following format : example@example.com</string>
-    <string name="errorInvalidPasswordFormat">The password should follow the right format</string>
-    <string name="errorInvalidPasswordConfirmation">The passwords are different</string>
-    <string name="errorAccountAlreadyExists">There's already an account using this email</string>
+    <string name="errorEmptyField">This field is required.</string>
+    <string name="errorInvalidMailFormat">The mail should respect the following format : example@example.com .</string>
+    <string name="errorInvalidPasswordFormat">The password needs to have at least 8 characters, one uppercase letter, one lowercase letter, one digit, and one special character.</string>
+    <string name="errorInvalidPasswordConfirmation">The passwords are different.</string>
+    <string name="errorAccountAlreadyExists">There is already an account using this email.</string>
+    <string name="errorInvalidMailPassword">The mail or the password is incorrect.</string>
+    <string name="errorInvalidQuestionAnswer">The secret question or answer is incorrect.</string>
+    <string name="errorInvalidNewPassword">The new password must be different from the old one.</string>
+    <string name="errorNoAccountFound">No account found with this mail.</string>
 
 
 </resources>

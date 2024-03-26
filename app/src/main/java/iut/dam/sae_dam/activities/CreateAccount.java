@@ -3,11 +3,13 @@ package iut.dam.sae_dam.activities;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,15 +20,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import iut.dam.sae_dam.data.DatabaseConnection;
 import iut.dam.sae_dam.R;
-import iut.dam.sae_dam.errors.ErrorMessages;
+import iut.dam.sae_dam.errors.ErrorManager;
 import iut.dam.sae_dam.errors.Errors;
 
 public class CreateAccount extends AppCompatActivity {
@@ -35,126 +33,39 @@ public class CreateAccount extends AppCompatActivity {
 
     private HashMap<View, TextView> errorMessagesViews;
     private HashMap<View, Errors> errors;
-
     private Spinner secretQuestionSP;
-    private Button signUpBTN, Btn_AlreadyAccount;
+    private Button signUpBTN, logInBTN;
+    ImageButton passwordVisibilityBTN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
         errors = new HashMap<>();
+        errorMessagesViews = new HashMap<>();
         getViews();
 
-        Btn_AlreadyAccount = findViewById(R.id.createAccount_alreadySignedUpBTN);
-        Btn_AlreadyAccount.setOnClickListener(v -> {
+        logInBTN.setOnClickListener(v -> {
             Intent intent = new Intent(CreateAccount.this, Login.class);
             startActivity(intent);
         });
 
-        signUpBTN = findViewById(R.id.createAccount_signUpBTN);
+        passwordVisibilityBTN.setOnClickListener(v -> {
+            changePasswordVisibility();
+        });
+
         signUpBTN.setOnClickListener(v -> {
             createAccount();
         });
     }
 
-    private void getViews() {
-        firstNameET = findViewById(R.id.createAccount_firstNameET);
-        lastNameET = findViewById(R.id.createAccount_lastNameET);
-        mailET = findViewById(R.id.createAccount_mailET);
-        cityET = findViewById(R.id.createAccount_cityET);
-        passwordET = findViewById(R.id.createAccount_passwordET);
-        passwordVerifyEt = findViewById(R.id.createAccount_verifyPasswordET);
-        secretQuestionSP = findViewById(R.id.createAccount_secretQuestionSP);
-        secretAnswerET = findViewById(R.id.createAccount_secretAnswerET);
-        signUpBTN = findViewById(R.id.createAccount_signUpBTN);
-
-        errorFirstNameTV = findViewById(R.id.createAccount_errorFirstNameTV);
-        errorLastNameTV = findViewById(R.id.createAccount_errorLastNameTV);
-        errorMailTV = findViewById(R.id.createAccount_errorMailTV);
-        errorCityTV = findViewById(R.id.createAccount_errorCityTV);
-        errorPasswordTV = findViewById(R.id.createAccount_errorPasswordTV);
-        errorPasswordVerifyTV = findViewById(R.id.createAccount_errorVerifyPasswordTV);
-        errorSecretQuestion = findViewById(R.id.createAccount_errorSecretQuestionTV);
-        errorSecretAnswerTV = findViewById(R.id.createAccount_errorSecretAnswerTV);
-
-        errorMessagesViews = new HashMap<>();
-        errorMessagesViews.put(firstNameET, errorFirstNameTV);
-        errorMessagesViews.put(lastNameET, errorLastNameTV);
-        errorMessagesViews.put(mailET, errorMailTV);
-        errorMessagesViews.put(cityET, errorCityTV);
-        errorMessagesViews.put(passwordET, errorPasswordTV);
-        errorMessagesViews.put(passwordVerifyEt, errorPasswordVerifyTV);
-        errorMessagesViews.put(secretQuestionSP, errorSecretQuestion);
-        errorMessagesViews.put(secretAnswerET, errorSecretAnswerTV);
-    }
-
     private void createAccount() {
-
-        ViewGroup layout = findViewById(R.id.createAccountRL);
         errors = getErrors();
         if (errors.isEmpty()) {
             new CheckAccountTask().execute();
         } else {
-            updateBorder();
+            ErrorManager.updateBorder(this, errors, errorMessagesViews);
         }
-    }
-
-    private void updateBorder() {
-        for (View field : errors.keySet()) {
-            field.setBackgroundResource(R.drawable.invalid_edittext_border);
-            errorMessagesViews.get(field).setText(ErrorMessages.getErrorMessage(this, errors.get(field)));
-            errorMessagesViews.get(field).setVisibility(View.VISIBLE);
-        }
-    }
-
-
-    private HashMap<View, Errors> getErrors() {
-        HashMap<View, Errors> errors = new HashMap<>();
-        if (firstNameET.getText().toString().isEmpty()) {
-            errors.put(firstNameET, Errors.EMPTY);
-        }
-        if (lastNameET.getText().toString().isEmpty()) {
-            errors.put(lastNameET, Errors.EMPTY);
-        }
-        if (cityET.getText().toString().isEmpty()) {
-            errors.put(cityET, Errors.EMPTY);
-        }
-        switch (checkPassword(passwordET.getText().toString(), passwordVerifyEt.getText().toString())) {
-            case -1:
-                errors.put(passwordET, Errors.EMPTY);
-                errors.put(passwordVerifyEt, Errors.EMPTY);
-                break;
-            case 1:
-                errors.put(passwordET, Errors.INVALID_PASSWORD_CONFIRMATION);
-                break;
-            default:
-                break;
-        }
-        if (!checkEmail(mailET.getText().toString())) {
-            errors.put(mailET, Errors.INVALID_MAIL_FORMAT);
-        }
-        if (secretQuestionSP.getSelectedItemPosition() == 0) {
-            errors.put(secretQuestionSP, Errors.EMPTY);
-        }
-        if (secretAnswerET.getText().toString().isEmpty()) {
-            errors.put(secretAnswerET, Errors.EMPTY);
-        }
-        return errors;
-    }
-
-    private boolean checkEmail(String email) {
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-        Pattern pattern = Pattern.compile(emailPattern);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
-    }
-
-    /*
-     * Renvoie -1 si le mot de passe est vide, 1 si les mots de passe ne correspondent pas, 0 sinon
-     */
-    private int checkPassword(String mdp, String mdpVerify) {
-        return mdp.isEmpty() ? -1 : !mdpVerify.equals(mdp) ? 1 : 0;
     }
 
     private class CheckAccountTask extends AsyncTask<Void, Void, Void> {
@@ -191,9 +102,9 @@ public class CreateAccount extends AppCompatActivity {
             super.onPostExecute(aVoid);
             if (exists) {
                 errors.put(mailET, Errors.ACCOUNT_ALREADY_EXISTS);
-                updateBorder();
+                ErrorManager.updateBorder(getApplicationContext(), errors, errorMessagesViews);
             } else {
-                updateBorder();
+                ErrorManager.updateBorder(getApplicationContext(), errors, errorMessagesViews);
                 new CreateAccountTask().execute();
             }
         }
@@ -240,4 +151,91 @@ public class CreateAccount extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    private void changePasswordVisibility() {
+        int passwordSelectionStart = passwordET.getSelectionStart();
+        int passwordSelectionEnd = passwordET.getSelectionEnd();
+
+        int passwordVerifySelectionStart = passwordVerifyEt.getSelectionStart();
+        int passwordVerifySelectionEnd = passwordVerifyEt.getSelectionEnd();
+
+        if (passwordET.getTransformationMethod() == PasswordTransformationMethod.getInstance()) {
+            passwordET.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            passwordVerifyEt.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            passwordVisibilityBTN.setBackgroundResource(R.drawable.ic_hide_password);
+        } else {
+            passwordET.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            passwordVerifyEt.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            passwordVisibilityBTN.setBackgroundResource(R.drawable.ic_show_password);
+        }
+
+        passwordET.setSelection(passwordSelectionStart, passwordSelectionEnd);
+        passwordVerifyEt.setSelection(passwordVerifySelectionStart, passwordVerifySelectionEnd);
+    }
+
+    private void getViews() {
+        firstNameET = findViewById(R.id.createAccount_firstNameET);
+        lastNameET = findViewById(R.id.createAccount_lastNameET);
+        mailET = findViewById(R.id.createAccount_mailET);
+        cityET = findViewById(R.id.createAccount_cityET);
+        passwordET = findViewById(R.id.createAccount_passwordET);
+        passwordVerifyEt = findViewById(R.id.createAccount_verifyPasswordET);
+        secretQuestionSP = findViewById(R.id.createAccount_secretQuestionSP);
+        secretAnswerET = findViewById(R.id.createAccount_secretAnswerET);
+        signUpBTN = findViewById(R.id.createAccount_signUpBTN);
+        logInBTN = findViewById(R.id.createAccount_alreadySignedUpBTN);
+        passwordVisibilityBTN = findViewById(R.id.createAccount_passwordVisibilityBTN);
+
+        errorFirstNameTV = findViewById(R.id.createAccount_errorFirstNameTV);
+        errorLastNameTV = findViewById(R.id.createAccount_errorLastNameTV);
+        errorMailTV = findViewById(R.id.createAccount_errorMailTV);
+        errorCityTV = findViewById(R.id.createAccount_errorCityTV);
+        errorPasswordTV = findViewById(R.id.createAccount_errorPasswordTV);
+        errorPasswordVerifyTV = findViewById(R.id.createAccount_errorVerifyPasswordTV);
+        errorSecretQuestion = findViewById(R.id.createAccount_errorSecretQuestionTV);
+        errorSecretAnswerTV = findViewById(R.id.createAccount_errorSecretAnswerTV);
+
+        errorMessagesViews.put(firstNameET, errorFirstNameTV);
+        errorMessagesViews.put(lastNameET, errorLastNameTV);
+        errorMessagesViews.put(mailET, errorMailTV);
+        errorMessagesViews.put(cityET, errorCityTV);
+        errorMessagesViews.put(passwordET, errorPasswordTV);
+        errorMessagesViews.put(passwordVerifyEt, errorPasswordVerifyTV);
+        errorMessagesViews.put(secretQuestionSP, errorSecretQuestion);
+        errorMessagesViews.put(secretAnswerET, errorSecretAnswerTV);
+
+        for (View view : errorMessagesViews.keySet()) {
+            errorMessagesViews.get(view).setVisibility(View.GONE);
+        }
+    }
+
+    private HashMap<View, Errors> getErrors() {
+        HashMap<View, Errors> errors = new HashMap<>();
+        if (firstNameET.getText().toString().isEmpty()) {
+            errors.put(firstNameET, Errors.EMPTY_FIELD);
+        }
+        if (lastNameET.getText().toString().isEmpty()) {
+            errors.put(lastNameET, Errors.EMPTY_FIELD);
+        }
+        if (cityET.getText().toString().isEmpty()) {
+            errors.put(cityET, Errors.EMPTY_FIELD);
+        }
+        if (!ErrorManager.checkPassword(passwordET.getText().toString())) {
+            errors.put(passwordET, Errors.INVALID_PASSWORD_FORMAT);
+            errors.put(passwordVerifyEt, Errors.EMPTY);
+        } else if (!ErrorManager.checkPasswordVerify(passwordET.getText().toString(), passwordVerifyEt.getText().toString())) {
+            errors.put(passwordVerifyEt, Errors.INVALID_PASSWORD_CONFIRMATION);
+        }
+        if (!ErrorManager.checkEmail(mailET.getText().toString())) {
+            errors.put(mailET, Errors.INVALID_MAIL_FORMAT);
+        }
+        if (secretQuestionSP.getSelectedItemPosition() == 0) {
+            errors.put(secretQuestionSP, Errors.EMPTY_FIELD);
+        }
+        if (secretAnswerET.getText().toString().isEmpty()) {
+            errors.put(secretAnswerET, Errors.EMPTY_FIELD);
+        }
+        return errors;
+    }
+
 }

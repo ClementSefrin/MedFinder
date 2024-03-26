@@ -20,5 +20,8 @@
     <dimen name="accountCardViewMarginEnd">30dp</dimen>
     <dimen name="accountCardViewElevation">21dp</dimen>
 
+    <dimen name="passwordVisibilityIconSize">30dp</dimen>
+    <dimen name="passwordVisibilityIconMargin">5dp</dimen>
+
 
 </resources>
