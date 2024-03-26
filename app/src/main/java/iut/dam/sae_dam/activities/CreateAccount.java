@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,24 +19,32 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import iut.dam.sae_dam.data.DatabaseConnection;
 import iut.dam.sae_dam.R;
+import iut.dam.sae_dam.errors.ErrorMessages;
+import iut.dam.sae_dam.errors.Errors;
 
 public class CreateAccount extends AppCompatActivity {
-    EditText firstNameET, lastNameET, mailET, cityET, passwordET, passwordVerifyEt, secretAnswerET;
-    Spinner secretQuestionSP;
-    Button signUpBTN, Btn_AlreadyAccount;
-    private List<EditText> editTexts;
-    private List<View> invalidFields;
+    private EditText firstNameET, lastNameET, mailET, cityET, passwordET, passwordVerifyEt, secretAnswerET;
+    private TextView errorFirstNameTV, errorLastNameTV, errorMailTV, errorCityTV, errorPasswordTV, errorPasswordVerifyTV, errorSecretQuestion, errorSecretAnswerTV;
+
+    private HashMap<View, TextView> errorMessagesViews;
+    private HashMap<View, Errors> errors;
+
+    private Spinner secretQuestionSP;
+    private Button signUpBTN, Btn_AlreadyAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+        errors = new HashMap<>();
+        getViews();
 
         Btn_AlreadyAccount = findViewById(R.id.createAccount_alreadySignedUpBTN);
         Btn_AlreadyAccount.setOnClickListener(v -> {
@@ -49,7 +58,7 @@ public class CreateAccount extends AppCompatActivity {
         });
     }
 
-    private void createAccount() {
+    private void getViews() {
         firstNameET = findViewById(R.id.createAccount_firstNameET);
         lastNameET = findViewById(R.id.createAccount_lastNameET);
         mailET = findViewById(R.id.createAccount_mailET);
@@ -60,77 +69,78 @@ public class CreateAccount extends AppCompatActivity {
         secretAnswerET = findViewById(R.id.createAccount_secretAnswerET);
         signUpBTN = findViewById(R.id.createAccount_signUpBTN);
 
+        errorFirstNameTV = findViewById(R.id.createAccount_errorFirstNameTV);
+        errorLastNameTV = findViewById(R.id.createAccount_errorLastNameTV);
+        errorMailTV = findViewById(R.id.createAccount_errorMailTV);
+        errorCityTV = findViewById(R.id.createAccount_errorCityTV);
+        errorPasswordTV = findViewById(R.id.createAccount_errorPasswordTV);
+        errorPasswordVerifyTV = findViewById(R.id.createAccount_errorVerifyPasswordTV);
+        errorSecretQuestion = findViewById(R.id.createAccount_errorSecretQuestionTV);
+        errorSecretAnswerTV = findViewById(R.id.createAccount_errorSecretAnswerTV);
+
+        errorMessagesViews = new HashMap<>();
+        errorMessagesViews.put(firstNameET, errorFirstNameTV);
+        errorMessagesViews.put(lastNameET, errorLastNameTV);
+        errorMessagesViews.put(mailET, errorMailTV);
+        errorMessagesViews.put(cityET, errorCityTV);
+        errorMessagesViews.put(passwordET, errorPasswordTV);
+        errorMessagesViews.put(passwordVerifyEt, errorPasswordVerifyTV);
+        errorMessagesViews.put(secretQuestionSP, errorSecretQuestion);
+        errorMessagesViews.put(secretAnswerET, errorSecretAnswerTV);
+    }
+
+    private void createAccount() {
+
         ViewGroup layout = findViewById(R.id.createAccountRL);
-        editTexts = getAllEditTexts(layout);
-        invalidFields = getInvalidFields();
-        if (invalidFields.isEmpty()) {
+        errors = getErrors();
+        if (errors.isEmpty()) {
             new CheckAccountTask().execute();
         } else {
-            Toast.makeText(CreateAccount.this, "Certains champs ne sont pas valides!", Toast.LENGTH_SHORT).show();
             updateBorder();
         }
     }
 
     private void updateBorder() {
-        for (EditText field : editTexts) {
-            if (invalidFields.contains(field)) {
-                field.setBackgroundResource(R.drawable.invalid_edittext_border);
-            } else {
-                field.setBackgroundResource(R.drawable.valid_edittext_border);
-            }
-        }
-        if (invalidFields.contains(secretQuestionSP)) {
-            secretQuestionSP.setBackgroundResource(R.drawable.invalid_edittext_border);
-        } else {
-            secretQuestionSP.setBackgroundResource(R.drawable.valid_edittext_border);
+        for (View field : errors.keySet()) {
+            field.setBackgroundResource(R.drawable.invalid_edittext_border);
+            errorMessagesViews.get(field).setText(ErrorMessages.getErrorMessage(this, errors.get(field)));
+            errorMessagesViews.get(field).setVisibility(View.VISIBLE);
         }
     }
 
-    private List<EditText> getAllEditTexts(ViewGroup viewGroup) {
-        List<EditText> editTexts = new ArrayList<>();
-        for (int i = 0; i < viewGroup.getChildCount(); i++) {
-            View child = viewGroup.getChildAt(i);
-            if (child instanceof EditText) {
-                editTexts.add((EditText) child);
-            } else if (child instanceof ViewGroup) {
-                editTexts.addAll(getAllEditTexts((ViewGroup) child));
-            }
-        }
-        return editTexts;
-    }
 
-    private List<View> getInvalidFields() {
-        List<View> invalidFields = new ArrayList<>();
+    private HashMap<View, Errors> getErrors() {
+        HashMap<View, Errors> errors = new HashMap<>();
         if (firstNameET.getText().toString().isEmpty()) {
-            invalidFields.add(firstNameET);
+            errors.put(firstNameET, Errors.EMPTY);
         }
         if (lastNameET.getText().toString().isEmpty()) {
-            invalidFields.add(lastNameET);
+            errors.put(lastNameET, Errors.EMPTY);
         }
         if (cityET.getText().toString().isEmpty()) {
-            invalidFields.add(cityET);
+            errors.put(cityET, Errors.EMPTY);
         }
         switch (checkPassword(passwordET.getText().toString(), passwordVerifyEt.getText().toString())) {
             case -1:
-                invalidFields.add(passwordET);
-                invalidFields.add(passwordVerifyEt);
+                errors.put(passwordET, Errors.EMPTY);
+                errors.put(passwordVerifyEt, Errors.EMPTY);
                 break;
             case 1:
-                invalidFields.add(passwordVerifyEt);
+                errors.put(passwordET, Errors.INVALID_PASSWORD_CONFIRMATION);
                 break;
             default:
                 break;
         }
         if (!checkEmail(mailET.getText().toString())) {
-            invalidFields.add(mailET);
+            errors.put(mailET, Errors.INVALID_MAIL_FORMAT);
         }
         if (secretQuestionSP.getSelectedItemPosition() == 0) {
-            invalidFields.add(secretQuestionSP);
+            errors.put(secretQuestionSP, Errors.EMPTY);
         }
         if (secretAnswerET.getText().toString().isEmpty()) {
-            invalidFields.add(secretAnswerET);
+            errors.put(secretAnswerET, Errors.EMPTY);
         }
-        return invalidFields;
+        return errors;
     }
 
     private boolean checkEmail(String email) {
@@ -180,9 +190,8 @@ public class CreateAccount extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             if (exists) {
-                invalidFields.add(mailET);
+                errors.put(mailET, Errors.ACCOUNT_ALREADY_EXISTS);
                 updateBorder();
-                Toast.makeText(CreateAccount.this, "Un compte existe déjà avec cet email!", Toast.LENGTH_SHORT).show();
             } else {
                 updateBorder();
                 new CreateAccountTask().execute();

@@ -1,4 +1,5 @@
 <resources>
+    <!-- Titles -->
     <string name="app_name" translatable="false">SAE_DAM</string>
     <string name="title_home">Home</string>
     <string name="title_scan" translatable="false">Scan</string>
@@ -7,6 +8,7 @@
     <string name="code_cis_title">CIS Code</string>
     <string name="code_cis_search">Search for a medicine…</string>
     <string name="pharmacy_title">Pharmacy</string>
+
     <string name="pharmacy_search">Search for a pharmacy…</string>
     <string name="report">Report</string>
     <string name="delete_history_dialog_confirm">Are you sure you want to delete your history?</string>
@@ -43,6 +45,13 @@
     <string name="forgotPasswordTitle">Reset password</string>
     <string name="forgotPasswordHeader">Reset your password</string>
     <string name="hintNewPassword">New password</string>
+
+    <!-- Error messages -->
+    <string name="errorEmptyField">This field is required</string>
+    <string name="errorInvalidMailFormat">The mail should follow the following format : example@example.com</string>
+    <string name="errorInvalidPasswordFormat">The password should follow the right format</string>
+    <string name="errorInvalidPasswordConfirmation">The passwords are different</string>
+    <string name="errorAccountAlreadyExists">There's already an account using this email</string>
 
 
 </resources>
