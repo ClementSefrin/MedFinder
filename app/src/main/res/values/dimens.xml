@@ -5,4 +5,20 @@
     <dimen name="edit_text_height">50dp</dimen>
 
     <dimen name="header_height">75dp</dimen>
+
+    <dimen name="baseMarginTop">20dp</dimen>
+    <dimen name="baseMarginBottom">20dp</dimen>
+    <dimen name="baseMarginStart">10dp</dimen>
+    <dimen name="baseMarginEnd">10dp</dimen>
+
+    <dimen name="accountPadding">20dp</dimen>
+    <dimen name="accountTextSize">25sp</dimen>
+    <dimen name="accountTextHeight">50dp</dimen>
+    <dimen name="accountSmallTextSize">15sp</dimen>
+
+    <dimen name="accountCardViewMarginStart">30dp</dimen>
+    <dimen name="accountCardViewMarginEnd">30dp</dimen>
+    <dimen name="accountCardViewElevation">21dp</dimen>
+
+
 </resources>

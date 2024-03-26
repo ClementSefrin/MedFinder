@@ -1,4 +1,4 @@
-package data;
+package iut.dam.sae_dam.data;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,7 +13,7 @@ public class DatabaseConnection {
             return DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            return null;
+            throw new SQLException("JDBC driver not found", e);
         }
     }
 
@@ -27,4 +27,3 @@ public class DatabaseConnection {
         }
     }
 }
-

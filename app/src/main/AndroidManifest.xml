@@ -13,13 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SAE_DAM">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".AccountManagement.create_account.create_account"
+            android:name=".activities.CreateAccount"
             android:exported="false" />
         <activity
-            android:name=".AccountManagement.login.login"
+            android:name=".activities.Login"
             android:exported="true">
 
             <intent-filter>
@@ -28,6 +28,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activities.ForgotPassword"
+            android:exported="false" />
     </application>
 
 </manifest>

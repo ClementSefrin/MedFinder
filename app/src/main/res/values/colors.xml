@@ -24,6 +24,7 @@
     <color name="primary">#0857F7</color>
     <color name="secondary">#517FEE</color>
     <color name="red">#FF0000</color>
+    <color name="green">#00FF00</color>
     <color name="blue">#0277BD</color>
     <color name="redgray">#546E7A</color>
 </resources>
