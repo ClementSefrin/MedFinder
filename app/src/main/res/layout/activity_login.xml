@@ -107,7 +107,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_below="@id/login_noAccountBTN"
-                    android:layout_marginTop="@dimen/baseMarginTop"
                     android:background="@android:color/transparent"
                     android:text="@string/logInForgotPassword"
                     android:textAllCaps="false"

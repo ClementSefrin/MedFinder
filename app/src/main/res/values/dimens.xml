@@ -12,9 +12,9 @@
     <dimen name="baseMarginEnd">10dp</dimen>
 
     <dimen name="accountPadding">20dp</dimen>
-    <dimen name="accountTextSize">25sp</dimen>
+    <dimen name="accountTextSize">20sp</dimen>
     <dimen name="accountTextHeight">50dp</dimen>
-    <dimen name="accountSmallTextSize">15sp</dimen>
+    <dimen name="accountSmallTextSize">10sp</dimen>
 
     <dimen name="accountCardViewMarginStart">30dp</dimen>
     <dimen name="accountCardViewMarginEnd">30dp</dimen>
