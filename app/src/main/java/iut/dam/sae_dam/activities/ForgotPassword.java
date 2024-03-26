@@ -31,7 +31,11 @@ public class ForgotPassword extends AppCompatActivity {
     private Spinner secretQuestionSP;
     private Button resetPasswordBTN, signUpBTN;
     private List<EditText> editTexts;
+    private List<View> validFields;
     private List<View> invalidFields;
+    int step = 1;
+    private int userId;
+    private String currentMail, currentSecretQuestion, currentSecretAnswer, currentPassword;
 
 
     @Override
@@ -39,6 +43,17 @@ public class ForgotPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
         invalidFields = new ArrayList<>();
+        validFields = new ArrayList<>();
+
+        ViewGroup layout = findViewById(R.id.forgotPasswordRL);
+        editTexts = getAllEditTexts(layout);
+
+        mailET = findViewById(R.id.forgotPassword_mailET);
+        newPasswordET = findViewById(R.id.forgotPassword_newPasswordET);
+        verifyNewPasswordET = findViewById(R.id.forgotPassword_newPasswordVerifyET);
+        secretQuestionSP = findViewById(R.id.forgotPassword_secretQuestionSP);
+        secretAnswerET = findViewById(R.id.forgotPassword_secretAnswerET);
+        setFirstStep();
 
         resetPasswordBTN = findViewById(R.id.forgotPassword_resetPasswordBTN);
         resetPasswordBTN.setOnClickListener(v -> {
@@ -53,31 +68,106 @@ public class ForgotPassword extends AppCompatActivity {
     }
 
     private void resetPassword() {
-        mailET = findViewById(R.id.forgotPassword_mailET);
-        newPasswordET = findViewById(R.id.forgotPassword_newPasswordET);
-        verifyNewPasswordET = findViewById(R.id.forgotPassword_newPasswordVerifyET);
-        secretQuestionSP = findViewById(R.id.forgotPassword_secretQuestionSP);
-        secretAnswerET = findViewById(R.id.forgotPassword_secretAnswerET);
         //TODO : généraliser la vérifications des champs
-
-        ViewGroup layout = findViewById(R.id.forgotPasswordRL);
-        editTexts = getAllEditTexts(layout);
         if (checkEmail(mailET.getText().toString())) {
-            invalidFields.clear();
-            new CheckAccountTask().execute();
+            if (step == 1) {
+                new CheckAccountTask().execute();
+            } else if (step == 2) {
+                checkStepQuestionAnswer();
+            } else if (step == 3) {
+                checkStepPassword();
+            }
         } else {
             Toast.makeText(this, "Email invalide!", Toast.LENGTH_SHORT).show();
+            setFirstStep();
             invalidFields.clear();
-            allFieldsWrong();
+            invalidFields.add(mailET);
             updateBorder();
         }
+    }
 
+    private void setFirstStep() {
+        step = 1;
+        mailET.setVisibility(View.VISIBLE);
+        secretQuestionSP.setVisibility(View.GONE);
+        secretAnswerET.setVisibility(View.GONE);
+        newPasswordET.setVisibility(View.GONE);
+        verifyNewPasswordET.setVisibility(View.GONE);
+    }
+
+    private void setSecondStep() {
+        step = 2;
+        mailET.setVisibility(View.GONE);
+        secretQuestionSP.setVisibility(View.VISIBLE);
+        secretAnswerET.setVisibility(View.VISIBLE);
+        newPasswordET.setVisibility(View.GONE);
+        verifyNewPasswordET.setVisibility(View.GONE);
+    }
+
+    private void setThirdStep() {
+        step = 3;
+        mailET.setVisibility(View.GONE);
+        secretQuestionSP.setVisibility(View.GONE);
+        secretAnswerET.setVisibility(View.GONE);
+        newPasswordET.setVisibility(View.VISIBLE);
+        verifyNewPasswordET.setVisibility(View.VISIBLE);
+    }
+
+    private void checkStepQuestionAnswer() {
+        invalidFields.clear();
+        validFields.clear();
+        if (secretQuestionSP.getSelectedItem().toString().isEmpty()) {
+            invalidFields.add(secretQuestionSP);
+        } else if (!secretQuestionSP.getSelectedItem().toString().equals(currentSecretQuestion)) {
+            invalidFields.add(secretQuestionSP);
+        } else {
+            validFields.add(secretQuestionSP);
+        }
+
+        if (secretAnswerET.getText().toString().isEmpty()) {
+            invalidFields.add(secretAnswerET);
+        } else if (!secretAnswerET.getText().toString().equals(currentSecretAnswer)) {
+            invalidFields.add(secretAnswerET);
+        } else {
+            validFields.add(secretAnswerET);
+        }
+        updateBorder();
+
+        if (invalidFields.isEmpty()) {
+            setThirdStep();
+        }
+    }
+
+    private void checkStepPassword() {
+        invalidFields.clear();
+        validFields.clear();
+        switch (checkPassword(currentPassword, newPasswordET.getText().toString(), verifyNewPasswordET.getText().toString())) {
+            case -1:
+                invalidFields.add(newPasswordET);
+                invalidFields.add(verifyNewPasswordET);
+                updateBorder();
+                break;
+            case 1:
+                validFields.add(newPasswordET);
+                invalidFields.add(verifyNewPasswordET);
+                updateBorder();
+                break;
+            case 2:
+                invalidFields.add(newPasswordET);
+                invalidFields.add(verifyNewPasswordET);
+                updateBorder();
+                break;
+            case 0:
+                validFields.add(newPasswordET);
+                validFields.add(verifyNewPasswordET);
+                new ResetPasswordTask().execute();
+                break;
+        }
     }
 
 
     private class CheckAccountTask extends AsyncTask<Void, Void, Void> {
         private boolean exists;
-        private int userId;
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -89,34 +179,15 @@ public class ForgotPassword extends AppCompatActivity {
                 preparedStatement.setString(1, mailET.getText().toString());
                 ResultSet resultSet = preparedStatement.executeQuery();
                 if (resultSet.next()) {
-                    Log.e("Database Connection", "Un compte existe bien!");
                     userId = resultSet.getInt("Id");
+                    currentMail = resultSet.getString("Email");
+                    currentSecretQuestion = resultSet.getString("QuestionSecrete");
+                    currentSecretAnswer = resultSet.getString("ReponseSecrete");
+                    currentPassword = resultSet.getString("Password");
                     this.exists = true;
                 } else {
                     this.exists = false;
                     Log.e("Database Connection", "Aucun compte avec cet email!");
-                }
-
-                if (exists) {
-                    if (!resultSet.getString("QuestionSecrete").equals(secretQuestionSP.getSelectedItem().toString())) {
-                        invalidFields.add(secretQuestionSP);
-                    }
-                    if (!resultSet.getString("ReponseSecrete").equals(secretAnswerET.getText().toString())) {
-                        invalidFields.add(secretAnswerET);
-                    }
-                    switch (checkPassword(resultSet.getString("Password"), newPasswordET.getText().toString(), verifyNewPasswordET.getText().toString())) {
-                        case -1:
-                            invalidFields.add(newPasswordET);
-                            invalidFields.add(verifyNewPasswordET);
-                            break;
-                        case 1:
-                            invalidFields.add(verifyNewPasswordET);
-                            break;
-                        case 2:
-                            invalidFields.add(newPasswordET);
-                            invalidFields.add(verifyNewPasswordET);
-                            break;
-                    }
                 }
 
                 DatabaseConnection.closeConnection(connection);
@@ -130,35 +201,23 @@ public class ForgotPassword extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            //TODO : généraliser les messages Toast (langue)
             if (exists) {
-                if (invalidFields.isEmpty()) {
-                    invalidFields.clear();
-                    updateBorder();
-                    new ResetPasswordTask(userId).execute();
-                } else {
-                    updateBorder();
-                    Toast.makeText(ForgotPassword.this, "Certains champs ne sont pas valides!", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                allFieldsWrong();
+                invalidFields.clear();
+                validFields.clear();
+                validFields.add(mailET);
                 updateBorder();
-                Log.e("Database Connection", "Aucun compte trouvé avec cet email!");
-                //TODO : généraliser les messages Toast (langue)
+                setSecondStep();
+            } else {
+                invalidFields.clear();
+                invalidFields.add(mailET);
+                updateBorder();
                 Toast.makeText(ForgotPassword.this, "Aucun compte trouvé avec cet email!", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-
     private class ResetPasswordTask extends AsyncTask<Void, Void, Void> {
-
-        private int userId;
-
-        public ResetPasswordTask(int userId) {
-            super();
-            this.userId = userId;
-        }
-
         @Override
         protected Void doInBackground(Void... voids) {
             try {
@@ -182,10 +241,9 @@ public class ForgotPassword extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-
             Toast.makeText(ForgotPassword.this, "Mot de passe réinitialisé avec succès!", Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(ForgotPassword.this, MainActivity.class);
+            Intent intent = new Intent(ForgotPassword.this, Login.class);
             startActivity(intent);
         }
     }
@@ -203,13 +261,13 @@ public class ForgotPassword extends AppCompatActivity {
         for (EditText field : editTexts) {
             if (invalidFields.contains(field)) {
                 field.setBackgroundResource(R.drawable.invalid_edittext_border);
-            } else {
+            } else if (validFields.contains(field)) {
                 field.setBackgroundResource(R.drawable.valid_edittext_border);
             }
         }
         if (invalidFields.contains(secretQuestionSP)) {
             secretQuestionSP.setBackgroundResource(R.drawable.invalid_edittext_border);
-        } else {
+        } else if (validFields.contains(secretQuestionSP)) {
             secretQuestionSP.setBackgroundResource(R.drawable.valid_edittext_border);
         }
     }
