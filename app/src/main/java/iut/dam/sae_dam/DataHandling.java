@@ -71,7 +71,6 @@ public class DataHandling {
                 }
 
                 preparedStatement.close();
-                Log.e("Database Connection", "Compte créé avec succès!");
 
                 DatabaseConnection.closeConnection(connection);
             } catch (SQLException e) {
@@ -84,6 +83,8 @@ public class DataHandling {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            Saisie s = new Saisie(medicaments.get(0), pharmacies.get(0));
+            userSaisies.add(s);
         }
     }
 

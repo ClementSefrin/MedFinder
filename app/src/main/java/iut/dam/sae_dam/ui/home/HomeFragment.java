@@ -27,8 +27,11 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 import iut.dam.sae_dam.R;
+import iut.dam.sae_dam.medicaments.Medicament;
+import iut.dam.sae_dam.pharmacies.Pharmacie;
 import iut.dam.sae_dam.saisies.Saisie;
 import iut.dam.sae_dam.saisies.SaisieAdapter;
 import iut.dam.sae_dam.DataHandling;
@@ -36,38 +39,30 @@ import iut.dam.sae_dam.databinding.FragmentHomeBinding;
 
 
 public class HomeFragment extends Fragment {
-    private ListView histoSaisie;
     private FragmentHomeBinding binding;
-    private static LinkedList<Saisie> saisies = new LinkedList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        saisies = DataHandling.getUserSaisies();
         HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
-        histoSaisie = root.findViewById(R.id.fragmentHome_HistoSaisieLV);
+
+        List<Saisie> saisies = new LinkedList<>();
+        Medicament med = new Medicament(1, "Doliprane", "Comprimé", "Libre", "Autorisation de mise sur le marché", "Commercialisé", "Sanofi", false);
+        Pharmacie pharma = new Pharmacie(1, "Pharmacie de la gare");
+        saisies.add(new Saisie(med, pharma));
+
+        ListView histoSaisie = binding.fragmentHomeHistoSaisieLV;
+        SaisieAdapter adapter = new SaisieAdapter(getActivity(), R.layout.item_saisie, DataHandling.getUserSaisies());
+        histoSaisie.setAdapter(adapter);
+
         return root;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        for (Saisie saisie : saisies) {
-            Log.e("AAAA Saisie", saisie.getMedicament().getDenomination() + " " + saisie.getPharmacie().getName() + " " + saisie.getDateSaisie());
-        }
-        SaisieAdapter adapter = new SaisieAdapter(getActivity(), R.layout.item_saisie, saisies);
-        histoSaisie.setAdapter(adapter);
-    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
-    public static void addData(Saisie saisie) {
-        saisies.add(saisie);
-    }
-
 }

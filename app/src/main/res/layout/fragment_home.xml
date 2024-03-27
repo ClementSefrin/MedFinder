@@ -16,5 +16,4 @@
         android:layout_height="match_parent"
         android:divider="?attr/background"
         android:dividerHeight="20dp" />
-
 </RelativeLayout>

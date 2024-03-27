@@ -1,59 +1,53 @@
 package iut.dam.sae_dam.saisies;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.util.List;
 
-import iut.dam.sae_dam.DataHandling;
 import iut.dam.sae_dam.R;
 
 public class SaisieAdapter extends ArrayAdapter<Saisie> {
+    Activity activity;
+    int itemRessourceId;
+    List<Saisie> items;
 
-    TextView nomMedicamentTV, codeCisTV, dateSaisieTV, pharmacieTV;
-    private final Activity activity;
-    private final int itemResourceId;
-    private List<Saisie> items;
-
-    public SaisieAdapter(Activity activity, int itemResourceId, List<Saisie> items) {
-        super(activity, itemResourceId);
+    public SaisieAdapter(Activity activity, int itemRessourceId, List<Saisie> items) {
+        super(activity, itemRessourceId, items);
         this.activity = activity;
-        this.itemResourceId = itemResourceId;
+        this.itemRessourceId = itemRessourceId;
         this.items = items;
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View layout = convertView;
-
-        if (layout == null) {
+        if (convertView == null) {
             LayoutInflater inflater = activity.getLayoutInflater();
-            layout = inflater.inflate(itemResourceId, parent, false);
+            layout = inflater.inflate(itemRessourceId, parent, false);
         }
 
-        nomMedicamentTV = (TextView) layout.findViewById(R.id.itemSaisie_nomMedicamentTV);
-        codeCisTV = (TextView) layout.findViewById(R.id.itemSaisie_codeCisTV);
-        dateSaisieTV = (TextView) layout.findViewById(R.id.itemSaisie_dateSaisieTV);
-        pharmacieTV = (TextView) layout.findViewById(R.id.itemSaisie_pharmacieTV);
-
-        Saisie currentSaisie = items.get(position);
-        nomMedicamentTV.setText(currentSaisie.getMedicament().getDenomination());
-        codeCisTV.setText(currentSaisie.getMedicament().getCisCode());
+        //Récupérer les view
+        TextView nomMedicamentTV = (TextView) layout.findViewById(R.id.itemSaisie_nomMedicamentTV);
+        TextView codeCisTV = (TextView) layout.findViewById(R.id.itemSaisie_codeCisTV);
+        TextView pharmacieTV = (TextView) layout.findViewById(R.id.itemSaisie_pharmacieTV);
+        TextView dateSaisieTV = (TextView) layout.findViewById(R.id.itemSaisie_dateSaisieTV);
 
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(activity.getApplicationContext());
 
-        dateSaisieTV.setText(dateFormat.format(currentSaisie.getDateSaisie()));
+        nomMedicamentTV.setText(items.get(position).getMedicament().getDenomination());
+        codeCisTV.setText(String.valueOf(items.get(position).getMedicament().getCisCode()));
+        pharmacieTV.setText(String.valueOf(items.get(position).getPharmacie().getName()));
+        dateSaisieTV.setText(dateFormat.format(items.get(position).getDateSaisie()));
 
-        pharmacieTV.setText(currentSaisie.getPharmacie().getName());
         return layout;
     }
+
+
 }
