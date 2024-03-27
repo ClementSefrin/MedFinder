@@ -28,80 +28,71 @@ public class CisFragment extends Fragment {
     private FragmentCisBinding binding;
     private CisViewModel cisViewModel;
 
-
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCisBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         cisViewModel = new ViewModelProvider(this, new CisViewModel.Factory(requireContext())).get(CisViewModel.class);
 
-        cisViewModel.setMedicineList(DataHandling.getMedicineList());
-        cisViewModel.setPharmacieList(DataHandling.getPharmacieList());
-
         // Code autocomplete //
-        AutoCompleteTextView codeCompleteTextView = binding.autoCompleteTextView;
-        MedicamentAdapter codeAdapter = new MedicamentAdapter(requireContext(), cisViewModel.getMedicineList());
+        AutoCompleteTextView codeCompleteTextView = binding.cisFragmentCodeCisACTV;
+        MedicamentAdapter codeAdapter = new MedicamentAdapter(requireContext(), DataHandling.getMedicaments());
         codeCompleteTextView.setAdapter(codeAdapter);
 
         codeCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Medicament selectedMedicine = (Medicament) parent.getItemAtPosition(position);
-                TextView medicamentTV = binding.medicamentTV;
+                TextView medicamentTV = binding.cisFragmentMedicamentNameTV;
                 medicamentTV.setText(selectedMedicine.getDenomination());
             }
         });
 
         // Pharmacie autocomplete //
-        AutoCompleteTextView pharmacieCompleteTextView = binding.pharmacieACTV;
-        PharmacieAdapter pharmacieAdapter = new PharmacieAdapter(requireContext(), cisViewModel.getPharmacieList());
+        AutoCompleteTextView pharmacieCompleteTextView = binding.cisFragmentPharmacieACTV;
+        PharmacieAdapter pharmacieAdapter = new PharmacieAdapter(requireContext(), DataHandling.getPharmacies());
         pharmacieCompleteTextView.setAdapter(pharmacieAdapter);
 
-        pharmacieCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Pharmacie selectedMedicine = (Pharmacie) parent.getItemAtPosition(position);
-            }
-        });
-
-        Button addButton = binding.signalerB;
+        Button addButton = binding.cisFragmentSignalerBTN;
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String code = codeCompleteTextView.getText().toString();
-                String medicament = binding.medicamentTV.getText().toString();
-                String pharmacie = pharmacieCompleteTextView.getText().toString();
+                String medCodeStr = codeCompleteTextView.getText().toString();
+                Medicament med;
+                int medicamentCode = 0;
+                if (medCodeStr.isEmpty()) {
+                    med = null;
+                } else {
+                    medicamentCode = Integer.parseInt(codeCompleteTextView.getText().toString());
+                    med = DataHandling.getMedicamentByCode(medicamentCode);
+                }
+                String pharmacieName = pharmacieCompleteTextView.getText().toString();
+                Pharmacie pharmacie = DataHandling.getPharmacieByName(pharmacieName);
 
                 boolean error = false;
-                if (code.isEmpty() || (!code.isEmpty() && !codeAdapter.contains(Integer.parseInt(code), medicament))) {
+                if (med == null) {
                     Toast.makeText(requireContext(), "Médicament inconnu", Toast.LENGTH_SHORT).show();
                     codeCompleteTextView.setText("");
                     error = true;
                 }
 
-                if (!pharmacieAdapter.contains(pharmacie)) {
-                    Toast.makeText(requireContext(), "Pharmacie inconnue", Toast.LENGTH_SHORT).show();
+                if (pharmacie == null) {
                     pharmacieCompleteTextView.setText("");
+                    Toast.makeText(requireContext(), "Pharmacie inconnue", Toast.LENGTH_SHORT).show();
                     error = true;
                 }
-                if (error)
+
+                //TODO : errorhandling
+                if (error) {
                     return;
-                else {
+                } else {
                     codeCompleteTextView.setText("");
                     pharmacieCompleteTextView.setText("");
-                    binding.medicamentTV.setText("");
+                    binding.cisFragmentMedicamentNameTV.setText("");
                 }
 
-                Saisie saisie = new Saisie(code, medicament, pharmacie);
-                boolean test = HomeFragment.ajoutSaisie(saisie);
-                if (test)
-                    Toast.makeText(requireContext(), "Signalement ajouté", Toast.LENGTH_SHORT).show();
-                else {
-                    Toast.makeText(requireContext(), "Erreur dans le signalement", Toast.LENGTH_SHORT).show();
-                }
+                Saisie saisie = new Saisie(med, pharmacie);
+                DataHandling.addData(saisie);
             }
         });
 

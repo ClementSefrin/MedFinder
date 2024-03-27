@@ -22,7 +22,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/baseVerticalMargin"
         android:text="@string/logInTitle"
-        android:textSize="@dimen/accountTitleTextSize"
+        android:textSize="@dimen/titleTextSize"
         android:textStyle="bold" />
 
 
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/logInHeader"
                     android:textAlignment="center"
-                    android:textSize="@dimen/accountTitleTextSize"
+                    android:textSize="@dimen/titleTextSize"
                     android:textStyle="bold" />
 
                 <EditText
@@ -72,7 +72,7 @@
                     android:drawableStart="@drawable/ic_mail"
                     android:hint="@string/hintMail"
                     android:inputType="textEmailAddress"
-                    android:textSize="@dimen/accountTextSize" />
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/login_errorMailTV"
@@ -81,7 +81,7 @@
                     android:layout_below="@id/login_mailET"
                     android:text="@string/errorEmptyField"
                     android:textColor="?attr/errorMessageColor"
-                    android:textSize="@dimen/accountSmallTextSize" />
+                    android:textSize="@dimen/smallTextSize" />
 
                 <LinearLayout
                     android:id="@+id/login_passwordLL"
@@ -102,7 +102,7 @@
                         android:drawableStart="@drawable/ic_password"
                         android:hint="@string/hintPassword"
                         android:inputType="textPassword"
-                        android:textSize="@dimen/accountTextSize" />
+                        android:textSize="@dimen/textSize" />
 
                     <ImageButton
                         android:id="@+id/login_passwordVisibilityBTN"
@@ -122,7 +122,7 @@
                     android:layout_below="@id/login_passwordLL"
                     android:text="@string/errorEmptyField"
                     android:textColor="?attr/errorMessageColor"
-                    android:textSize="@dimen/accountSmallTextSize" />
+                    android:textSize="@dimen/smallTextSize" />
 
                 <Button
                     android:id="@+id/login_noAccountBTN"
@@ -135,7 +135,7 @@
                     android:text="@string/logInSignUp"
                     android:textAllCaps="false"
                     android:textColor="?attr/accountButtonTextColor"
-                    android:textSize="@dimen/accountSmallTextSize" />
+                    android:textSize="@dimen/smallTextSize" />
 
                 <Button
                     android:id="@+id/login_forgotPasswordBTN"
@@ -146,7 +146,7 @@
                     android:text="@string/logInForgotPassword"
                     android:textAllCaps="false"
                     android:textColor="?attr/accountButtonTextColor"
-                    android:textSize="@dimen/accountSmallTextSize" />
+                    android:textSize="@dimen/smallTextSize" />
             </RelativeLayout>
 
         </ScrollView>

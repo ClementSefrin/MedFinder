@@ -4,28 +4,53 @@ package iut.dam.sae_dam.medicaments;
 import java.util.Objects;
 
 public class Medicament {
-    private int CIS;
-    private String denomination;
+    private int cisCode;
+    private String denomination, formeAdministration, statusAdministration, procedureAutorisation, etatCommercialisation, titulaire;
+    boolean surveillance;
 
-    public Medicament(int CIS, String denomination) {
-        this.CIS = CIS;
+    public Medicament(int cisCode, String denomination, String formeAdministration,
+                      String statusAdministration, String procedureAutorisation,
+                      String etatCommercialisation, String titulaire, boolean surveillance) {
+        this.cisCode = cisCode;
         this.denomination = denomination;
+        this.formeAdministration = formeAdministration;
+        this.statusAdministration = statusAdministration;
+        this.procedureAutorisation = procedureAutorisation;
+        this.etatCommercialisation = etatCommercialisation;
+        this.titulaire = titulaire;
+        this.surveillance = surveillance;
     }
 
-    public int getCIS() {
-        return CIS;
+    public int getCisCode() {
+        return cisCode;
     }
 
-    public void setCIS(int CIS) {
-        this.CIS = CIS;
+    public String getFormeAdministration() {
+        return formeAdministration;
+    }
+
+    public String getStatusAdministration() {
+        return statusAdministration;
+    }
+
+    public String getProcedureAutorisation() {
+        return procedureAutorisation;
+    }
+
+    public String getEtatCommercialisation() {
+        return etatCommercialisation;
+    }
+
+    public String getTitulaire() {
+        return titulaire;
+    }
+
+    public boolean isSurveillance() {
+        return surveillance;
     }
 
     public String getDenomination() {
         return denomination;
-    }
-
-    public void setDenomination(String denomination) {
-        this.denomination = denomination;
     }
 
     @Override
@@ -33,11 +58,17 @@ public class Medicament {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Medicament that = (Medicament) o;
-        return CIS == that.CIS && Objects.equals(denomination, that.denomination);
+        return getCisCode() == that.getCisCode() && surveillance == that.surveillance
+                && Objects.equals(getDenomination(), that.getDenomination())
+                && Objects.equals(formeAdministration, that.formeAdministration)
+                && Objects.equals(statusAdministration, that.statusAdministration)
+                && Objects.equals(procedureAutorisation, that.procedureAutorisation)
+                && Objects.equals(etatCommercialisation, that.etatCommercialisation)
+                && Objects.equals(titulaire, that.titulaire);
     }
 
     @Override
     public String toString() {
-        return String.valueOf(CIS); // or return denomination; depending on your preference
+        return String.valueOf(cisCode);
     }
 }

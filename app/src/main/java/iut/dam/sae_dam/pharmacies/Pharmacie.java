@@ -3,9 +3,11 @@ package iut.dam.sae_dam.pharmacies;
 import java.util.Objects;
 
 public class Pharmacie {
+    int id;
     private String name;
 
-    public Pharmacie(String name) {
+    public Pharmacie(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 
@@ -13,8 +15,8 @@ public class Pharmacie {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public int getId() {
+        return id;
     }
 
     @Override
@@ -27,6 +29,6 @@ public class Pharmacie {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pharmacie pharmacie = (Pharmacie) o;
-        return Objects.equals(name, pharmacie.name);
+        return Objects.equals(name, pharmacie.name) && Objects.equals(id, pharmacie.id);
     }
 }

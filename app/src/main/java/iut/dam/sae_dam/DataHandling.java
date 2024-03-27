@@ -1,156 +1,124 @@
 package iut.dam.sae_dam;
 
-import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
+import iut.dam.sae_dam.activities.CreateAccount;
+import iut.dam.sae_dam.activities.MainActivity;
+import iut.dam.sae_dam.data.DatabaseConnection;
 import iut.dam.sae_dam.medicaments.Medicament;
 import iut.dam.sae_dam.pharmacies.Pharmacie;
 import iut.dam.sae_dam.saisies.Saisie;
 
-public class DataHandling implements Runnable {
-    private Context context;
-    private static List<Medicament> medicineList = new ArrayList<>();
-    private static List<Pharmacie> pharmacieList = new ArrayList<>();
-    private static FileOutputStream fos;
-    private static OutputStreamWriter osw;
+public class DataHandling {
+    private static List<Medicament> medicaments = new LinkedList<>();
+    private static List<Pharmacie> pharmacies = new LinkedList<>();
+    private static LinkedList<Saisie> allSaisies = new LinkedList<>();
+    private static LinkedList<Saisie> userSaisies = new LinkedList<>();
 
-    public DataHandling(Context context) {
-        this.context = context;
+    public static void loadData() {
+        new LoadData().execute();
     }
 
-    @Override
-    public void run() {
+    public static void addData(Saisie saisie) {
+        userSaisies.add(saisie);
     }
 
-    public void init() {
-        try {
-            Log.e("LOADING", "LOADING STARTED");
-            // Medicaments //
-            InputStream inputStream = context.getAssets().open("medicaments.json");
-            int size = inputStream.available();
-            byte[] buffer = new byte[size];
-            inputStream.read(buffer);
-            inputStream.close();
+    public static void supprimerHisto() {
+        userSaisies.clear();
+    }
 
-            String json = new String(buffer, "UTF-8");
+    private static class LoadData extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                Connection connection = DatabaseConnection.getConnection();
 
-            JSONArray jsonArray = new JSONArray(json);
+                String query = "SELECT * FROM Medicament";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    int cisCode = resultSet.getInt("CodeCis");
+                    String denomination = resultSet.getString("NomMedicament");
+                    String formeAdministration = resultSet.getString("Forme_D_Administration");
+                    String statusAdministration = resultSet.getString("Statut_Administration");
+                    String procedureAutorisation = resultSet.getString("Procedure_autorisation");
+                    String etatCommercialisation = resultSet.getString("Etat_Commercialisation");
+                    String titulaire = resultSet.getString("Titulaire");
+                    boolean surveillance = resultSet.getBoolean("Surveillance");
+                    medicaments.add(new Medicament(cisCode, denomination, formeAdministration, statusAdministration, procedureAutorisation, etatCommercialisation, titulaire, surveillance));
+                }
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                query = "SELECT * FROM pharmacies";
+                preparedStatement = connection.prepareStatement(query);
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
 
-                Medicament medicine = new Medicament(jsonObject.getInt("CIS"), jsonObject.getString("denomination"));
+                    pharmacies.add(new Pharmacie(id, name));
+                }
 
-                medicineList.add(medicine);
+                preparedStatement.close();
+                Log.e("Database Connection", "Compte créé avec succès!");
+
+                DatabaseConnection.closeConnection(connection);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                Log.e("Database Error", e.getMessage());
             }
+            return null;
+        }
 
-            // Pharmacies //
-            inputStream = context.getAssets().open("pharmacies.json");
-            size = inputStream.available();
-            buffer = new byte[size];
-            inputStream.read(buffer);
-            inputStream.close();
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+    }
 
-            json = new String(buffer, "UTF-8");
+    public static List<Medicament> getMedicaments() {
+        return medicaments;
+    }
 
-            jsonArray = new JSONArray(json);
+    public static List<Pharmacie> getPharmacies() {
+        return pharmacies;
+    }
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
+    public static LinkedList<Saisie> getAllSaisies() {
+        return allSaisies;
+    }
 
-                Pharmacie pharmacie = new Pharmacie(jsonObject.getString("name"));
+    public static LinkedList<Saisie> getUserSaisies() {
+        return userSaisies;
+    }
 
-                pharmacieList.add(pharmacie);
+    public static Medicament getMedicamentByCode(int cisCode) {
+        for (Medicament medicament : medicaments) {
+            if (medicament.getCisCode() == cisCode) {
+                return medicament;
             }
-
-
-            Log.e("LOADING", "LOADING ENDED");
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
         }
+        return null;
     }
 
-    public static ArrayList<Saisie> loadData(File saveFile, Gson gson) {
-        ArrayList<Saisie> savedItems = new ArrayList<>();
-        try {
-            FileInputStream fis = new FileInputStream(saveFile);
-            InputStreamReader isr = new InputStreamReader(fis);
-            JsonReader reader = new JsonReader(isr);
-            reader.setLenient(true); // Lenient mode to accept malformed JSON
-
-            while (reader.hasNext()) {
-                Saisie readObject = gson.fromJson(reader, Saisie.class);
-                savedItems.add(readObject);
+    public static Pharmacie getPharmacieByName(String name) {
+        for (Pharmacie pharmacie : pharmacies) {
+            if (pharmacie.getName().equals(name)) {
+                return pharmacie;
             }
-
-            reader.close();
-            isr.close();
-            fis.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        return savedItems;
+        return null;
     }
 
-    public static boolean addData(File saveFile, Gson gson, Saisie saisie) {
-        try {
-            fos = new FileOutputStream(saveFile, true);
-            osw = new OutputStreamWriter(fos);
-
-            String json = gson.toJson(saisie);
-            osw.write(json + "\n");
-
-            osw.close();
-            fos.close();
-            return true;
-        } catch (IOException e) {
-            Log.e("FileWriteError", "Error writing to file: " + e.getMessage());
-            return false;
-        }
-    }
-
-    public static boolean deleteData(File saveFile) {
-        try {
-            fos = new FileOutputStream(saveFile);
-            osw = new OutputStreamWriter(fos);
-
-            osw.write("");
-
-            osw.close();
-            fos.close();
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
-    }
-
-    public static List<Medicament> getMedicineList() {
-        return medicineList;
-    }
-
-    public static List<Pharmacie> getPharmacieList() {
-        return pharmacieList;
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
-    }
 }

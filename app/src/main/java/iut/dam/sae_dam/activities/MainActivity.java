@@ -25,20 +25,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //TODO : enelver la ligne
+        DataHandling.loadData();
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        DataHandling d = new DataHandling(this.getApplicationContext());
-        d.init();
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        BottomNavigationView navView = findViewById(R.id.mainActivity_navView);
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        NavController navController = Navigation.findNavController(this, R.id.mainActivity_hostFragment);
+        NavigationUI.setupWithNavController(binding.mainActivityNavView, navController);
 
 
-        final TextView headerTextView = findViewById(R.id.header_title);
+        final TextView headerTextView = findViewById(R.id.mainActivity_headerTitle);
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController controller,

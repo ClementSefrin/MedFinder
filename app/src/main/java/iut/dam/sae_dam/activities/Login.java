@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import iut.dam.sae_dam.DataHandling;
 import iut.dam.sae_dam.R;
 import iut.dam.sae_dam.data.DatabaseConnection;
 import iut.dam.sae_dam.errors.ErrorManager;
@@ -40,6 +41,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        DataHandling.loadData();
         errors = new HashMap<>();
         errorMessagesViews = new HashMap<>();
         getViews();

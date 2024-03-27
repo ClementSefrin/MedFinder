@@ -16,6 +16,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import iut.dam.sae_dam.DataHandling;
 import iut.dam.sae_dam.R;
 import iut.dam.sae_dam.databinding.FragmentAccountBinding;
 import iut.dam.sae_dam.ui.home.HomeFragment;
@@ -30,7 +31,7 @@ public class AccountFragment extends Fragment {
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.supprimerHistoTV;
+        final TextView textView = binding.accountFragmentSupprimerHistoTV;
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,12 +44,9 @@ public class AccountFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
-                        boolean test = HomeFragment.supprimerHisto();
-                        if (test)
-                            Toast.makeText(requireContext(), "Historique supprimé", Toast.LENGTH_SHORT).show();
-                        else {
-                            Toast.makeText(requireContext(), "Erreur dans la suppression de l'historique", Toast.LENGTH_SHORT).show();
-                        }
+                        DataHandling.supprimerHisto();
+                        Toast.makeText(requireContext(), "Historique supprimé : " + DataHandling.getUserSaisies().size(), Toast.LENGTH_SHORT).show();
+
                     }
                 });
 

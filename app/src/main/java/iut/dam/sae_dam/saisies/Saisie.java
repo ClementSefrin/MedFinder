@@ -2,29 +2,26 @@ package iut.dam.sae_dam.saisies;
 
 import java.util.Date;
 
+import iut.dam.sae_dam.medicaments.Medicament;
+import iut.dam.sae_dam.pharmacies.Pharmacie;
+
 public class Saisie {
 
-    private String code, medicament, pharmacie;
-
+    private Medicament medicament;
+    private Pharmacie pharmacie;
     private Date dateSaisie;
 
-    public Saisie(String code, String medicament, String pharmacie) {
-        this.code = code;
+    public Saisie(Medicament medicament, Pharmacie pharmacie) {
         this.medicament = medicament;
         this.pharmacie = pharmacie;
         dateSaisie = new Date();
     }
 
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getMedicament() {
+    public Medicament getMedicament() {
         return medicament;
     }
 
-    public String getPharmacie() {
+    public Pharmacie getPharmacie() {
         return pharmacie;
     }
 

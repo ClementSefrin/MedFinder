@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -9,25 +9,26 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/divider1"
+            android:id="@+id/accountFragment_divider1"
             android:layout_width="match_parent"
-            android:layout_height="2dp" />
+            android:layout_height="@dimen/divider_height" />
 
         <TextView
-            android:id="@+id/supprimerHistoTV"
+            android:id="@+id/accountFragment_supprimerHistoTV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/accountFragment_divider1"
             android:padding="5dp"
-            android:layout_below="@id/divider1"
             android:text="@string/delete_history"
-            android:textColor="#F00"
-            android:textSize="30sp"
-            android:textStyle="bold"></TextView>
+            android:textColor="?attr/errorMessageColor"
+            android:textSize="@dimen/titleTextSize"
+            android:textStyle="bold" />
 
         <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/accountFragment_divider2"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_below="@id/supprimerHistoTV" />
+            android:layout_height="@dimen/divider_height"
+            android:layout_below="@id/accountFragment_supprimerHistoTV" />
 
     </RelativeLayout>
 </ScrollView>

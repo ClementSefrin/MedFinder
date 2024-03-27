@@ -21,8 +21,8 @@ public class PharmacieAdapter extends ArrayAdapter<Pharmacie> implements Filtera
     }
 
 
-    public boolean contains(String name) {
-        return pharmaciesListFull.contains(new Pharmacie(name));
+    public boolean contains(int id, String name) {
+        return pharmaciesListFull.contains(new Pharmacie(id, name));
     }
 
     @NonNull
@@ -66,5 +66,6 @@ public class PharmacieAdapter extends ArrayAdapter<Pharmacie> implements Filtera
             return String.valueOf(((Pharmacie) resultValue).getName());
         }
     };
+
 
 }

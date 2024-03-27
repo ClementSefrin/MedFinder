@@ -26,8 +26,10 @@ public class MedicamentAdapter extends ArrayAdapter<Medicament> implements Filte
         return medicineFilter;
     }
 
-    public boolean contains(int id, String name) {
-        return medicineListFull.contains(new Medicament(id, name));
+    public boolean contains(int id, String name, String formeAdministration, String statusAdministration,
+                            String procedureAutorisation, String etatCommercialisation, String titulaire, boolean surveillance) {
+        return medicineListFull.contains(new Medicament(id, name, formeAdministration, statusAdministration,
+                procedureAutorisation, etatCommercialisation, titulaire, surveillance));
     }
 
     private Filter medicineFilter = new Filter() {
@@ -42,7 +44,7 @@ public class MedicamentAdapter extends ArrayAdapter<Medicament> implements Filte
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
                 for (Medicament medicine : medicineListFull) {
-                    if (String.valueOf(medicine.getCIS()).contains(filterPattern) ||
+                    if (String.valueOf(medicine.getCisCode()).contains(filterPattern) ||
                             medicine.getDenomination().toLowerCase().contains(filterPattern)) {
                         suggestions.add(medicine);
                     }
@@ -63,7 +65,7 @@ public class MedicamentAdapter extends ArrayAdapter<Medicament> implements Filte
 
         @Override
         public CharSequence convertResultToString(Object resultValue) {
-            return String.valueOf(((Medicament) resultValue).getCIS());
+            return String.valueOf(((Medicament) resultValue).getCisCode());
         }
     };
 }

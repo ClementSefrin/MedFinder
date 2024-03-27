@@ -16,8 +16,14 @@
         android:theme="@style/Theme.SAE_DAM">
         <activity
             android:name=".activities.MainActivity"
-            android:exported="false"
-            android:theme="@style/Theme.SAE_DAM" />
+            android:exported="true"
+            android:theme="@style/Theme.SAE_DAM">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".activities.CreateAccount"
@@ -26,14 +32,8 @@
 
         <activity
             android:name=".activities.Login"
-            android:exported="true"
-            android:theme="@style/Theme.SAE_DAM.Account">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"
+            android:theme="@style/Theme.SAE_DAM.Account"></activity>
 
         <activity
             android:name=".activities.ForgotPassword"

@@ -13,28 +13,9 @@ import iut.dam.sae_dam.medicaments.Medicament;
 import iut.dam.sae_dam.pharmacies.Pharmacie;
 
 public class CisViewModel extends ViewModel {
-    private List<Medicament> medicineList = new ArrayList<>();
-    private List<Pharmacie> pharmacieList = new ArrayList<>();
-
     public CisViewModel(Context context) {
     }
 
-
-    public List<Medicament> getMedicineList() {
-        return medicineList;
-    }
-
-    public void setMedicineList(List<Medicament> medicineList) {
-        this.medicineList = medicineList;
-    }
-
-    public List<Pharmacie> getPharmacieList() {
-        return pharmacieList;
-    }
-
-    public void setPharmacieList(List<Pharmacie> pharmacieList) {
-        this.pharmacieList = pharmacieList;
-    }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory {
         private final Context context;
