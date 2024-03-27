@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -41,7 +42,6 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        DataHandling.loadData();
         errors = new HashMap<>();
         errorMessagesViews = new HashMap<>();
         getViews();
@@ -115,12 +115,7 @@ public class Login extends AppCompatActivity {
             super.onPostExecute(aVoid);
             if (exists && passwordCorrect) {
                 ErrorManager.updateBorder(getApplicationContext(), errors, errorMessagesViews);
-                Intent intent = new Intent(Login.this, MainActivity.class);
-                intent.putExtra("userId", userId);
-                intent.putExtra("password", password);
-                intent.putExtra("admin", admin == 0);
-                intent.putExtra("city", city);
-                startActivity(intent);
+                DataHandling.loadData(Login.this, userId, password, admin == 0, city);
             } else {
                 errors.put(mailET, Errors.EMPTY);
                 errors.put(passwordET, Errors.INVALID_MAIL_PASSWORD);

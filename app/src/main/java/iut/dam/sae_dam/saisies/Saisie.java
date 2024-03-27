@@ -9,12 +9,17 @@ public class Saisie {
 
     private Medicament medicament;
     private Pharmacie pharmacie;
+    private int userId;
+    private String ville, departement;
     private Date dateSaisie;
 
-    public Saisie(Medicament medicament, Pharmacie pharmacie) {
+    public Saisie(Medicament medicament, int userId ,Pharmacie pharmacie, Date dateSaisie, String ville, String departement) {
         this.medicament = medicament;
+        this.userId = userId;
         this.pharmacie = pharmacie;
-        dateSaisie = new Date();
+        this.dateSaisie = dateSaisie;
+        this.ville = ville;
+        this.departement = departement;
     }
 
     public Medicament getMedicament() {

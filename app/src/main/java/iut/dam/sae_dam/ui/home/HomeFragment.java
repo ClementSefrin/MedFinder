@@ -47,10 +47,6 @@ public class HomeFragment extends Fragment {
         HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
 
-        List<Saisie> saisies = new LinkedList<>();
-        Medicament med = new Medicament(1, "Doliprane", "Comprimé", "Libre", "Autorisation de mise sur le marché", "Commercialisé", "Sanofi", false);
-        Pharmacie pharma = new Pharmacie(1, "Pharmacie de la gare");
-        saisies.add(new Saisie(med, pharma));
 
         ListView histoSaisie = binding.fragmentHomeHistoSaisieLV;
         SaisieAdapter adapter = new SaisieAdapter(getActivity(), R.layout.item_saisie, DataHandling.getUserSaisies());

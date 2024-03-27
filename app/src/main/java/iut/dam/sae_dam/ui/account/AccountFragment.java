@@ -45,7 +45,7 @@ public class AccountFragment extends Fragment {
                     public void onClick(View v) {
                         dialog.dismiss();
                         DataHandling.supprimerHisto();
-                        Toast.makeText(requireContext(), "Historique supprimé : " + DataHandling.getUserSaisies().size(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), "Historique supprimé.", Toast.LENGTH_SHORT).show();
 
                     }
                 });

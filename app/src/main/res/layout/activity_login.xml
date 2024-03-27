@@ -72,6 +72,7 @@
                     android:drawableStart="@drawable/ic_mail"
                     android:hint="@string/hintMail"
                     android:inputType="textEmailAddress"
+                    android:text="a@g.com"
                     android:textSize="@dimen/textSize" />
 
                 <TextView
@@ -102,6 +103,7 @@
                         android:drawableStart="@drawable/ic_password"
                         android:hint="@string/hintPassword"
                         android:inputType="textPassword"
+                        android:text="Azertyui1#"
                         android:textSize="@dimen/textSize" />
 
                     <ImageButton

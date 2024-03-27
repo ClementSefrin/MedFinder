@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.util.Date;
+
 import iut.dam.sae_dam.DataHandling;
 import iut.dam.sae_dam.databinding.FragmentCisBinding;
 import iut.dam.sae_dam.medicaments.Medicament;
@@ -91,7 +93,7 @@ public class CisFragment extends Fragment {
                     binding.cisFragmentMedicamentNameTV.setText("");
                 }
 
-                Saisie saisie = new Saisie(med, pharmacie);
+                Saisie saisie = new Saisie(med, pharmacie, new Date());
                 DataHandling.addData(saisie);
             }
         });
