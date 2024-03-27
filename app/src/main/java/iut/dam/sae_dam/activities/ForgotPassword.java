@@ -40,8 +40,8 @@ public class ForgotPassword extends AppCompatActivity {
     private HashMap<View, TextView> errorMessagesViews;
     private HashMap<View, Errors> errors;
     int step = 1;
-    private int userId;
-    private String currentMail, currentSecretQuestion, currentSecretAnswer, currentPassword;
+    private int userId, currentQuestionID;
+    private String currentMail, currentSecretAnswer, currentPassword;
     Drawable defaultBackground;
 
 
@@ -103,7 +103,7 @@ public class ForgotPassword extends AppCompatActivity {
                 if (resultSet.next()) {
                     userId = resultSet.getInt("Id");
                     currentMail = resultSet.getString("Email");
-                    currentSecretQuestion = resultSet.getString("QuestionSecrete");
+                    currentQuestionID = resultSet.getInt("QuestionSecrete");
                     currentSecretAnswer = resultSet.getString("ReponseSecrete");
                     currentPassword = resultSet.getString("Password");
                     this.exists = true;
@@ -207,6 +207,7 @@ public class ForgotPassword extends AppCompatActivity {
         secretAnswerET.setVisibility(View.GONE);
         passwordLL.setVisibility(View.GONE);
         verifyNewPasswordET.setVisibility(View.GONE);
+        resetPasswordBTN.setText(R.string.forgotPasswordButtonTextAltStep);
     }
 
     private void setSecondStep() {
@@ -222,10 +223,14 @@ public class ForgotPassword extends AppCompatActivity {
 
     private void checkStepQuestionAnswer() {
         errors.clear();
-        if (secretQuestionSP.getSelectedItem().toString().isEmpty()) {
-            errors.put(secretQuestionSP, Errors.EMPTY_FIELD);
-            errors.put(secretAnswerET, Errors.EMPTY);
-        } else if (!secretQuestionSP.getSelectedItem().toString().equals(currentSecretQuestion)) {
+
+        int selectedPosition = secretQuestionSP.getSelectedItemPosition();
+        String[] secretQuestionsArray = getResources().getStringArray(R.array.questionsSecretes);
+        if (selectedPosition >= 0 && selectedPosition < secretQuestionsArray.length) {
+            int questionResourceId = getResources().getIdentifier(
+                    secretQuestionsArray[selectedPosition], "string", getPackageName());
+        }
+        if (selectedPosition != currentQuestionID || secretQuestionSP.getSelectedItem().toString().isEmpty()) {
             errors.put(secretQuestionSP, Errors.INVALID_QUESTION_ANSWER);
             errors.put(secretAnswerET, Errors.EMPTY);
         } else {
@@ -252,6 +257,7 @@ public class ForgotPassword extends AppCompatActivity {
         newPasswordET.setBackground(defaultBackground);
         verifyNewPasswordET.setVisibility(View.VISIBLE);
         verifyNewPasswordET.setBackground(defaultBackground);
+        resetPasswordBTN.setText(R.string.forgotPasswordHeader);
     }
 
     private void checkStepPassword() {

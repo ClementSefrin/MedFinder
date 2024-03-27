@@ -1,14 +1,14 @@
 <resources>
     <!-- Titles -->
-    <string name="app_name" translatable="false">SAE_DAM</string>
+    <string name="app_name" translatable="false">MedFind</string>
     <string name="title_home">Home</string>
     <string name="title_scan" translatable="false">Scan</string>
     <string name="title_cis">New entry</string>
     <string name="title_account">Account</string>
     <string name="code_cis_title">CIS Code</string>
-    <string name="code_cis_search">Search for a medicine…</string>
     <string name="pharmacy_title">Pharmacy</string>
 
+    <string name="code_cis_search">Search for a medicine…</string>
     <string name="pharmacy_search">Search for a pharmacy…</string>
     <string name="report">Report</string>
     <string name="delete_history_dialog_confirm">Are you sure you want to delete your history?</string>
@@ -24,7 +24,7 @@
     <string name="hintMail">Mail</string>
     <string name="hintCity">City</string>
     <string name="hintPassword">Password</string>
-    <string name="hintPasswordVerify">Verify Password</string>
+    <string name="hintPasswordVerify">Confirm password</string>
     <string name="signUpAlreadySignedUp">Already have account ? Log in.</string>
     <string-array name="questionsSecretes">
         <item>-</item>
@@ -33,7 +33,7 @@
         <item>What is the name of your first school ?</item>
         <item>What is the name of your best friend ?</item>
     </string-array>
-    <string name="hintSecretAnswer">Secret answer</string>
+    <string name="hintSecretAnswer">Answer</string>
 
     <!--Log in-->
     <string name="logInTitle">Log in</string>
@@ -42,9 +42,10 @@
     <string name="logInSignUp">No account ? Sign up.</string>
 
     <!--Forgot password-->
-    <string name="forgotPasswordTitle">Reset password</string>
+    <string name="forgotPasswordTitle">Forgot password</string>
     <string name="forgotPasswordHeader">Reset your password</string>
     <string name="hintNewPassword">New password</string>
+    <string name="forgotPasswordButtonTextAltStep">Next</string>
 
     <!-- Error messages -->
     <string name="errorEmptyField">This field is required.</string>

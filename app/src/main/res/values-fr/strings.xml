@@ -1,15 +1,59 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="title_home">Menu principal</string>
+    <!-- Titles -->
+    <string name="title_home">Menu principale</string>
     <string name="title_cis">Nouvelle saisie</string>
     <string name="title_account">Compte</string>
     <string name="code_cis_title">Code CIS</string>
-    <string name="code_cis_search">Chercher un médicament…</string>
     <string name="pharmacy_title">Pharmacie</string>
+
+    <string name="code_cis_search">Chercher un médicament…</string>
     <string name="pharmacy_search">Chercher une pharmacie…</string>
     <string name="report">Signaler</string>
-    <string name="delete_history_dialog_confirm">Voulez-vous vraiment supprimer l\'historique des saisies?</string>
+    <string name="delete_history_dialog_confirm">Voulez-vous vraiment supprimer votre historique?</string>
     <string name="cancel">Annuler</string>
     <string name="delete">Supprimer</string>
     <string name="delete_history">Supprimer l\'historique</string>
+
+    <!--Sign up-->
+    <string name="signUpTitle">S\'inscrire</string>
+    <string name="signUpHeader">Informations personnelles</string>
+    <string name="hintFirstName">Prénom</string>
+    <string name="hintLastName">Nom</string>
+    <string name="hintMail">Email</string>
+    <string name="hintCity">Ville</string>
+    <string name="hintPassword">Mot de passe</string>
+    <string name="hintPasswordVerify">Confirmer le mot de passe</string>
+    <string name="signUpAlreadySignedUp">Déjà inscrit? Connectez-vous.</string>
+    <string-array name="questionsSecretes">
+        <item>-</item>
+        <item>Comment s\'appelle votre animal de compagnie ?</item>
+        <item>Comment s\'appelle votre premier professeur ?</item>
+        <item>Comment s\'appelle votre première école ?</item>
+        <item>Comment s\'appelle votre meilleur(e) amie(e) ?</item>
+    </string-array>
+    <string name="hintSecretAnswer">Réponse</string>
+
+    <!--Log in-->
+    <string name="logInTitle">Se connecter</string>
+    <string name="logInHeader">Connexion</string>
+    <string name="logInForgotPassword">Mot de passe oublié ?</string>
+    <string name="logInSignUp">Pas de compte ? Inscrivez-vous.</string>
+
+    <!--Forgot password-->
+    <string name="forgotPasswordTitle">Mot de passe oublié</string>
+    <string name="forgotPasswordHeader">Réinitialiser votre mot de passe</string>
+    <string name="hintNewPassword">Nouveau mot de passe</string>
+
+    <!-- Error messages -->
+    <string name="errorEmptyField">Champs requis.</string>
+    <string name="errorInvalidMailFormat">L\'email doit suivre le format suivant : exemple@exemple.com .</string>
+    <string name="errorInvalidPasswordFormat">Le mot de passe doit comporter au moins 8 caractères, une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.</string>
+    <string name="errorInvalidPasswordConfirmation">Les mots de passe sont différents.</string>
+    <string name="errorAccountAlreadyExists">Il existe déjà un compte avec cet email.</string>
+    <string name="errorInvalidMailPassword">L\'email ou le mot de passe est incorrect.</string>
+    <string name="errorInvalidQuestionAnswer">La question secrète ou la réponse est incorrecte.</string>
+    <string name="errorInvalidNewPassword">Le nouveau mot de passe doit être différent du précédent.</string>
+    <string name="errorNoAccountFound">Aucun compte avec cet email.</string>
+
+
 </resources>

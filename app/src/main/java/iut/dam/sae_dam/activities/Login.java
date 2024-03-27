@@ -75,6 +75,8 @@ public class Login extends AppCompatActivity {
     private class LogInTask extends AsyncTask<Void, Void, Void> {
         boolean exists = false;
         boolean passwordCorrect = false;
+        private int userId, admin;
+        private String password, city;
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -90,6 +92,11 @@ public class Login extends AppCompatActivity {
                     exists = true;
                     if (resultSet.getString("Password").equals(passwordET.getText().toString())) {
                         passwordCorrect = true;
+                        userId = resultSet.getInt("Id");
+                        password = resultSet.getString("Password");
+                        admin = resultSet.getInt("Administrator");
+                        city = resultSet.getString("City");
+
                     }
                 }
 
@@ -107,6 +114,10 @@ public class Login extends AppCompatActivity {
             if (exists && passwordCorrect) {
                 ErrorManager.updateBorder(getApplicationContext(), errors, errorMessagesViews);
                 Intent intent = new Intent(Login.this, MainActivity.class);
+                intent.putExtra("userId", userId);
+                intent.putExtra("password", password);
+                intent.putExtra("admin", admin == 0);
+                intent.putExtra("city", city);
                 startActivity(intent);
             } else {
                 errors.put(mailET, Errors.EMPTY);

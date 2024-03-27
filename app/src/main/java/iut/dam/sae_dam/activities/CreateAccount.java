@@ -111,13 +111,14 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     private class CreateAccountTask extends AsyncTask<Void, Void, Void> {
+        private int userId, admin;
 
         @Override
         protected Void doInBackground(Void... voids) {
             try {
                 Connection connection = DatabaseConnection.getConnection();
 
-                String query = "INSERT INTO user (FirstName, SecondName, Email, Password, Administrator, City, QuestionSecrete, ReponseSecrete) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                String query = "INSERT INTO user (FirstName, LastName, Email, Password, Administrator, City, QuestionSecrete, ReponseSecrete) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, firstNameET.getText().toString());
@@ -126,10 +127,25 @@ public class CreateAccount extends AppCompatActivity {
                 preparedStatement.setString(4, passwordET.getText().toString());
                 preparedStatement.setInt(5, 1);
                 preparedStatement.setString(6, cityET.getText().toString());
-                //TODO : mettre dans la base de données la question dans une langue précise
-                preparedStatement.setString(7, secretQuestionSP.getSelectedItem().toString());
+
+                int selectedPosition = secretQuestionSP.getSelectedItemPosition();
+                String[] secretQuestionsArray = getResources().getStringArray(R.array.questionsSecretes);
+                if (selectedPosition >= 0 && selectedPosition < secretQuestionsArray.length) {
+                    int questionResourceId = getResources().getIdentifier(
+                            secretQuestionsArray[selectedPosition], "string", getPackageName());
+                }
+                preparedStatement.setInt(7, selectedPosition);
                 preparedStatement.setString(8, secretAnswerET.getText().toString());
                 preparedStatement.executeUpdate();
+
+                query = "SELECT Id, Administrator FROM user WHERE Email = ?";
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, mailET.getText().toString());
+                ResultSet resultSet = preparedStatement.executeQuery();
+                resultSet.next();
+                userId = resultSet.getInt("Id");
+                admin = resultSet.getInt("Administrator");
+
                 preparedStatement.close();
                 Log.e("Database Connection", "Compte créé avec succès!");
 
@@ -147,7 +163,10 @@ public class CreateAccount extends AppCompatActivity {
             Toast.makeText(CreateAccount.this, "Compte créé avec succès!", Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(CreateAccount.this, MainActivity.class);
-            //TODO: passer les infos de connexion
+            intent.putExtra("userId", userId);
+            intent.putExtra("password", passwordET.getText().toString());
+            intent.putExtra("admin", admin == 0);
+            intent.putExtra("city", cityET.getText().toString());
             startActivity(intent);
         }
     }
