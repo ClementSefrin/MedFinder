@@ -2,16 +2,27 @@
     <!-- Base application theme. -->
     <style name="Theme.SAE_DAM" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
-        <item name="colorPrimary">@color/nav_background_dark</item>
+        <item name="colorPrimary">@color/primary_dark</item>
+        <item name="colorSecondary">@color/secondary_dark</item>
+
         <item name="colorPrimaryVariant">@color/hover_dark</item>
-        <item name="android:navigationBarColor">?attr/colorPrimary</item>
         <item name="background">@color/main_background_dark</item>
 
         <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">?attr/colorPrimary</item>
+
         <item name="cardBackgroundColor">@color/histo_saisie_background_dark</item>
 
         <item name="android:textColor">@color/text_dark</item>
 
-        <item name="buttonBackground">@color/button_dark</item>
+        <item name="buttonBackground">@color/button_background_dark</item>
+        <item name="errorMessageColor">@color/error_message</item>
+        <item name="accountButtonTextColor">@color/account_button_text</item>
+        <item name="accountIconColor">@color/account_icon_dark</item>
+
+    </style>
+
+    <style name="Theme.SAE_DAM.Account" parent="Theme.SAE_DAM">
+        <item name="android:navigationBarColor">?attr/background</item>
     </style>
 </resources>

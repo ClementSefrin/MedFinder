@@ -29,7 +29,7 @@
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextView"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/edit_text_height"
+                android:layout_height="@dimen/auto_complete_height"
                 android:layout_below="@id/codeCisTV"
                 android:hint="@string/code_cis_search"
                 android:inputType="text" />
@@ -57,7 +57,6 @@
                 android:id="@+id/pharmacieTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/codeCisTV"
                 android:gravity="center"
                 android:text="@string/pharmacy_title"
                 android:textSize="20sp" />
@@ -65,7 +64,7 @@
             <AutoCompleteTextView
                 android:id="@+id/pharmacieACTV"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/edit_text_height"
+                android:layout_height="@dimen/auto_complete_height"
                 android:layout_below="@id/pharmacieTV"
                 android:hint="@string/pharmacy_search"
                 android:inputType="text" />

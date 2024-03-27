@@ -3,12 +3,14 @@ package iut.dam.sae_dam.activities;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,40 +18,31 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import iut.dam.sae_dam.R;
 import iut.dam.sae_dam.data.DatabaseConnection;
+import iut.dam.sae_dam.errors.ErrorManager;
+import iut.dam.sae_dam.errors.Errors;
 
 
 public class Login extends AppCompatActivity {
 
     EditText mailET, passwordET;
-
     Button signUpBTN, forgotPasswordBTN, logInBTN;
-
-    private List<View> invalidFields;
-    private List<EditText> editTexts;
+    private HashMap<View, TextView> errorMessagesViews;
+    private HashMap<View, Errors> errors;
+    ImageButton passwordVisibilityBTN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        invalidFields = new ArrayList<>();
-        editTexts = new ArrayList<>();
-
-        mailET = findViewById(R.id.login_mailET);
-        passwordET = findViewById(R.id.login_passwordET);
-        signUpBTN = findViewById(R.id.login_noAccountBTN);
-        forgotPasswordBTN = findViewById(R.id.login_forgotPasswordBTN);
-        logInBTN = findViewById(R.id.login_logInBTN);
-
-
-        ViewGroup layout = findViewById(R.id.loginRL);
-        editTexts = getAllEditTexts(layout);
+        errors = new HashMap<>();
+        errorMessagesViews = new HashMap<>();
+        getViews();
 
         forgotPasswordBTN.setOnClickListener(v -> {
             Intent intent = new Intent(Login.this, ForgotPassword.class);
@@ -61,27 +54,29 @@ public class Login extends AppCompatActivity {
             startActivity(intent);
         });
 
+        passwordVisibilityBTN.setOnClickListener(v -> {
+            changePasswordVisibility();
+        });
+
         logInBTN.setOnClickListener(v -> {
             logIn();
         });
     }
 
     private void logIn() {
-        ViewGroup layout = findViewById(R.id.createAccountRL);
-        invalidFields.clear();
-        invalidFields = getInvalidFields();
-        if (invalidFields.isEmpty()) {
+        errors = getErrors();
+        if (errors.isEmpty()) {
             new LogInTask().execute();
         } else {
-            Toast.makeText(Login.this, "L'email ou le mot de passe est incorrect!", Toast.LENGTH_SHORT).show();
-            updateBorder();
+            ErrorManager.updateBorder(this, errors, errorMessagesViews);
         }
     }
-
 
     private class LogInTask extends AsyncTask<Void, Void, Void> {
         boolean exists = false;
         boolean passwordCorrect = false;
+        private int userId, admin;
+        private String password, city;
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -97,6 +92,11 @@ public class Login extends AppCompatActivity {
                     exists = true;
                     if (resultSet.getString("Password").equals(passwordET.getText().toString())) {
                         passwordCorrect = true;
+                        userId = resultSet.getInt("Id");
+                        password = resultSet.getString("Password");
+                        admin = resultSet.getInt("Administrator");
+                        city = resultSet.getString("City");
+
                     }
                 }
 
@@ -111,65 +111,58 @@ public class Login extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            if (exists) {
-                invalidFields.clear();
-                if (passwordCorrect) {
-                    updateBorder();
-                    Intent intent = new Intent(Login.this, MainActivity.class);
-                    startActivity(intent);
-                } else {
-                    invalidFields.add(passwordET);
-                    updateBorder();
-                    Toast.makeText(Login.this, "L'email ou le mot de passe est incorrect!", Toast.LENGTH_SHORT).show();
-                }
+            if (exists && passwordCorrect) {
+                ErrorManager.updateBorder(getApplicationContext(), errors, errorMessagesViews);
+                Intent intent = new Intent(Login.this, MainActivity.class);
+                intent.putExtra("userId", userId);
+                intent.putExtra("password", password);
+                intent.putExtra("admin", admin == 0);
+                intent.putExtra("city", city);
+                startActivity(intent);
             } else {
-                invalidFields.clear();
-                invalidFields.add(mailET);
-                invalidFields.add(passwordET);
-                updateBorder();
-                Toast.makeText(Login.this, "L'email ou le mot de passe est incorrect!", Toast.LENGTH_SHORT).show();
+                errors.put(mailET, Errors.EMPTY);
+                errors.put(passwordET, Errors.INVALID_MAIL_PASSWORD);
+                ErrorManager.updateBorder(getApplicationContext(), errors, errorMessagesViews);
             }
         }
     }
 
-    private boolean checkEmail(String email) {
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-        Pattern pattern = Pattern.compile(emailPattern);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
+    private void changePasswordVisibility() {
+        int passwordSelectionStart = passwordET.getSelectionStart();
+        int passwordSelectionEnd = passwordET.getSelectionEnd();
+
+        if (passwordET.getTransformationMethod() == PasswordTransformationMethod.getInstance()) {
+            passwordET.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            passwordVisibilityBTN.setBackgroundResource(R.drawable.ic_hide_password);
+        } else {
+            passwordET.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            passwordVisibilityBTN.setBackgroundResource(R.drawable.ic_show_password);
+        }
+        passwordET.setSelection(passwordSelectionStart, passwordSelectionEnd);
     }
 
-    private List<EditText> getAllEditTexts(ViewGroup viewGroup) {
-        List<EditText> editTexts = new ArrayList<>();
-        for (int i = 0; i < viewGroup.getChildCount(); i++) {
-            View child = viewGroup.getChildAt(i);
-            if (child instanceof EditText) {
-                editTexts.add((EditText) child);
-            } else if (child instanceof ViewGroup) {
-                editTexts.addAll(getAllEditTexts((ViewGroup) child));
-            }
-        }
-        return editTexts;
-    }
+    private void getViews() {
+        mailET = findViewById(R.id.login_mailET);
+        passwordET = findViewById(R.id.login_passwordET);
+        signUpBTN = findViewById(R.id.login_noAccountBTN);
+        forgotPasswordBTN = findViewById(R.id.login_forgotPasswordBTN);
+        logInBTN = findViewById(R.id.login_logInBTN);
+        passwordVisibilityBTN = findViewById(R.id.login_passwordVisibilityBTN);
 
-    private void updateBorder() {
-        for (EditText field : editTexts) {
-            if (invalidFields.contains(field)) {
-                field.setBackgroundResource(R.drawable.invalid_edittext_border);
-            } else {
-                field.setBackgroundResource(R.drawable.valid_edittext_border);
-            }
+        errorMessagesViews.put(mailET, findViewById(R.id.login_errorMailTV));
+        errorMessagesViews.put(passwordET, findViewById(R.id.login_errorPasswordTV));
+
+        for (View view : errorMessagesViews.keySet()) {
+            errorMessagesViews.get(view).setVisibility(View.GONE);
         }
     }
 
-    private List<View> getInvalidFields() {
-        List<View> invalidFields = new ArrayList<>();
-        if (!checkEmail(mailET.getText().toString())) {
-            invalidFields.add(mailET);
+    private HashMap<View, Errors> getErrors() {
+        HashMap<View, Errors> currentErrors = new HashMap<>();
+        if (!ErrorManager.checkEmail(mailET.getText().toString())) {
+            currentErrors.put(mailET, Errors.INVALID_MAIL_FORMAT);
+            currentErrors.put(passwordET, Errors.EMPTY);
         }
-        if (passwordET.getText().toString().isEmpty()) {
-            invalidFields.add(passwordET);
-        }
-        return invalidFields;
+        return currentErrors;
     }
 }

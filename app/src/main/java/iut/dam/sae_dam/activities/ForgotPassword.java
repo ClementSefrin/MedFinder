@@ -1,14 +1,19 @@
 package iut.dam.sae_dam.activities;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,35 +22,49 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.HashMap;
 
 import iut.dam.sae_dam.R;
 import iut.dam.sae_dam.data.DatabaseConnection;
+import iut.dam.sae_dam.errors.ErrorManager;
+import iut.dam.sae_dam.errors.Errors;
 
 public class ForgotPassword extends AppCompatActivity {
 
     private EditText mailET, newPasswordET, verifyNewPasswordET, secretAnswerET;
+    private TextView errorMailTV, errorPasswordTV, errorPasswordVerifyTV, errorSecretQuestion, errorSecretAnswerTV;
+    private LinearLayout passwordLL;
     private Spinner secretQuestionSP;
     private Button resetPasswordBTN, signUpBTN;
-    private List<EditText> editTexts;
-    private List<View> invalidFields;
+    private ImageButton passwordVisibilityBTN;
+    private HashMap<View, TextView> errorMessagesViews;
+    private HashMap<View, Errors> errors;
+    int step = 1;
+    private int userId, currentQuestionID;
+    private String currentMail, currentSecretAnswer, currentPassword;
+    Drawable defaultBackground;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
-        invalidFields = new ArrayList<>();
+        errors = new HashMap<>();
+        errorMessagesViews = new HashMap<>();
+        getViews();
 
-        resetPasswordBTN = findViewById(R.id.forgotPassword_resetPasswordBTN);
+
+        setFirstStep();
+
         resetPasswordBTN.setOnClickListener(v -> {
             resetPassword();
         });
 
-        signUpBTN = findViewById(R.id.forgotPassword_signUpBTN);
+
+        passwordVisibilityBTN.setOnClickListener(v -> {
+            changePasswordVisibility();
+        });
+
         signUpBTN.setOnClickListener(v -> {
             Intent intent = new Intent(ForgotPassword.this, CreateAccount.class);
             startActivity(intent);
@@ -53,31 +72,24 @@ public class ForgotPassword extends AppCompatActivity {
     }
 
     private void resetPassword() {
-        mailET = findViewById(R.id.forgotPassword_mailET);
-        newPasswordET = findViewById(R.id.forgotPassword_newPasswordET);
-        verifyNewPasswordET = findViewById(R.id.forgotPassword_newPasswordVerifyET);
-        secretQuestionSP = findViewById(R.id.forgotPassword_secretQuestionSP);
-        secretAnswerET = findViewById(R.id.forgotPassword_secretAnswerET);
-        //TODO : généraliser la vérifications des champs
-
-        ViewGroup layout = findViewById(R.id.forgotPasswordRL);
-        editTexts = getAllEditTexts(layout);
-        if (checkEmail(mailET.getText().toString())) {
-            invalidFields.clear();
-            new CheckAccountTask().execute();
+        if (ErrorManager.checkEmail(mailET.getText().toString())) {
+            if (step == 1) {
+                new CheckAccountTask().execute();
+            } else if (step == 2) {
+                checkStepQuestionAnswer();
+            } else if (step == 3) {
+                checkStepPassword();
+            }
         } else {
-            Toast.makeText(this, "Email invalide!", Toast.LENGTH_SHORT).show();
-            invalidFields.clear();
-            allFieldsWrong();
-            updateBorder();
+            setFirstStep();
+            errors.clear();
+            errors.put(mailET, Errors.INVALID_MAIL_FORMAT);
+            ErrorManager.updateBorder(this, errors, errorMessagesViews);
         }
-
     }
-
 
     private class CheckAccountTask extends AsyncTask<Void, Void, Void> {
         private boolean exists;
-        private int userId;
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -89,34 +101,15 @@ public class ForgotPassword extends AppCompatActivity {
                 preparedStatement.setString(1, mailET.getText().toString());
                 ResultSet resultSet = preparedStatement.executeQuery();
                 if (resultSet.next()) {
-                    Log.e("Database Connection", "Un compte existe bien!");
                     userId = resultSet.getInt("Id");
+                    currentMail = resultSet.getString("Email");
+                    currentQuestionID = resultSet.getInt("QuestionSecrete");
+                    currentSecretAnswer = resultSet.getString("ReponseSecrete");
+                    currentPassword = resultSet.getString("Password");
                     this.exists = true;
                 } else {
                     this.exists = false;
                     Log.e("Database Connection", "Aucun compte avec cet email!");
-                }
-
-                if (exists) {
-                    if (!resultSet.getString("QuestionSecrete").equals(secretQuestionSP.getSelectedItem().toString())) {
-                        invalidFields.add(secretQuestionSP);
-                    }
-                    if (!resultSet.getString("ReponseSecrete").equals(secretAnswerET.getText().toString())) {
-                        invalidFields.add(secretAnswerET);
-                    }
-                    switch (checkPassword(resultSet.getString("Password"), newPasswordET.getText().toString(), verifyNewPasswordET.getText().toString())) {
-                        case -1:
-                            invalidFields.add(newPasswordET);
-                            invalidFields.add(verifyNewPasswordET);
-                            break;
-                        case 1:
-                            invalidFields.add(verifyNewPasswordET);
-                            break;
-                        case 2:
-                            invalidFields.add(newPasswordET);
-                            invalidFields.add(verifyNewPasswordET);
-                            break;
-                    }
                 }
 
                 DatabaseConnection.closeConnection(connection);
@@ -131,34 +124,17 @@ public class ForgotPassword extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             if (exists) {
-                if (invalidFields.isEmpty()) {
-                    invalidFields.clear();
-                    updateBorder();
-                    new ResetPasswordTask(userId).execute();
-                } else {
-                    updateBorder();
-                    Toast.makeText(ForgotPassword.this, "Certains champs ne sont pas valides!", Toast.LENGTH_SHORT).show();
-                }
+                errors.clear();
+                ErrorManager.updateBorder(ForgotPassword.this, errors, errorMessagesViews);
+                setSecondStep();
             } else {
-                allFieldsWrong();
-                updateBorder();
-                Log.e("Database Connection", "Aucun compte trouvé avec cet email!");
-                //TODO : généraliser les messages Toast (langue)
-                Toast.makeText(ForgotPassword.this, "Aucun compte trouvé avec cet email!", Toast.LENGTH_SHORT).show();
+                errors.put(mailET, Errors.NO_ACCOUNT_FOUND);
+                ErrorManager.updateBorder(ForgotPassword.this, errors, errorMessagesViews);
             }
         }
     }
 
-
     private class ResetPasswordTask extends AsyncTask<Void, Void, Void> {
-
-        private int userId;
-
-        public ResetPasswordTask(int userId) {
-            super();
-            this.userId = userId;
-        }
-
         @Override
         protected Void doInBackground(Void... voids) {
             try {
@@ -182,64 +158,146 @@ public class ForgotPassword extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-
             Toast.makeText(ForgotPassword.this, "Mot de passe réinitialisé avec succès!", Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(ForgotPassword.this, MainActivity.class);
+            Intent intent = new Intent(ForgotPassword.this, Login.class);
             startActivity(intent);
         }
-    }
-
-    private void allFieldsWrong() {
-        invalidFields.clear();
-        for (EditText field : editTexts) {
-            invalidFields.add(field);
-        }
-        invalidFields.add(secretQuestionSP);
 
     }
 
-    private void updateBorder() {
-        for (EditText field : editTexts) {
-            if (invalidFields.contains(field)) {
-                field.setBackgroundResource(R.drawable.invalid_edittext_border);
-            } else {
-                field.setBackgroundResource(R.drawable.valid_edittext_border);
-            }
+    private void getViews() {
+        mailET = findViewById(R.id.forgotPassword_mailET);
+        newPasswordET = findViewById(R.id.forgotPassword_newPasswordET);
+        verifyNewPasswordET = findViewById(R.id.forgotPassword_newPasswordVerifyET);
+        secretQuestionSP = findViewById(R.id.forgotPassword_secretQuestionSP);
+        secretAnswerET = findViewById(R.id.forgotPassword_secretAnswerET);
+
+        resetPasswordBTN = findViewById(R.id.forgotPassword_resetPasswordBTN);
+        signUpBTN = findViewById(R.id.forgotPassword_signUpBTN);
+        passwordVisibilityBTN = findViewById(R.id.forgotPassword_passwordVisibilityBTN);
+
+        passwordLL = findViewById(R.id.forgotPassword_passwordLL);
+
+        defaultBackground = mailET.getBackground();
+
+        errorMailTV = findViewById(R.id.forgotPassword_errorMailTV);
+        errorPasswordTV = findViewById(R.id.forgotPassword_errorNewPasswordTV);
+        errorPasswordVerifyTV = findViewById(R.id.forgotPassword_errorNewPasswordVerifyTV);
+        errorSecretQuestion = findViewById(R.id.forgotPassword_errorSecretQuestionTV);
+        errorSecretAnswerTV = findViewById(R.id.forgotPassword_errorSecretAnswerTV);
+
+
+        errorMessagesViews.put(mailET, errorMailTV);
+        errorMessagesViews.put(newPasswordET, errorPasswordTV);
+        errorMessagesViews.put(verifyNewPasswordET, errorPasswordVerifyTV);
+        errorMessagesViews.put(secretQuestionSP, errorSecretQuestion);
+        errorMessagesViews.put(secretAnswerET, errorSecretAnswerTV);
+
+        for (View view : errorMessagesViews.keySet()) {
+            errorMessagesViews.get(view).setVisibility(View.GONE);
         }
-        if (invalidFields.contains(secretQuestionSP)) {
-            secretQuestionSP.setBackgroundResource(R.drawable.invalid_edittext_border);
+    }
+
+    private void setFirstStep() {
+        step = 1;
+        mailET.setVisibility(View.VISIBLE);
+        mailET.setBackground(defaultBackground);
+        secretQuestionSP.setVisibility(View.GONE);
+        secretAnswerET.setVisibility(View.GONE);
+        passwordLL.setVisibility(View.GONE);
+        verifyNewPasswordET.setVisibility(View.GONE);
+        resetPasswordBTN.setText(R.string.forgotPasswordButtonTextAltStep);
+    }
+
+    private void setSecondStep() {
+        step = 2;
+        mailET.setVisibility(View.GONE);
+        secretQuestionSP.setVisibility(View.VISIBLE);
+        secretQuestionSP.setBackgroundResource(0);
+        secretAnswerET.setVisibility(View.VISIBLE);
+        secretAnswerET.setBackground(defaultBackground);
+        passwordLL.setVisibility(View.GONE);
+        verifyNewPasswordET.setVisibility(View.GONE);
+    }
+
+    private void checkStepQuestionAnswer() {
+        errors.clear();
+
+        int selectedPosition = secretQuestionSP.getSelectedItemPosition();
+        String[] secretQuestionsArray = getResources().getStringArray(R.array.questionsSecretes);
+        if (selectedPosition >= 0 && selectedPosition < secretQuestionsArray.length) {
+            int questionResourceId = getResources().getIdentifier(
+                    secretQuestionsArray[selectedPosition], "string", getPackageName());
+        }
+        if (selectedPosition != currentQuestionID || secretQuestionSP.getSelectedItem().toString().isEmpty()) {
+            errors.put(secretQuestionSP, Errors.INVALID_QUESTION_ANSWER);
+            errors.put(secretAnswerET, Errors.EMPTY);
         } else {
-            secretQuestionSP.setBackgroundResource(R.drawable.valid_edittext_border);
-        }
-    }
-
-    private List<EditText> getAllEditTexts(ViewGroup viewGroup) {
-        List<EditText> editTexts = new ArrayList<>();
-        for (int i = 0; i < viewGroup.getChildCount(); i++) {
-            View child = viewGroup.getChildAt(i);
-            if (child instanceof EditText) {
-                editTexts.add((EditText) child);
-            } else if (child instanceof ViewGroup) {
-                editTexts.addAll(getAllEditTexts((ViewGroup) child));
+            if (secretAnswerET.getText().toString().isEmpty()) {
+                errors.put(secretAnswerET, Errors.EMPTY_FIELD);
+            } else if (!secretAnswerET.getText().toString().equals(currentSecretAnswer)) {
+                errors.put(secretQuestionSP, Errors.INVALID_QUESTION_ANSWER);
+                errors.put(secretAnswerET, Errors.EMPTY);
             }
         }
-        return editTexts;
+
+        ErrorManager.updateBorder(this, errors, errorMessagesViews);
+        if (errors.isEmpty()) {
+            setThirdStep();
+        }
     }
 
-    private boolean checkEmail(String email) {
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-        Pattern pattern = Pattern.compile(emailPattern);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
+    private void setThirdStep() {
+        step = 3;
+        mailET.setVisibility(View.GONE);
+        secretQuestionSP.setVisibility(View.GONE);
+        secretAnswerET.setVisibility(View.GONE);
+        passwordLL.setVisibility(View.VISIBLE);
+        newPasswordET.setBackground(defaultBackground);
+        verifyNewPasswordET.setVisibility(View.VISIBLE);
+        verifyNewPasswordET.setBackground(defaultBackground);
+        resetPasswordBTN.setText(R.string.forgotPasswordHeader);
     }
 
-    /*
-     * Renvoie -1 si le mot de passe est vide, 1 si les mots de passe ne correspondent pas,
-     * 2 si le mot de passe est le même que l'ancien, 0 sinon
-     */
-    private int checkPassword(String originalPassword, String newPassword, String newPasswordVerify) {
-        return newPassword.isEmpty() ? -1 : !newPasswordVerify.equals(newPassword) ? 1 : newPassword.equals(originalPassword) ? 2 : 0;
+    private void checkStepPassword() {
+        errors.clear();
+        if (!ErrorManager.checkPassword(newPasswordET.getText().toString())) {
+            errors.put(newPasswordET, Errors.INVALID_PASSWORD_FORMAT);
+            errors.put(verifyNewPasswordET, Errors.EMPTY);
+            ErrorManager.updateBorder(this, errors, errorMessagesViews);
+        } else if (!ErrorManager.checkPasswordVerify(newPasswordET.getText().toString(), verifyNewPasswordET.getText().toString())) {
+            errors.put(verifyNewPasswordET, Errors.INVALID_PASSWORD_CONFIRMATION);
+            ErrorManager.updateBorder(this, errors, errorMessagesViews);
+        } else if (newPasswordET.getText().toString().equals(currentPassword)) {
+            errors.put(newPasswordET, Errors.INVALID_NEW_PASSWORD);
+            errors.put(verifyNewPasswordET, Errors.EMPTY);
+            ErrorManager.updateBorder(this, errors, errorMessagesViews);
+        } else {
+            ErrorManager.updateBorder(this, errors, errorMessagesViews);
+            new ResetPasswordTask().execute();
+        }
+    }
+
+    private void changePasswordVisibility() {
+        int passwordSelectionStart = newPasswordET.getSelectionStart();
+        int passwordSelectionEnd = newPasswordET.getSelectionEnd();
+
+        int passwordVerifySelectionStart = verifyNewPasswordET.getSelectionStart();
+        int passwordVerifySelectionEnd = verifyNewPasswordET.getSelectionEnd();
+
+        if (newPasswordET.getTransformationMethod() == PasswordTransformationMethod.getInstance()) {
+            newPasswordET.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            verifyNewPasswordET.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            passwordVisibilityBTN.setBackgroundResource(R.drawable.ic_hide_password);
+        } else {
+            newPasswordET.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            verifyNewPasswordET.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            passwordVisibilityBTN.setBackgroundResource(R.drawable.ic_show_password);
+        }
+
+        newPasswordET.setSelection(passwordSelectionStart, passwordSelectionEnd);
+        verifyNewPasswordET.setSelection(passwordVerifySelectionStart, passwordVerifySelectionEnd);
     }
 }
 

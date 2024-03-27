@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="match_parent"
+    android:theme="@style/Theme.SAE_DAM"
     android:layout_height="match_parent"
     android:background="?attr/background">
 
@@ -18,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="Nom page"
-            android:textSize="30sp"
+            android:textSize="@dimen/accountTitleTextSize"
             android:textStyle="bold" />
 
     </RelativeLayout>
@@ -45,8 +46,8 @@
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
         android:background="?attr/colorPrimary"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
+        app:itemIconTint="@color/navigation_color_state_list"
+        app:itemTextColor="@color/navigation_color_state_list"
         app:menu="@menu/bottom_nav_menu" />
 
 

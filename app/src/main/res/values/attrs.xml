@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <attr name="buttonBackground" format="color" />
+    <attr name="errorMessageColor" format="color" />
+    <attr name="accountButtonTextColor" format="color" />
+    <attr name="accountIconColor" format="color" />
 </resources>
