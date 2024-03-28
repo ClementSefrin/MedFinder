@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,6 +19,8 @@ import java.util.Date;
 import java.util.HashMap;
 
 import iut.dam.sae_dam.data.DataHandling;
+import iut.dam.sae_dam.data.villes.Ville;
+import iut.dam.sae_dam.data.villes.VilleAdapter;
 import iut.dam.sae_dam.databinding.FragmentCisBinding;
 import iut.dam.sae_dam.errors.ErrorManager;
 import iut.dam.sae_dam.errors.Errors;
@@ -38,6 +41,7 @@ public class CisFragment extends Fragment {
     private HashMap<View, Errors> errors;
     private Medicament med;
     private Pharmacie pharmacie;
+    private Ville city;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,6 +70,11 @@ public class CisFragment extends Fragment {
         PharmacieAdapter pharmacieAdapter = new PharmacieAdapter(requireContext(), DataHandling.getPharmacies());
         pharmacieCompleteTextView.setAdapter(pharmacieAdapter);
 
+        // City autocomplete //
+        VilleAdapter cityAdapter = new VilleAdapter(requireContext(), DataHandling.getVilles());
+        cityCompleteTextView.setAdapter(cityAdapter);
+
+
         Button addButton = binding.cisFragmentSignalerBTN;
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,10 +90,11 @@ public class CisFragment extends Fragment {
                     codeCompleteTextView.setText("");
                     pharmacieCompleteTextView.setText("");
                     medicamentNameTV.setText("");
+                    cityCompleteTextView.setText("");
                 }
 
                 int userId = getActivity().getIntent().getIntExtra("userId", 0);
-                Saisie saisie = new Saisie(1, med, pharmacie, new Date(), "", 75000);
+                Saisie saisie = new Saisie(1, med, pharmacie, new Date(), city, city.getZipCode());
                 DataHandling.addData(saisie);
             }
         });
@@ -134,6 +144,16 @@ public class CisFragment extends Fragment {
             pharmacie = DataHandling.getPharmacieByName(pharmacieName);
             if (pharmacie == null) {
                 errors.put(pharmacieCompleteTextView, Errors.UNKNOWN_PHARMACY);
+            }
+        }
+
+        String cityName = cityCompleteTextView.getText().toString().split(" ")[0];
+        if (cityName.isEmpty()) {
+            errors.put(cityCompleteTextView, Errors.EMPTY_FIELD);
+        } else {
+            city = DataHandling.getCitybyName(cityName);
+            if (city == null) {
+                errors.put(cityCompleteTextView, Errors.UNKNOWN_CITY);
             }
         }
 

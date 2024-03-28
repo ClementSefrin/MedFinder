@@ -4,13 +4,14 @@ import java.util.Date;
 
 import iut.dam.sae_dam.data.medicaments.Medicament;
 import iut.dam.sae_dam.data.pharmacies.Pharmacie;
+import iut.dam.sae_dam.data.villes.Ville;
 
 public class Saisie {
 
     private Medicament medicament;
     private Pharmacie pharmacie;
     private int userId, departement;
-    private String ville;
+    private Ville ville;
 
     public int getUserId() {
         return userId;
@@ -18,7 +19,7 @@ public class Saisie {
 
     private Date dateSaisie;
 
-    public Saisie(int userId, Medicament medicament, Pharmacie pharmacie, Date dateSaisie, String ville, int departement) {
+    public Saisie(int userId, Medicament medicament, Pharmacie pharmacie, Date dateSaisie, Ville ville, int departement) {
         this.medicament = medicament;
         this.userId = userId;
         this.pharmacie = pharmacie;

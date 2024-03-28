@@ -17,6 +17,7 @@ import java.util.List;
 import iut.dam.sae_dam.data.medicaments.Medicament;
 import iut.dam.sae_dam.data.pharmacies.Pharmacie;
 import iut.dam.sae_dam.data.saisies.Saisie;
+import iut.dam.sae_dam.data.villes.Ville;
 
 public class DataHandling {
     private static boolean dataLoaded = false;
@@ -28,7 +29,6 @@ public class DataHandling {
     private static int userId;
     private static boolean admin;
     private static String password, city;
-    private static Context context;
 
     public static void loadData() {
         new LoadData().execute();
@@ -39,6 +39,7 @@ public class DataHandling {
         DataHandling.password = password;
         DataHandling.admin = admin;
         DataHandling.city = city;
+
         loadUserSaisies();
     }
 
@@ -99,7 +100,7 @@ public class DataHandling {
                     int queryUserId = resultSet.getInt("userId");
                     String queryVille = resultSet.getString("ville");
                     int queryDepartement = resultSet.getInt("departement");
-                    Saisie saisie = new Saisie(queryUserId, getMedicamentByCode(queryCisCode), getPharmacieByName(pharmacies.get(queryPharmacieId).getName()), queryDate, queryVille, queryDepartement);
+                    Saisie saisie = new Saisie(queryUserId, getMedicamentByCode(queryCisCode), getPharmacieByName(pharmacies.get(queryPharmacieId).getName()), queryDate, getCitybyName(queryVille), queryDepartement);
                     allSaisies.add(saisie);
                 }
 
@@ -111,7 +112,7 @@ public class DataHandling {
                     String name = resultSet.getString("name");
                     int departement = resultSet.getInt("departement");
                     String region = resultSet.getString("region");
-                    villes.add(new Ville(insee, name, departement, region));
+                    villes.add(new Ville(insee, name, departement, region, 0));
                 }
 
                 preparedStatement.close();
@@ -138,6 +139,8 @@ public class DataHandling {
                 userSaisies.add(saisie);
             }
         }
+
+
     }
 
     public static List<Medicament> getMedicaments() {
@@ -154,6 +157,10 @@ public class DataHandling {
 
     public static LinkedList<Saisie> getUserSaisies() {
         return userSaisies;
+    }
+
+    public static LinkedList<Ville> getVilles() {
+        return villes;
     }
 
     public static Medicament getMedicamentByCode(int cisCode) {
@@ -183,4 +190,12 @@ public class DataHandling {
         return null;
     }
 
+    public static Ville getCitybyName(String name) {
+        for (Ville ville : villes) {
+            if (ville.getName().equalsIgnoreCase(name)) {
+                return ville;
+            }
+        }
+        return null;
+    }
 }

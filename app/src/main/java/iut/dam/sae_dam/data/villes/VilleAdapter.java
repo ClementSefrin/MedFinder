@@ -1,4 +1,4 @@
-package iut.dam.sae_dam.data;
+package iut.dam.sae_dam.data.villes;
 // MedicineAdapter.java
 
 import android.content.Context;
@@ -10,8 +10,6 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import iut.dam.sae_dam.data.medicaments.Medicament;
 
 public class VilleAdapter extends ArrayAdapter<Ville> implements Filterable {
 

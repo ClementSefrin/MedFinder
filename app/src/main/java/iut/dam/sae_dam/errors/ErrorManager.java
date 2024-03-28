@@ -34,6 +34,7 @@ public class ErrorManager {
         errorMessages.put(Errors.NO_ACCOUNT_FOUND, R.string.errorNoAccountFound);
         errorMessages.put(Errors.UNKNOWN_MEDICINE, R.string.errorUnknownMedicine);
         errorMessages.put(Errors.UNKNOWN_PHARMACY, R.string.errorUnknownPharmacy);
+        errorMessages.put(Errors.UNKNOWN_CITY, R.string.errorUnknownCity);
     }
 
     public static String getErrorMessage(Context context, Errors error) {

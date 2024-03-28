@@ -58,6 +58,7 @@
     <string name="errorInvalidQuestionAnswer">The secret question or answer is incorrect.</string>
     <string name="errorInvalidNewPassword">The new password must be different from the old one.</string>
     <string name="errorNoAccountFound">No account found with this mail.</string>
-    <string name="errorUnknownMedicine">The medicine is unknown.</string>
-    <string name="errorUnknownPharmacy">The pharmacy is unknown.</string>
+    <string name="errorUnknownMedicine">Unknown medicine.</string>
+    <string name="errorUnknownPharmacy">Unknown pharmacy.</string>
+    <string name="errorUnknownCity">Unknown city.</string>
 </resources>
