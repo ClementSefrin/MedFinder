@@ -9,26 +9,36 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.util.Date;
+import java.util.HashMap;
 
-import iut.dam.sae_dam.DataHandling;
+import iut.dam.sae_dam.data.DataHandling;
 import iut.dam.sae_dam.databinding.FragmentCisBinding;
-import iut.dam.sae_dam.medicaments.Medicament;
-import iut.dam.sae_dam.medicaments.MedicamentAdapter;
-import iut.dam.sae_dam.pharmacies.Pharmacie;
-import iut.dam.sae_dam.pharmacies.PharmacieAdapter;
-import iut.dam.sae_dam.ui.home.HomeFragment;
-import iut.dam.sae_dam.saisies.Saisie;
+import iut.dam.sae_dam.errors.ErrorManager;
+import iut.dam.sae_dam.errors.Errors;
+import iut.dam.sae_dam.data.medicaments.Medicament;
+import iut.dam.sae_dam.data.medicaments.MedicamentAdapter;
+import iut.dam.sae_dam.data.pharmacies.Pharmacie;
+import iut.dam.sae_dam.data.pharmacies.PharmacieAdapter;
+import iut.dam.sae_dam.data.saisies.Saisie;
 
 public class CisFragment extends Fragment {
     private FragmentCisBinding binding;
     private CisViewModel cisViewModel;
+
+
+    AutoCompleteTextView codeCompleteTextView, pharmacieCompleteTextView, cityCompleteTextView;
+    private TextView errorCisCodeTV, errorPharmacieTV, errorCityTV, medicamentNameTV;
+    private HashMap<View, TextView> errorMessagesViews;
+    private HashMap<View, Errors> errors;
+    private Medicament med;
+    private Pharmacie pharmacie;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCisBinding.inflate(inflater, container, false);
@@ -36,8 +46,11 @@ public class CisFragment extends Fragment {
 
         cisViewModel = new ViewModelProvider(this, new CisViewModel.Factory(requireContext())).get(CisViewModel.class);
 
+        errors = new HashMap<>();
+        errorMessagesViews = new HashMap<>();
+        getViews();
+
         // Code autocomplete //
-        AutoCompleteTextView codeCompleteTextView = binding.cisFragmentCodeCisACTV;
         MedicamentAdapter codeAdapter = new MedicamentAdapter(requireContext(), DataHandling.getMedicaments());
         codeCompleteTextView.setAdapter(codeAdapter);
 
@@ -45,13 +58,11 @@ public class CisFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Medicament selectedMedicine = (Medicament) parent.getItemAtPosition(position);
-                TextView medicamentTV = binding.cisFragmentMedicamentNameTV;
-                medicamentTV.setText(selectedMedicine.getDenomination());
+                medicamentNameTV.setText(selectedMedicine.getDenomination());
             }
         });
 
         // Pharmacie autocomplete //
-        AutoCompleteTextView pharmacieCompleteTextView = binding.cisFragmentPharmacieACTV;
         PharmacieAdapter pharmacieAdapter = new PharmacieAdapter(requireContext(), DataHandling.getPharmacies());
         pharmacieCompleteTextView.setAdapter(pharmacieAdapter);
 
@@ -59,46 +70,74 @@ public class CisFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String medCodeStr = codeCompleteTextView.getText().toString();
-                Medicament med;
-                int medicamentCode = 0;
-                if (medCodeStr.isEmpty()) {
-                    med = null;
-                } else {
-                    medicamentCode = Integer.parseInt(codeCompleteTextView.getText().toString());
-                    med = DataHandling.getMedicamentByCode(medicamentCode);
-                }
-                String pharmacieName = pharmacieCompleteTextView.getText().toString();
-                Pharmacie pharmacie = DataHandling.getPharmacieByName(pharmacieName);
-
-                boolean error = false;
-                if (med == null) {
-                    Toast.makeText(requireContext(), "Médicament inconnu", Toast.LENGTH_SHORT).show();
-                    codeCompleteTextView.setText("");
-                    error = true;
-                }
-
-                if (pharmacie == null) {
-                    pharmacieCompleteTextView.setText("");
-                    Toast.makeText(requireContext(), "Pharmacie inconnue", Toast.LENGTH_SHORT).show();
-                    error = true;
-                }
-
+                errors = getErrors();
                 //TODO : errorhandling
-                if (error) {
+                if (!errors.isEmpty()) {
+                    ErrorManager.updateBorder(getContext(), errors, errorMessagesViews);
+                    medicamentNameTV.setText("");
                     return;
                 } else {
+                    ErrorManager.updateBorder(getContext(), errors, errorMessagesViews);
                     codeCompleteTextView.setText("");
                     pharmacieCompleteTextView.setText("");
-                    binding.cisFragmentMedicamentNameTV.setText("");
+                    medicamentNameTV.setText("");
                 }
 
-                Saisie saisie = new Saisie(med, pharmacie, new Date());
+                int userId = getActivity().getIntent().getIntExtra("userId", 0);
+                Saisie saisie = new Saisie(1, med, pharmacie, new Date(), "", 75000);
                 DataHandling.addData(saisie);
             }
         });
 
         return root;
+    }
+
+
+    private void getViews() {
+        codeCompleteTextView = binding.cisFragmentCodeCisACTV;
+        pharmacieCompleteTextView = binding.cisFragmentPharmacieACTV;
+        cityCompleteTextView = binding.cisFragmentCityACTV;
+
+        errorCisCodeTV = binding.cisFragmentErrorCisCodeTV;
+        errorPharmacieTV = binding.cisFragmentErrorPharmacieTV;
+        errorCityTV = binding.cisFragmentErrorCityTV;
+
+        medicamentNameTV = binding.cisFragmentMedicamentNameTV;
+
+        errorMessagesViews.put(codeCompleteTextView, errorCisCodeTV);
+        errorMessagesViews.put(pharmacieCompleteTextView, errorPharmacieTV);
+        errorMessagesViews.put(cityCompleteTextView, errorCityTV);
+
+        for (View view : errorMessagesViews.keySet()) {
+            errorMessagesViews.get(view).setVisibility(View.GONE);
+        }
+    }
+
+    private HashMap<View, Errors> getErrors() {
+        HashMap<View, Errors> errors = new HashMap<>();
+
+        String medCodeStr = codeCompleteTextView.getText().toString();
+        if (medCodeStr.isEmpty()) {
+            errors.put(codeCompleteTextView, Errors.EMPTY_FIELD);
+        } else {
+            int medicamentCode = Integer.parseInt(medCodeStr);
+            med = DataHandling.getMedicamentByCode(medicamentCode);
+            if (med == null) {
+                errors.put(codeCompleteTextView, Errors.UNKNOWN_MEDICINE);
+            }
+        }
+
+        String pharmacieName = pharmacieCompleteTextView.getText().toString();
+        if (pharmacieName.isEmpty()) {
+            errors.put(pharmacieCompleteTextView, Errors.EMPTY_FIELD);
+        } else {
+            pharmacie = DataHandling.getPharmacieByName(pharmacieName);
+            if (pharmacie == null) {
+                errors.put(pharmacieCompleteTextView, Errors.UNKNOWN_PHARMACY);
+            }
+        }
+
+        return errors;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package iut.dam.sae_dam.pharmacies;
+package iut.dam.sae_dam.data.pharmacies;
 
 import java.util.Objects;
 

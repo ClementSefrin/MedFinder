@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,10 +19,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import iut.dam.sae_dam.DataHandling;
+import iut.dam.sae_dam.data.DataHandling;
 import iut.dam.sae_dam.R;
 import iut.dam.sae_dam.data.DatabaseConnection;
 import iut.dam.sae_dam.errors.ErrorManager;
@@ -42,6 +39,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        DataHandling.loadData();
         errors = new HashMap<>();
         errorMessagesViews = new HashMap<>();
         getViews();
@@ -115,7 +113,21 @@ public class Login extends AppCompatActivity {
             super.onPostExecute(aVoid);
             if (exists && passwordCorrect) {
                 ErrorManager.updateBorder(getApplicationContext(), errors, errorMessagesViews);
-                DataHandling.loadData(Login.this, userId, password, admin == 0, city);
+
+                Intent intent = new Intent(Login.this, MainActivity.class);
+                intent.putExtra("userId", userId);
+                intent.putExtra("password", password);
+                intent.putExtra("admin", admin);
+                intent.putExtra("city", city);
+                while (!DataHandling.isDataLoaded()) {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                DataHandling.getIntentData(userId, password, admin == 0, city);
+                startActivity(intent);
             } else {
                 errors.put(mailET, Errors.EMPTY);
                 errors.put(passwordET, Errors.INVALID_MAIL_PASSWORD);

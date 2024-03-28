@@ -1,5 +1,5 @@
 // Medicament.java
-package iut.dam.sae_dam.medicaments;
+package iut.dam.sae_dam.data.medicaments;
 
 import java.util.Objects;
 

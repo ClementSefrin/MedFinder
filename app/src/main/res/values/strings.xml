@@ -10,6 +10,7 @@
 
     <string name="code_cis_search">Search for a medicine…</string>
     <string name="pharmacy_search">Search for a pharmacy…</string>
+    <string name="city_search">Search for a city…</string>
     <string name="report">Report</string>
     <string name="delete_history_dialog_confirm">Are you sure you want to delete your history?</string>
     <string name="cancel">Cancel</string>
@@ -57,6 +58,6 @@
     <string name="errorInvalidQuestionAnswer">The secret question or answer is incorrect.</string>
     <string name="errorInvalidNewPassword">The new password must be different from the old one.</string>
     <string name="errorNoAccountFound">No account found with this mail.</string>
-
-
+    <string name="errorUnknownMedicine">The medicine is unknown.</string>
+    <string name="errorUnknownPharmacy">The pharmacy is unknown.</string>
 </resources>

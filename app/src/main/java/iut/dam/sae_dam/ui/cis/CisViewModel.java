@@ -5,13 +5,6 @@ import android.content.Context;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import iut.dam.sae_dam.DataHandling;
-import iut.dam.sae_dam.medicaments.Medicament;
-import iut.dam.sae_dam.pharmacies.Pharmacie;
-
 public class CisViewModel extends ViewModel {
     public CisViewModel(Context context) {
     }

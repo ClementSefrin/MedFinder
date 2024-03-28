@@ -1,19 +1,24 @@
-package iut.dam.sae_dam.saisies;
+package iut.dam.sae_dam.data.saisies;
 
 import java.util.Date;
 
-import iut.dam.sae_dam.medicaments.Medicament;
-import iut.dam.sae_dam.pharmacies.Pharmacie;
+import iut.dam.sae_dam.data.medicaments.Medicament;
+import iut.dam.sae_dam.data.pharmacies.Pharmacie;
 
 public class Saisie {
 
     private Medicament medicament;
     private Pharmacie pharmacie;
-    private int userId;
-    private String ville, departement;
+    private int userId, departement;
+    private String ville;
+
+    public int getUserId() {
+        return userId;
+    }
+
     private Date dateSaisie;
 
-    public Saisie(Medicament medicament, int userId ,Pharmacie pharmacie, Date dateSaisie, String ville, String departement) {
+    public Saisie(int userId, Medicament medicament, Pharmacie pharmacie, Date dateSaisie, String ville, int departement) {
         this.medicament = medicament;
         this.userId = userId;
         this.pharmacie = pharmacie;

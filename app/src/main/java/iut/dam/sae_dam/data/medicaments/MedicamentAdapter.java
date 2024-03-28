@@ -1,4 +1,4 @@
-package iut.dam.sae_dam.medicaments;
+package iut.dam.sae_dam.data.medicaments;
 // MedicineAdapter.java
 
 import android.content.Context;
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class MedicamentAdapter extends ArrayAdapter<Medicament> implements Filterable {
 
-    private List<Medicament> medicineListFull;  // Full list of medicines for filtering
+    private List<Medicament> medicineListFull;
 
     public MedicamentAdapter(Context context, List<Medicament> medicineList) {
         super(context, android.R.layout.simple_dropdown_item_1line, medicineList);

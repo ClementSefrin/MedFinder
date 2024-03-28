@@ -1,34 +1,29 @@
-package iut.dam.sae_dam;
+package iut.dam.sae_dam.data;
 
 
 import android.content.Context;
-import android.content.Intent;
+import android.databinding.tool.util.StringUtils;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
+
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import iut.dam.sae_dam.activities.CreateAccount;
-import iut.dam.sae_dam.activities.Login;
-import iut.dam.sae_dam.activities.MainActivity;
-import iut.dam.sae_dam.data.DatabaseConnection;
-import iut.dam.sae_dam.medicaments.Medicament;
-import iut.dam.sae_dam.pharmacies.Pharmacie;
-import iut.dam.sae_dam.saisies.Saisie;
-import iut.dam.sae_dam.saisies.SaisieAdapter;
+import iut.dam.sae_dam.data.medicaments.Medicament;
+import iut.dam.sae_dam.data.pharmacies.Pharmacie;
+import iut.dam.sae_dam.data.saisies.Saisie;
 
 public class DataHandling {
+    private static boolean dataLoaded = false;
     private static List<Medicament> medicaments = new LinkedList<>();
     private static List<Pharmacie> pharmacies = new LinkedList<>();
+    private static LinkedList<Ville> villes = new LinkedList<>();
     private static LinkedList<Saisie> allSaisies = new LinkedList<>();
     private static LinkedList<Saisie> userSaisies = new LinkedList<>();
     private static int userId;
@@ -36,13 +31,16 @@ public class DataHandling {
     private static String password, city;
     private static Context context;
 
-    public static void loadData(Context context, int userId, String password, boolean admin, String city) {
-        DataHandling.context = context;
+    public static void loadData() {
+        new LoadData().execute();
+    }
+
+    public static void getIntentData(int userId, String password, boolean admin, String city) {
         DataHandling.userId = userId;
         DataHandling.password = password;
         DataHandling.admin = admin;
         DataHandling.city = city;
-        new LoadData().execute();
+        loadUserSaisies();
     }
 
     public static void addData(Saisie saisie) {
@@ -55,6 +53,10 @@ public class DataHandling {
             allSaisies.remove(s);
         }
         userSaisies.clear();
+    }
+
+    public static boolean isDataLoaded() {
+        return dataLoaded;
     }
 
     private static class LoadData extends AsyncTask<Void, Void, Void> {
@@ -96,13 +98,22 @@ public class DataHandling {
                     int queryPharmacieId = resultSet.getInt("pharmacieId");
                     Date queryDate = resultSet.getDate("dateSignalement");
                     int queryUserId = resultSet.getInt("userId");
-                    Saisie saisie = new Saisie(getMedicamentByCode(queryCisCode), getPharmacieByName(pharmacies.get(queryPharmacieId).getName()), queryDate);
+                    String queryVille = resultSet.getString("ville");
+                    int queryDepartement = resultSet.getInt("departement");
+                    Saisie saisie = new Saisie(queryUserId, getMedicamentByCode(queryCisCode), getPharmacieByName(pharmacies.get(queryPharmacieId).getName()), queryDate, queryVille, queryDepartement);
                     allSaisies.add(saisie);
-                    if (queryUserId == DataHandling.userId) {
-                        userSaisies.add(saisie);
-                    }
                 }
 
+                query = "SELECT * FROM villes";
+                preparedStatement = connection.prepareStatement(query);
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    int insee = resultSet.getInt("insee");
+                    String name = resultSet.getString("name");
+                    int departement = resultSet.getInt("departement");
+                    String region = resultSet.getString("region");
+                    villes.add(new Ville(insee, StringUtils.capitalize(name), departement, region));
+                }
 
                 preparedStatement.close();
 
@@ -117,13 +128,16 @@ public class DataHandling {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            dataLoaded = true;
+        }
+    }
 
-            Intent intent = new Intent(context, MainActivity.class);
-            intent.putExtra("userId", userId);
-            intent.putExtra("password", password);
-            intent.putExtra("admin", admin);
-            intent.putExtra("city", city);
-            context.startActivity(intent);
+    public static void loadUserSaisies() {
+        userSaisies.clear();
+        for (Saisie saisie : allSaisies) {
+            if (saisie.getUserId() == userId) {
+                userSaisies.add(saisie);
+            }
         }
     }
 

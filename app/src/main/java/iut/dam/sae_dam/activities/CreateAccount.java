@@ -22,6 +22,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import iut.dam.sae_dam.data.DataHandling;
 import iut.dam.sae_dam.data.DatabaseConnection;
 import iut.dam.sae_dam.R;
 import iut.dam.sae_dam.errors.ErrorManager;
@@ -41,6 +42,7 @@ public class CreateAccount extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+        DataHandling.loadData();
         errors = new HashMap<>();
         errorMessagesViews = new HashMap<>();
         getViews();
@@ -167,6 +169,14 @@ public class CreateAccount extends AppCompatActivity {
             intent.putExtra("password", passwordET.getText().toString());
             intent.putExtra("admin", admin == 0);
             intent.putExtra("city", cityET.getText().toString());
+            while (!DataHandling.isDataLoaded()) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            DataHandling.getIntentData(userId, passwordET.getText().toString(), admin == 0, cityET.getText().toString());
             startActivity(intent);
         }
     }

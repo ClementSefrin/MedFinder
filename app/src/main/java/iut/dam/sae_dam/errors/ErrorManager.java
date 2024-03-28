@@ -32,6 +32,8 @@ public class ErrorManager {
         errorMessages.put(Errors.INVALID_QUESTION_ANSWER, R.string.errorInvalidQuestionAnswer);
         errorMessages.put(Errors.INVALID_NEW_PASSWORD, R.string.errorInvalidNewPassword);
         errorMessages.put(Errors.NO_ACCOUNT_FOUND, R.string.errorNoAccountFound);
+        errorMessages.put(Errors.UNKNOWN_MEDICINE, R.string.errorUnknownMedicine);
+        errorMessages.put(Errors.UNKNOWN_PHARMACY, R.string.errorUnknownPharmacy);
     }
 
     public static String getErrorMessage(Context context, Errors error) {

@@ -1,4 +1,4 @@
-package iut.dam.sae_dam.saisies;
+package iut.dam.sae_dam.data.saisies;
 
 import android.app.Activity;
 import android.view.LayoutInflater;

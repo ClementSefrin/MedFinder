@@ -13,9 +13,9 @@
     <ScrollView
         android:id="@+id/cisFragment_mainSV"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_above="@id/cisFragment_signalerBTN"
-        android:layout_alignParentTop="true"
-        android:layout_height="wrap_content">
+        android:layout_alignParentTop="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -43,10 +43,19 @@
                     android:inputType="text" />
 
                 <TextView
+                    android:id="@+id/cisFragment_errorCisCodeTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cisFragment_codeCisACTV"
+                    android:text="@string/errorEmptyField"
+                    android:textColor="?attr/errorMessageColor"
+                    android:textSize="@dimen/smallTextSize" />
+
+                <TextView
                     android:id="@+id/cisFragment_medicamentNameTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/cisFragment_codeCisACTV"
+                    android:layout_below="@id/cisFragment_errorCisCodeTV"
                     android:gravity="center"
                     android:textSize="@dimen/smallTextSize" />
             </RelativeLayout>
@@ -74,7 +83,51 @@
                     android:layout_below="@id/cisFragment_pharmacieTV"
                     android:hint="@string/pharmacy_search"
                     android:inputType="text" />
+
+                <TextView
+                    android:id="@+id/cisFragment_errorPharmacieTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cisFragment_pharmacieACTV"
+                    android:text="@string/errorEmptyField"
+                    android:textColor="?attr/errorMessageColor"
+                    android:textSize="@dimen/smallTextSize" />
             </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cisFragment_cityRL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cisFragment_pharmacieRL"
+                android:layout_alignStart="@id/cisFragment_codeCisRL"
+                android:layout_marginTop="@dimen/baseVerticalMargin">
+
+                <TextView
+                    android:id="@+id/cisFragment_cityTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/hintCity"
+                    android:textSize="@dimen/textSize" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/cisFragment_cityACTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/auto_complete_height"
+                    android:layout_below="@id/cisFragment_cityTV"
+                    android:hint="@string/city_search"
+                    android:inputType="text" />
+
+                <TextView
+                    android:id="@+id/cisFragment_errorCityTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cisFragment_cityACTV"
+                    android:text="@string/errorEmptyField"
+                    android:textColor="?attr/errorMessageColor"
+                    android:textSize="@dimen/smallTextSize" />
+            </RelativeLayout>
+
         </RelativeLayout>
     </ScrollView>
 
