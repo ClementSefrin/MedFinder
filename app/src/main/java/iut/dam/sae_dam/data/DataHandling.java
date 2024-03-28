@@ -2,7 +2,6 @@ package iut.dam.sae_dam.data;
 
 
 import android.content.Context;
-import android.databinding.tool.util.StringUtils;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -112,7 +111,7 @@ public class DataHandling {
                     String name = resultSet.getString("name");
                     int departement = resultSet.getInt("departement");
                     String region = resultSet.getString("region");
-                    villes.add(new Ville(insee, StringUtils.capitalize(name), departement, region));
+                    villes.add(new Ville(insee, name, departement, region));
                 }
 
                 preparedStatement.close();
