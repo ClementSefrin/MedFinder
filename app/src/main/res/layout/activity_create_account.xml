@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/baseVerticalMargin"
+        android:layout_marginTop="@dimen/verticalMargin"
         android:text="@string/signUpTitle"
         android:textSize="@dimen/titleTextSize"
         android:textStyle="bold" />
@@ -33,9 +33,9 @@
         android:layout_above="@id/createAccount_signUpBTN"
         android:layout_below="@id/createAccount_headerTV"
         android:layout_marginStart="@dimen/accountCardViewHorizontalMargin"
-        android:layout_marginTop="@dimen/baseVerticalMargin"
+        android:layout_marginTop="@dimen/verticalMargin"
         android:layout_marginEnd="@dimen/accountCardViewHorizontalMargin"
-        android:layout_marginBottom="@dimen/baseVerticalMargin"
+        android:layout_marginBottom="@dimen/verticalMargin"
         app:cardBackgroundColor="?attr/cardBackgroundColor"
         app:cardElevation="@dimen/accountCardViewElevation">
 
@@ -48,10 +48,10 @@
                 android:id="@+id/createAccount_infosRL"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="@dimen/accountHorizontalPadding"
-                android:paddingTop="@dimen/accountVerticalPadding"
-                android:paddingEnd="@dimen/accountHorizontalPadding"
-                android:paddingBottom="@dimen/accountVerticalPadding">
+                android:paddingStart="@dimen/horizontalPadding"
+                android:paddingTop="@dimen/verticalPadding"
+                android:paddingEnd="@dimen/horizontalPadding"
+                android:paddingBottom="@dimen/verticalPadding">
 
                 <TextView
                     android:id="@+id/createAccount_infosHeaderTV"
@@ -67,7 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_infosHeaderTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:autofillHints="InputNom"
                     android:drawableStart="@drawable/ic_edit"
                     android:hint="@string/hintFirstName"
@@ -88,7 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_errorFirstNameTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:autofillHints="InputNom"
                     android:drawableStart="@drawable/ic_edit"
                     android:hint="@string/hintLastName"
@@ -109,7 +109,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_errorLastNameTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:autofillHints="InputMail"
                     android:drawableStart="@drawable/ic_mail"
                     android:hint="@string/hintMail"
@@ -125,12 +125,12 @@
                     android:textColor="?attr/errorMessageColor"
                     android:textSize="@dimen/smallTextSize" />
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/createAccount_cityET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_errorMailTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:autofillHints="InputCommune"
                     android:drawableStart="@drawable/ic_city"
                     android:hint="@string/hintCity"
@@ -151,7 +151,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_errorCityTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -191,7 +191,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_errorPasswordTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:autofillHints="InputMdp"
                     android:drawableStart="@drawable/ic_lock"
                     android:hint="@string/hintPasswordVerify"
@@ -212,7 +212,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_errorVerifyPasswordTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:entries="@array/questionsSecretes" />
 
                 <TextView
@@ -229,7 +229,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_errorSecretQuestionTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:autofillHints="InputSecretAnswer"
                     android:drawableStart="@drawable/ic_secret_answer"
                     android:hint="@string/hintSecretAnswer"
@@ -250,7 +250,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_errorSecretAnswerTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:background="@android:color/transparent"
                     android:drawableEnd="@drawable/ic_redirection_arrow"
                     android:text="@string/signUpAlreadySignedUp"
@@ -271,7 +271,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="@dimen/accountCardViewHorizontalMargin"
         android:layout_marginEnd="@dimen/accountCardViewHorizontalMargin"
-        android:layout_marginBottom="@dimen/baseVerticalMargin"
+        android:layout_marginBottom="@dimen/verticalMargin"
         android:background="@drawable/button_background"
         android:text="@string/signUpTitle"
         android:textColor="?attr/accountButtonTextColor"

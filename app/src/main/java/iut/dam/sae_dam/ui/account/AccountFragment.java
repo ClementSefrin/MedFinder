@@ -33,20 +33,19 @@ public class AccountFragment extends Fragment {
             public void onClick(View v) {
                 //new DialogDeleteHisto().show(getChildFragmentManager(), "SUPPRIMER_HISTO");
                 final Dialog dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.dialog_signin);
+                dialog.setContentView(R.layout.dialog_delete_history);
 
-                Button positiveButton = (Button) dialog.findViewById(R.id.positiveButton);
+                Button positiveButton = (Button) dialog.findViewById(R.id.dialogDeleteHistory_positiveButton);
                 positiveButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
                         DataHandling.supprimerHisto();
                         Toast.makeText(requireContext(), "Historique supprimé.", Toast.LENGTH_SHORT).show();
-
                     }
                 });
 
-                Button negativeButton = (Button) dialog.findViewById(R.id.negativeButton);
+                Button negativeButton = (Button) dialog.findViewById(R.id.dialogDeleteHistory_negativeButton);
                 negativeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

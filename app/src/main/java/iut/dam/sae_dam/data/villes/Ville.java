@@ -14,7 +14,10 @@ public class Ville {
         this.departement = departement;
         this.region = region;
         this.zipCode = zipCode;
+    }
 
+    public int getInsee() {
+        return insee;
     }
 
     public String getName() {
@@ -24,7 +27,7 @@ public class Ville {
     @NonNull
     @Override
     public String toString() {
-        return nom + " (" + zipCode + ")";
+        return nom + " - " + insee;
     }
 
     public int getZipCode() {
@@ -38,5 +41,9 @@ public class Ville {
             sb.append(part.substring(0, 1).toUpperCase()).append(part.substring(1).toLowerCase()).append(" ");
         }
         return sb.toString().trim();
+    }
+
+    public int getDepartement() {
+        return departement;
     }
 }

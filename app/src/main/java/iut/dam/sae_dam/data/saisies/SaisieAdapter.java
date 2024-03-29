@@ -38,6 +38,7 @@ public class SaisieAdapter extends ArrayAdapter<Saisie> {
         TextView codeCisTV = (TextView) layout.findViewById(R.id.itemSaisie_codeCisTV);
         TextView pharmacieTV = (TextView) layout.findViewById(R.id.itemSaisie_pharmacieTV);
         TextView dateSaisieTV = (TextView) layout.findViewById(R.id.itemSaisie_dateSaisieTV);
+        TextView cisTV = (TextView) layout.findViewById(R.id.itemSaisie_villeTV);
 
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(activity.getApplicationContext());
 
@@ -45,6 +46,7 @@ public class SaisieAdapter extends ArrayAdapter<Saisie> {
         codeCisTV.setText(String.valueOf(items.get(position).getMedicament().getCisCode()));
         pharmacieTV.setText(String.valueOf(items.get(position).getPharmacie().getName()));
         dateSaisieTV.setText(dateFormat.format(items.get(position).getDateSaisie()));
+        cisTV.setText((items.get(position)).getCity().getName());
 
         return layout;
     }

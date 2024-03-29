@@ -1,8 +1,10 @@
 package iut.dam.sae_dam.activities;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,30 +31,56 @@ import iut.dam.sae_dam.errors.Errors;
 
 
 public class Login extends AppCompatActivity {
-
+    private boolean dataLoaded = false;
     EditText mailET, passwordET;
+    TextView errorMailTV, errorPasswordTV, errorDataTV;
     Button signUpBTN, forgotPasswordBTN, logInBTN;
     private HashMap<View, TextView> errorMessagesViews;
     private HashMap<View, Errors> errors;
     ImageButton passwordVisibilityBTN;
 
+
+    private Handler handler = new Handler();
+    private int step = 0;
+    private Runnable CheckDataLoadedRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (!DataHandling.isDataLoaded()) {
+                errorDataTV.setText(getString(R.string.waitingData) + (step % 2 == 0 ? "." : ""));
+                step++;
+                handler.postDelayed(this, 500);
+            } else {
+                errorDataTV.setVisibility(View.GONE);
+                dataLoaded = true;
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        DataHandling.loadData();
         errors = new HashMap<>();
         errorMessagesViews = new HashMap<>();
         getViews();
+        handler.post(CheckDataLoadedRunnable);
 
         forgotPasswordBTN.setOnClickListener(v -> {
-            Intent intent = new Intent(Login.this, ForgotPassword.class);
-            startActivity(intent);
+            if (dataLoaded) {
+                Intent intent = new Intent(Login.this, ForgotPassword.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, getString(R.string.errorDataLoaded), Toast.LENGTH_SHORT).show();
+            }
         });
 
         signUpBTN.setOnClickListener(v -> {
-            Intent intent = new Intent(Login.this, CreateAccount.class);
-            startActivity(intent);
+            if (dataLoaded) {
+                Intent intent = new Intent(Login.this, CreateAccount.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, getString(R.string.errorDataLoaded), Toast.LENGTH_SHORT).show();
+            }
         });
 
         passwordVisibilityBTN.setOnClickListener(v -> {
@@ -66,7 +95,11 @@ public class Login extends AppCompatActivity {
     private void logIn() {
         errors = getErrors();
         if (errors.isEmpty()) {
-            new LogInTask().execute();
+            if (dataLoaded) {
+                new LogInTask().execute();
+            } else {
+                Toast.makeText(this, getString(R.string.errorDataLoaded), Toast.LENGTH_SHORT).show();
+            }
         } else {
             ErrorManager.updateBorder(this, errors, errorMessagesViews);
         }
@@ -75,8 +108,8 @@ public class Login extends AppCompatActivity {
     private class LogInTask extends AsyncTask<Void, Void, Void> {
         boolean exists = false;
         boolean passwordCorrect = false;
-        private int userId, admin;
-        private String password, city;
+        private int userId, admin, city;
+        private String password;
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -95,7 +128,7 @@ public class Login extends AppCompatActivity {
                         userId = resultSet.getInt("Id");
                         password = resultSet.getString("Password");
                         admin = resultSet.getInt("Administrator");
-                        city = resultSet.getString("City");
+                        city = resultSet.getInt("City");
 
                     }
                 }
@@ -113,21 +146,14 @@ public class Login extends AppCompatActivity {
             super.onPostExecute(aVoid);
             if (exists && passwordCorrect) {
                 ErrorManager.updateBorder(getApplicationContext(), errors, errorMessagesViews);
-
                 Intent intent = new Intent(Login.this, MainActivity.class);
                 intent.putExtra("userId", userId);
                 intent.putExtra("password", password);
                 intent.putExtra("admin", admin);
                 intent.putExtra("city", city);
-                while (!DataHandling.isDataLoaded()) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
                 DataHandling.getIntentData(userId, password, admin == 0, city);
                 startActivity(intent);
+
             } else {
                 errors.put(mailET, Errors.EMPTY);
                 errors.put(passwordET, Errors.INVALID_MAIL_PASSWORD);
@@ -158,8 +184,13 @@ public class Login extends AppCompatActivity {
         logInBTN = findViewById(R.id.login_logInBTN);
         passwordVisibilityBTN = findViewById(R.id.login_passwordVisibilityBTN);
 
-        errorMessagesViews.put(mailET, findViewById(R.id.login_errorMailTV));
-        errorMessagesViews.put(passwordET, findViewById(R.id.login_errorPasswordTV));
+        errorMailTV = findViewById(R.id.login_errorMailTV);
+        errorPasswordTV = findViewById(R.id.login_errorPasswordTV);
+
+        errorDataTV = findViewById(R.id.login_errorDataTV);
+
+        errorMessagesViews.put(mailET, errorMailTV);
+        errorMessagesViews.put(passwordET, errorPasswordTV);
 
         for (View view : errorMessagesViews.keySet()) {
             errorMessagesViews.get(view).setVisibility(View.GONE);
@@ -173,5 +204,11 @@ public class Login extends AppCompatActivity {
             currentErrors.put(passwordET, Errors.EMPTY);
         }
         return currentErrors;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(CheckDataLoadedRunnable);
     }
 }

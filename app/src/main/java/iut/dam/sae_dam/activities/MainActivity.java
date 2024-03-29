@@ -13,10 +13,10 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import iut.dam.sae_dam.R;
+import iut.dam.sae_dam.data.DataHandling;
 import iut.dam.sae_dam.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-
 
     private ActivityMainBinding binding;
 

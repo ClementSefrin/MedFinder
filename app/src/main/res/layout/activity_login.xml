@@ -20,22 +20,35 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/baseVerticalMargin"
+        android:layout_marginTop="@dimen/verticalMargin"
         android:text="@string/logInTitle"
         android:textSize="@dimen/titleTextSize"
         android:textStyle="bold" />
 
+
+    <TextView
+        android:id="@+id/login_errorDataTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_headerTV"
+        android:layout_marginTop="@dimen/divider_height"
+        android:layout_marginBottom="@dimen/divider_height"
+        android:text="@string/waitingData"
+        android:textAlignment="center"
+        android:textColor="?attr/errorMessageColor"
+        android:textSize="@dimen/textSize"
+        android:textStyle="bold" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/login_infosCV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/login_logInBTN"
-        android:layout_below="@id/login_headerTV"
+        android:layout_below="@id/login_errorDataTV"
         android:layout_marginStart="@dimen/accountCardViewHorizontalMargin"
-        android:layout_marginTop="@dimen/baseVerticalMargin"
+        android:layout_marginTop="@dimen/verticalMargin"
         android:layout_marginEnd="@dimen/accountCardViewHorizontalMargin"
-        android:layout_marginBottom="@dimen/baseVerticalMargin"
+        android:layout_marginBottom="@dimen/verticalMargin"
         app:cardBackgroundColor="?attr/cardBackgroundColor"
         app:cardElevation="@dimen/accountCardViewElevation">
 
@@ -48,10 +61,10 @@
                 android:id="@+id/login_infosRL"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="@dimen/accountHorizontalPadding"
-                android:paddingTop="@dimen/accountVerticalPadding"
-                android:paddingEnd="@dimen/accountHorizontalPadding"
-                android:paddingBottom="@dimen/accountVerticalPadding">
+                android:paddingStart="@dimen/horizontalPadding"
+                android:paddingTop="@dimen/verticalPadding"
+                android:paddingEnd="@dimen/horizontalPadding"
+                android:paddingBottom="@dimen/verticalPadding">
 
                 <TextView
                     android:id="@+id/login_infosHeaderTV"
@@ -67,12 +80,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/login_infosHeaderTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:autofillHints="InputMail"
                     android:drawableStart="@drawable/ic_mail"
                     android:hint="@string/hintMail"
                     android:inputType="textEmailAddress"
-                    android:text="a@g.com"
                     android:textSize="@dimen/textSize" />
 
                 <TextView
@@ -90,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/login_errorMailTV"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -103,7 +115,6 @@
                         android:drawableStart="@drawable/ic_password"
                         android:hint="@string/hintPassword"
                         android:inputType="textPassword"
-                        android:text="Azertyui1#"
                         android:textSize="@dimen/textSize" />
 
                     <ImageButton
@@ -131,7 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/login_errorPasswordTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:background="@android:color/transparent"
                     android:drawableEnd="@drawable/ic_redirection_arrow"
                     android:text="@string/logInSignUp"
@@ -149,6 +160,7 @@
                     android:textAllCaps="false"
                     android:textColor="?attr/accountButtonTextColor"
                     android:textSize="@dimen/smallTextSize" />
+
             </RelativeLayout>
 
         </ScrollView>
@@ -163,7 +175,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="@dimen/accountCardViewHorizontalMargin"
         android:layout_marginEnd="@dimen/accountCardViewHorizontalMargin"
-        android:layout_marginBottom="@dimen/baseVerticalMargin"
+        android:layout_marginBottom="@dimen/verticalMargin"
         android:background="@drawable/button_background"
         android:text="@string/logInTitle"
         android:textColor="?attr/accountButtonTextColor"

@@ -1,6 +1,6 @@
 package iut.dam.sae_dam.data.saisies;
 
-import java.util.Date;
+import java.sql.Date;
 
 import iut.dam.sae_dam.data.medicaments.Medicament;
 import iut.dam.sae_dam.data.pharmacies.Pharmacie;
@@ -37,6 +37,14 @@ public class Saisie {
     }
 
     public Date getDateSaisie() {
+        return dateSaisie;
+    }
+
+    public Ville getCity() {
+        return ville;
+    }
+
+    public Date getDate() {
         return dateSaisie;
     }
 }

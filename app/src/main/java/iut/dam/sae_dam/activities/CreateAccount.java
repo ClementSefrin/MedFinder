@@ -7,6 +7,7 @@ import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -25,11 +26,13 @@ import java.util.HashMap;
 import iut.dam.sae_dam.data.DataHandling;
 import iut.dam.sae_dam.data.DatabaseConnection;
 import iut.dam.sae_dam.R;
+import iut.dam.sae_dam.data.villes.VilleAdapter;
 import iut.dam.sae_dam.errors.ErrorManager;
 import iut.dam.sae_dam.errors.Errors;
 
 public class CreateAccount extends AppCompatActivity {
-    private EditText firstNameET, lastNameET, mailET, cityET, passwordET, passwordVerifyEt, secretAnswerET;
+    private EditText firstNameET, lastNameET, mailET, passwordET, passwordVerifyEt, secretAnswerET;
+    private AutoCompleteTextView cityET;
     private TextView errorFirstNameTV, errorLastNameTV, errorMailTV, errorCityTV, errorPasswordTV, errorPasswordVerifyTV, errorSecretQuestion, errorSecretAnswerTV;
 
     private HashMap<View, TextView> errorMessagesViews;
@@ -42,7 +45,6 @@ public class CreateAccount extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
-        DataHandling.loadData();
         errors = new HashMap<>();
         errorMessagesViews = new HashMap<>();
         getViews();
@@ -128,7 +130,7 @@ public class CreateAccount extends AppCompatActivity {
                 preparedStatement.setString(3, mailET.getText().toString());
                 preparedStatement.setString(4, passwordET.getText().toString());
                 preparedStatement.setInt(5, 1);
-                preparedStatement.setString(6, cityET.getText().toString());
+                preparedStatement.setInt(6, Integer.parseInt(cityET.getText().toString().split(" - ")[1].trim()));
 
                 int selectedPosition = secretQuestionSP.getSelectedItemPosition();
                 String[] secretQuestionsArray = getResources().getStringArray(R.array.questionsSecretes);
@@ -162,21 +164,14 @@ public class CreateAccount extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            Toast.makeText(CreateAccount.this, "Compte créé avec succès!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CreateAccount.this, getString(R.string.accountCreatedMessage), Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(CreateAccount.this, MainActivity.class);
             intent.putExtra("userId", userId);
             intent.putExtra("password", passwordET.getText().toString());
             intent.putExtra("admin", admin == 0);
             intent.putExtra("city", cityET.getText().toString());
-            while (!DataHandling.isDataLoaded()) {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            DataHandling.getIntentData(userId, passwordET.getText().toString(), admin == 0, cityET.getText().toString());
+            DataHandling.getIntentData(userId, passwordET.getText().toString(), admin == 0, Integer.parseInt(cityET.getText().toString().split(" - ")[1].trim()));
             startActivity(intent);
         }
     }
@@ -236,6 +231,9 @@ public class CreateAccount extends AppCompatActivity {
         for (View view : errorMessagesViews.keySet()) {
             errorMessagesViews.get(view).setVisibility(View.GONE);
         }
+
+        VilleAdapter cityAdapter = new VilleAdapter(this, DataHandling.getVilles());
+        cityET.setAdapter(cityAdapter);
     }
 
     private HashMap<View, Errors> getErrors() {

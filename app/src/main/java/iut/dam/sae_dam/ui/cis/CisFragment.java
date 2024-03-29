@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashMap;
 
 import iut.dam.sae_dam.data.DataHandling;
@@ -80,7 +80,6 @@ public class CisFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 errors = getErrors();
-                //TODO : errorhandling
                 if (!errors.isEmpty()) {
                     ErrorManager.updateBorder(getContext(), errors, errorMessagesViews);
                     medicamentNameTV.setText("");
@@ -94,7 +93,7 @@ public class CisFragment extends Fragment {
                 }
 
                 int userId = getActivity().getIntent().getIntExtra("userId", 0);
-                Saisie saisie = new Saisie(1, med, pharmacie, new Date(), city, city.getZipCode());
+                Saisie saisie = new Saisie(userId, med, pharmacie, new Date(System.currentTimeMillis()), city, city.getZipCode());
                 DataHandling.addData(saisie);
             }
         });
@@ -147,11 +146,12 @@ public class CisFragment extends Fragment {
             }
         }
 
-        String cityName = cityCompleteTextView.getText().toString().split(" ")[0];
+        String cityName = cityCompleteTextView.getText().toString();
         if (cityName.isEmpty()) {
             errors.put(cityCompleteTextView, Errors.EMPTY_FIELD);
         } else {
-            city = DataHandling.getCitybyName(cityName);
+            int insee = Integer.parseInt(cityName.split(" - ")[1].trim());
+            city = DataHandling.getCitybyInsee(insee);
             if (city == null) {
                 errors.put(cityCompleteTextView, Errors.UNKNOWN_CITY);
             }

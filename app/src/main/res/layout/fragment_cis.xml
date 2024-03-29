@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="@dimen/baseHorizontalMargin"
-    android:paddingTop="@dimen/baseVerticalMargin"
-    android:paddingEnd="@dimen/baseHorizontalMargin"
-    android:paddingBottom="@dimen/baseVerticalMargin"
+    android:paddingStart="@dimen/horizontalMargin"
+    android:paddingTop="@dimen/verticalMargin"
+    android:paddingEnd="@dimen/horizontalMargin"
+    android:paddingBottom="@dimen/verticalMargin"
     tools:context=".ui.cis.CisFragment">
 
     <ScrollView
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cisFragment_codeCisRL"
                 android:layout_alignStart="@id/cisFragment_codeCisRL"
-                android:layout_marginTop="@dimen/baseVerticalMargin">
+                android:layout_marginTop="@dimen/verticalMargin">
 
                 <TextView
                     android:id="@+id/cisFragment_pharmacieTV"
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cisFragment_pharmacieRL"
                 android:layout_alignStart="@id/cisFragment_codeCisRL"
-                android:layout_marginTop="@dimen/baseVerticalMargin">
+                android:layout_marginTop="@dimen/verticalMargin">
 
                 <TextView
                     android:id="@+id/cisFragment_cityTV"
@@ -137,8 +137,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/baseVerticalMargin"
-        android:layout_marginBottom="@dimen/baseVerticalMargin"
+        android:layout_marginTop="@dimen/verticalMargin"
+        android:layout_marginBottom="@dimen/verticalMargin"
         android:background="@drawable/button_background"
         android:text="@string/report"
         app:backgroundTint="?attr/buttonBackground" />

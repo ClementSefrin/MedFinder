@@ -59,7 +59,7 @@ public class VilleAdapter extends ArrayAdapter<Ville> implements Filterable {
 
         @Override
         public CharSequence convertResultToString(Object resultValue) {
-            return String.valueOf(((Ville) resultValue).getName());
+            return String.valueOf((Ville) resultValue);
         }
     };
 }

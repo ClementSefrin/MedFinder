@@ -6,12 +6,18 @@
     <string name="code_cis_title">Code CIS</string>
     <string name="pharmacy_title">Pharmacie</string>
 
+
+
     <string name="code_cis_search">Chercher un médicament…</string>
     <string name="pharmacy_search">Chercher une pharmacie…</string>
+    <string name="city_search">Cherche une ville…</string>
     <string name="report">Signaler</string>
-    <string name="delete_history_dialog_confirm">Voulez-vous vraiment supprimer votre historique?</string>
+    <string name="delete_history_dialog_confirm">Voulez-vous vraiment supprimer votre historique ?</string>
+    <string name="connexion_dialog_confirm">Cette application nécessite une connexion Internet.</string>
     <string name="cancel">Annuler</string>
     <string name="delete">Supprimer</string>
+    <string name="retry">Réessayer</string>
+    <string name="quit">Quitter</string>
     <string name="delete_history">Supprimer l\'historique</string>
 
     <!--Sign up-->
@@ -23,7 +29,7 @@
     <string name="hintCity">Ville</string>
     <string name="hintPassword">Mot de passe</string>
     <string name="hintPasswordVerify">Confirmer le mot de passe</string>
-    <string name="signUpAlreadySignedUp">Déjà inscrit? Connectez-vous.</string>
+    <string name="signUpAlreadySignedUp">Déjà inscrit ? Connectez-vous.</string>
     <string-array name="questionsSecretes">
         <item>-</item>
         <item>Comment s\'appelle votre animal de compagnie ?</item>
@@ -32,6 +38,7 @@
         <item>Comment s\'appelle votre meilleur(e) amie(e) ?</item>
     </string-array>
     <string name="hintSecretAnswer">Réponse</string>
+    <string name="accountCreatedMessage">Compte créé avec succès!</string>
 
     <!--Log in-->
     <string name="logInTitle">Se connecter</string>
@@ -43,6 +50,7 @@
     <string name="forgotPasswordTitle">Mot de passe oublié</string>
     <string name="forgotPasswordHeader">Réinitialiser votre mot de passe</string>
     <string name="hintNewPassword">Nouveau mot de passe</string>
+    <string name="forgotPasswordButtonTextAltStep">Suivant</string>
 
     <!-- Error messages -->
     <string name="errorEmptyField">Champs requis.</string>
@@ -54,6 +62,9 @@
     <string name="errorInvalidQuestionAnswer">La question secrète ou la réponse est incorrecte.</string>
     <string name="errorInvalidNewPassword">Le nouveau mot de passe doit être différent du précédent.</string>
     <string name="errorNoAccountFound">Aucun compte avec cet email.</string>
-
-
+    <string name="errorUnknownMedicine">Médicament inconnu.</string>
+    <string name="errorUnknownPharmacy">Pharmacie inconnue.</string>
+    <string name="errorUnknownCity">Ville inconnue.</string>
+    <string name="waitingData">Chargement des données..</string>
+    <string name="errorDataLoaded">Veuillez attendre la fin du chargement des données.</string>
 </resources>

@@ -13,8 +13,11 @@
     <string name="city_search">Search for a city…</string>
     <string name="report">Report</string>
     <string name="delete_history_dialog_confirm">Are you sure you want to delete your history?</string>
+    <string name="connexion_dialog_confirm">This application requires an Internet connection.</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
+    <string name="retry">Retry</string>
+    <string name="quit">Leave</string>
     <string name="delete_history">Delete history</string>
 
     <!--Sign up-->
@@ -35,6 +38,7 @@
         <item>What is the name of your best friend ?</item>
     </string-array>
     <string name="hintSecretAnswer">Answer</string>
+    <string name="accountCreatedMessage">Account created successfully!</string>
 
     <!--Log in-->
     <string name="logInTitle">Log in</string>
@@ -61,4 +65,7 @@
     <string name="errorUnknownMedicine">Unknown medicine.</string>
     <string name="errorUnknownPharmacy">Unknown pharmacy.</string>
     <string name="errorUnknownCity">Unknown city.</string>
+    <string name="waitingData">Data is loading..</string>
+    <string name="errorDataLoaded">Please wait until all the data is loaded.</string>
+
 </resources>

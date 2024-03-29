@@ -4,6 +4,7 @@ package iut.dam.sae_dam.data;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import java.sql.Connection;
@@ -11,6 +12,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,33 +29,42 @@ public class DataHandling {
     private static LinkedList<Ville> villes = new LinkedList<>();
     private static LinkedList<Saisie> allSaisies = new LinkedList<>();
     private static LinkedList<Saisie> userSaisies = new LinkedList<>();
-    private static int userId;
+    private static LinkedList<Saisie> newSaisies = new LinkedList<>();
+    private static int userId, city;
     private static boolean admin;
-    private static String password, city;
+    private static String password;
 
     public static void loadData() {
+        dataLoaded = false;
         new LoadData().execute();
     }
 
-    public static void getIntentData(int userId, String password, boolean admin, String city) {
+    public static void saveData() {
+        new SaveData().execute();
+    }
+
+    public static void getIntentData(int userId, String password, boolean admin, int city) {
         DataHandling.userId = userId;
         DataHandling.password = password;
         DataHandling.admin = admin;
         DataHandling.city = city;
-
         loadUserSaisies();
     }
 
     public static void addData(Saisie saisie) {
         allSaisies.add(saisie);
         userSaisies.add(saisie);
+        newSaisies.add(saisie);
     }
 
     public static void supprimerHisto() {
+        new DeleteData().execute();
         for (Saisie s : userSaisies) {
             allSaisies.remove(s);
         }
         userSaisies.clear();
+        newSaisies.clear();
+
     }
 
     public static boolean isDataLoaded() {
@@ -60,6 +72,7 @@ public class DataHandling {
     }
 
     private static class LoadData extends AsyncTask<Void, Void, Void> {
+
         @Override
         protected Void doInBackground(Void... voids) {
             try {
@@ -90,20 +103,6 @@ public class DataHandling {
                     pharmacies.add(new Pharmacie(id, name));
                 }
 
-                query = "SELECT * FROM Medicament_Signalement";
-                preparedStatement = connection.prepareStatement(query);
-                resultSet = preparedStatement.executeQuery();
-                while (resultSet.next()) {
-                    int queryCisCode = resultSet.getInt("medicamentId");
-                    int queryPharmacieId = resultSet.getInt("pharmacieId");
-                    Date queryDate = resultSet.getDate("dateSignalement");
-                    int queryUserId = resultSet.getInt("userId");
-                    String queryVille = resultSet.getString("ville");
-                    int queryDepartement = resultSet.getInt("departement");
-                    Saisie saisie = new Saisie(queryUserId, getMedicamentByCode(queryCisCode), getPharmacieByName(pharmacies.get(queryPharmacieId).getName()), queryDate, getCitybyName(queryVille), queryDepartement);
-                    allSaisies.add(saisie);
-                }
-
                 query = "SELECT * FROM villes";
                 preparedStatement = connection.prepareStatement(query);
                 resultSet = preparedStatement.executeQuery();
@@ -112,8 +111,24 @@ public class DataHandling {
                     String name = resultSet.getString("name");
                     int departement = resultSet.getInt("departement");
                     String region = resultSet.getString("region");
-                    villes.add(new Ville(insee, name, departement, region, 0));
+                    Ville ville = new Ville(insee, name, departement, region, 0);
+                    villes.add(ville);
                 }
+
+                query = "SELECT * FROM Medicament_Signalement";
+                preparedStatement = connection.prepareStatement(query);
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    int queryCisCode = resultSet.getInt("medicamentId");
+                    int queryPharmacieId = resultSet.getInt("pharmacieId");
+                    Date queryDate = resultSet.getDate("dateSignalement");
+                    int queryUserId = resultSet.getInt("userId");
+                    int queryVille = resultSet.getInt("ville");
+                    Ville ville = getCitybyInsee(queryVille);
+                    Saisie saisie = new Saisie(queryUserId, getMedicamentByCode(queryCisCode), getPharmacieById(queryPharmacieId), queryDate, ville, ville.getDepartement());
+                    allSaisies.add(saisie);
+                }
+
 
                 preparedStatement.close();
 
@@ -132,6 +147,63 @@ public class DataHandling {
         }
     }
 
+    private static class SaveData extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                Connection connection = DatabaseConnection.getConnection();
+
+                String query = "INSERT INTO Medicament_Signalement (medicamentId, userId , pharmacieId, dateSignalement, ville) VALUES (?, ?, ?, ?, ?)";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                for (Saisie saisie : newSaisies) {
+                    preparedStatement.setInt(1, saisie.getMedicament().getCisCode());
+                    preparedStatement.setInt(2, saisie.getUserId());
+                    preparedStatement.setInt(3, saisie.getPharmacie().getId());
+                    preparedStatement.setDate(4, saisie.getDate());
+                    preparedStatement.setInt(5, saisie.getCity().getInsee());
+                    preparedStatement.executeUpdate();
+                }
+
+                preparedStatement.close();
+
+                DatabaseConnection.closeConnection(connection);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                Log.e("Database Error", e.getMessage());
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            newSaisies.clear();
+        }
+    }
+
+    private static class DeleteData extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                Connection connection = DatabaseConnection.getConnection();
+
+                String query = "DELETE FROM Medicament_Signalement WHERE userId = ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1, userId);
+                preparedStatement.executeUpdate();
+
+                preparedStatement.close();
+
+                DatabaseConnection.closeConnection(connection);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                Log.e("Database Error", e.getMessage());
+            }
+            return null;
+        }
+    }
+
+
     public static void loadUserSaisies() {
         userSaisies.clear();
         for (Saisie saisie : allSaisies) {
@@ -139,8 +211,6 @@ public class DataHandling {
                 userSaisies.add(saisie);
             }
         }
-
-
     }
 
     public static List<Medicament> getMedicaments() {
@@ -190,10 +260,19 @@ public class DataHandling {
         return null;
     }
 
-    public static Ville getCitybyName(String name) {
+    public static Ville getCitybyInsee(int insee) {
         for (Ville ville : villes) {
-            if (ville.getName().equalsIgnoreCase(name)) {
+            if (ville.getInsee() == insee) {
                 return ville;
+            }
+        }
+        return null;
+    }
+
+    public static Pharmacie getPharmacieById(int id) {
+        for (Pharmacie pharmacie : pharmacies) {
+            if (pharmacie.getId() == id) {
+                return pharmacie;
             }
         }
         return null;
