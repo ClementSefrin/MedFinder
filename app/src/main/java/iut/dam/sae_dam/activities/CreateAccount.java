@@ -3,6 +3,8 @@ package iut.dam.sae_dam.activities;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -23,6 +25,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import iut.dam.sae_dam.MedFind;
 import iut.dam.sae_dam.data.DataHandling;
 import iut.dam.sae_dam.data.DatabaseConnection;
 import iut.dam.sae_dam.R;
@@ -60,6 +63,38 @@ public class CreateAccount extends AppCompatActivity {
 
         signUpBTN.setOnClickListener(v -> {
             createAccount();
+        });
+
+        //Password character limit
+        passwordET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > MedFind.getMaxCharLimit()) {
+                    passwordET.setText(s.subSequence(0, MedFind.getMaxCharLimit()));
+                    passwordET.setSelection(MedFind.getMaxCharLimit());
+                }
+            }
+        });
+        passwordVerifyEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > MedFind.getMaxCharLimit()) {
+                    passwordVerifyEt.setText(s.subSequence(0, MedFind.getMaxCharLimit()));
+                    passwordVerifyEt.setSelection(MedFind.getMaxCharLimit());
+                }
+            }
         });
     }
 
@@ -171,6 +206,8 @@ public class CreateAccount extends AppCompatActivity {
             intent.putExtra("password", passwordET.getText().toString());
             intent.putExtra("admin", admin == 0);
             intent.putExtra("city", cityET.getText().toString());
+            intent.putExtra("secretQuestion", secretQuestionSP.getSelectedItemPosition());
+            intent.putExtra("secretAnswer", secretAnswerET.getText().toString());
             DataHandling.getIntentData(userId, passwordET.getText().toString(), admin == 0, Integer.parseInt(cityET.getText().toString().split(" - ")[1].trim()));
             startActivity(intent);
         }
@@ -246,6 +283,8 @@ public class CreateAccount extends AppCompatActivity {
         }
         if (cityET.getText().toString().isEmpty()) {
             errors.put(cityET, Errors.EMPTY_FIELD);
+        } else if (DataHandling.getVilles().stream().noneMatch(city -> city.getName().equalsIgnoreCase(cityET.getText().toString().split(" - ")[0].trim()))) {
+            errors.put(cityET, Errors.UNKNOWN_CITY);
         }
         if (!ErrorManager.checkPassword(passwordET.getText().toString())) {
             errors.put(passwordET, Errors.INVALID_PASSWORD_FORMAT);

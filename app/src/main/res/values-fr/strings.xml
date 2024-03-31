@@ -13,12 +13,21 @@
     <string name="city_search">Cherche une ville…</string>
     <string name="report">Signaler</string>
     <string name="delete_history_dialog_confirm">Voulez-vous vraiment supprimer votre historique ?</string>
+    <string name="log_out_dialog_confirm">Se déconnecter?</string>
+    <string name="delete_account_dialog_confirm">Voulez-vous vraiment supprimer votre compte ? Toutes vos données, dont vos signalements, seront supprimées.</string>
     <string name="connexion_dialog_confirm">Cette application nécessite une connexion Internet.</string>
     <string name="cancel">Annuler</string>
     <string name="delete">Supprimer</string>
+    <string name="confirm">Confirmer</string>
     <string name="retry">Réessayer</string>
     <string name="quit">Quitter</string>
     <string name="delete_history">Supprimer l\'historique</string>
+    <string name="change_password">Modifier le mot de passe</string>
+    <string name="statistics">Statistiques</string>
+    <string name="log_out">Déconnexion</string>
+    <string name="delete_account">Supprimer le compte</string>
+
+    <string name="changeBTN">Modifier</string>
 
     <!--Sign up-->
     <string name="signUpTitle">S\'inscrire</string>
@@ -27,7 +36,9 @@
     <string name="hintLastName">Nom</string>
     <string name="hintMail">Email</string>
     <string name="hintCity">Ville</string>
+    <string name="hintCityDefault">Ville (defaut :\u0020</string>
     <string name="hintPassword">Mot de passe</string>
+    <string name="hintOldPassword">Ancien mot de passe</string>
     <string name="hintPasswordVerify">Confirmer le mot de passe</string>
     <string name="signUpAlreadySignedUp">Déjà inscrit ? Connectez-vous.</string>
     <string-array name="questionsSecretes">
@@ -55,7 +66,7 @@
     <!-- Error messages -->
     <string name="errorEmptyField">Champs requis.</string>
     <string name="errorInvalidMailFormat">L\'email doit suivre le format suivant : exemple@exemple.com .</string>
-    <string name="errorInvalidPasswordFormat">Le mot de passe doit comporter au moins 8 caractères, une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.</string>
+    <string name="errorInvalidPasswordFormat">Le mot de passe doit comporter au moins 8 caractères et au plus 30, une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.</string>
     <string name="errorInvalidPasswordConfirmation">Les mots de passe sont différents.</string>
     <string name="errorAccountAlreadyExists">Il existe déjà un compte avec cet email.</string>
     <string name="errorInvalidMailPassword">L\'email ou le mot de passe est incorrect.</string>
@@ -67,4 +78,7 @@
     <string name="errorUnknownCity">Ville inconnue.</string>
     <string name="waitingData">Chargement des données..</string>
     <string name="errorDataLoaded">Veuillez attendre la fin du chargement des données.</string>
+    <string name="errorInvalidOldPassword">L\'ancien mot de passe est incorrect.</string>
+    <string name="errorSamePassword">Le nouveau mot de passe doit être différent de l\'ancien.</string>
+
 </resources>

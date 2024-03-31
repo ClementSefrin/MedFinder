@@ -12,13 +12,22 @@
     <string name="pharmacy_search">Search for a pharmacy…</string>
     <string name="city_search">Search for a city…</string>
     <string name="report">Report</string>
-    <string name="delete_history_dialog_confirm">Are you sure you want to delete your history?</string>
+    <string name="delete_history_dialog_confirm">Do you really want to delete your history?</string>
+    <string name="log_out_dialog_confirm">Log out?</string>
+    <string name="delete_account_dialog_confirm">Do you really want to delete your account? All data, including your reports, will be deleted.</string>
     <string name="connexion_dialog_confirm">This application requires an Internet connection.</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
+    <string name="confirm">Confirm</string>
     <string name="retry">Retry</string>
     <string name="quit">Leave</string>
     <string name="delete_history">Delete history</string>
+    <string name="change_password">Change password</string>
+    <string name="statistics">Statistics</string>
+    <string name="log_out">Log out</string>
+    <string name="delete_account">Delete account</string>
+
+    <string name="changeBTN">Change</string>
 
     <!--Sign up-->
     <string name="signUpTitle">Sign up</string>
@@ -27,7 +36,9 @@
     <string name="hintLastName">Last name</string>
     <string name="hintMail">Mail</string>
     <string name="hintCity">City</string>
+    <string name="hintCityDefault">City (default :\u0020</string>
     <string name="hintPassword">Password</string>
+    <string name="hintOldPassword">Old password</string>
     <string name="hintPasswordVerify">Confirm password</string>
     <string name="signUpAlreadySignedUp">Already have account ? Log in.</string>
     <string-array name="questionsSecretes">
@@ -55,7 +66,7 @@
     <!-- Error messages -->
     <string name="errorEmptyField">This field is required.</string>
     <string name="errorInvalidMailFormat">The mail should respect the following format : example@example.com .</string>
-    <string name="errorInvalidPasswordFormat">The password needs to have at least 8 characters, one uppercase letter, one lowercase letter, one digit, and one special character.</string>
+    <string name="errorInvalidPasswordFormat">The password needs to have at least 8 characters and at most 30, one uppercase letter, one lowercase letter, one digit, and one special character.</string>
     <string name="errorInvalidPasswordConfirmation">The passwords are different.</string>
     <string name="errorAccountAlreadyExists">There is already an account using this email.</string>
     <string name="errorInvalidMailPassword">The mail or the password is incorrect.</string>
@@ -67,5 +78,7 @@
     <string name="errorUnknownCity">Unknown city.</string>
     <string name="waitingData">Data is loading..</string>
     <string name="errorDataLoaded">Please wait until all the data is loaded.</string>
+    <string name="errorInvalidOldPassword">The old password is incorrect.</string>
+    <string name="errorSamePassword">The new password must be different from the old one.</string>
 
 </resources>

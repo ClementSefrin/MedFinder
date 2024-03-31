@@ -3,32 +3,180 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/accountFragment_divider1"
+            android:id="@+id/accountFragment_topDivider"
             android:layout_width="match_parent"
             android:layout_height="@dimen/divider_height" />
 
-        <TextView
-            android:id="@+id/accountFragment_supprimerHistoTV"
+        <RelativeLayout
+            android:id="@+id/accountFragment_historyRL"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/accountFragment_divider1"
-            android:padding="5dp"
-            android:text="@string/delete_history"
-            android:textColor="?attr/errorMessageColor"
-            android:textSize="@dimen/titleTextSize"
-            android:textStyle="bold" />
+            android:layout_below="@+id/accountFragment_topDivider">
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/accountFragment_historyTopDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height" />
+
+            <TextView
+                android:id="@+id/accountFragment_supprimerHistoTV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/accountFragment_historyTopDivider"
+                android:paddingLeft="@dimen/horizontalPadding"
+                android:paddingTop="@dimen/accountVerticalPadding"
+                android:paddingRight="@dimen/horizontalPadding"
+                android:paddingBottom="@dimen/accountVerticalPadding"
+                android:text="@string/delete_history"
+                android:textColor="?attr/errorMessageColor"
+                android:textSize="@dimen/mediumTextSize"
+                android:textStyle="bold" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/accountFragment_historyBottomDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_below="@id/accountFragment_supprimerHistoTV" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/accountFragment_changePasswordRL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/accountFragment_historyRL">
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/accountFragment_changePasswordTopDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height" />
+
+            <TextView
+                android:id="@+id/accountFragment_changePasswordTV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/accountFragment_changePasswordTopDivider"
+                android:paddingLeft="@dimen/horizontalPadding"
+                android:paddingTop="@dimen/accountVerticalPadding"
+                android:paddingRight="@dimen/horizontalPadding"
+                android:paddingBottom="@dimen/accountVerticalPadding"
+                android:text="@string/change_password"
+                android:textSize="@dimen/mediumTextSize"
+                android:textStyle="bold" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/accountFragment_changePasswordBottomDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_below="@id/accountFragment_changePasswordTV" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/accountFragment_statisticsRL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/accountFragment_changePasswordRL">
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/accountFragment_statisticsTopDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height" />
+
+            <TextView
+                android:id="@+id/accountFragment_statisticsTV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/accountFragment_statisticsTopDivider"
+                android:paddingLeft="@dimen/horizontalPadding"
+                android:paddingTop="@dimen/accountVerticalPadding"
+                android:paddingRight="@dimen/horizontalPadding"
+                android:paddingBottom="@dimen/accountVerticalPadding"
+                android:text="@string/statistics"
+                android:textSize="@dimen/mediumTextSize"
+                android:textStyle="bold" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/accountFragment_statisticsBottomDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_below="@id/accountFragment_statisticsTV" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/accountFragment_logOutRL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/accountFragment_statisticsRL">
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/accountFragment_logOutTopDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height" />
+
+            <TextView
+                android:id="@+id/accountFragment_logOutTV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/accountFragment_logOutTopDivider"
+                android:paddingLeft="@dimen/horizontalPadding"
+                android:paddingTop="@dimen/accountVerticalPadding"
+                android:paddingRight="@dimen/horizontalPadding"
+                android:paddingBottom="@dimen/accountVerticalPadding"
+                android:text="@string/log_out"
+                android:textSize="@dimen/mediumTextSize"
+                android:textStyle="bold" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/accountFragment_logOutBottomDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_below="@id/accountFragment_logOutTV" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/accountFragment_deleteAccountRL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/accountFragment_logOutRL">
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/accountFragment_deleteAccountTopDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height" />
+
+            <TextView
+                android:id="@+id/accountFragment_deleteAccountTV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/accountFragment_deleteAccountTopDivider"
+                android:paddingLeft="@dimen/horizontalPadding"
+                android:paddingTop="@dimen/accountVerticalPadding"
+                android:paddingRight="@dimen/horizontalPadding"
+                android:paddingBottom="@dimen/accountVerticalPadding"
+                android:text="@string/delete_account"
+                android:textSize="@dimen/mediumTextSize"
+                android:textStyle="bold" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/accountFragment_deleteAccountBottomDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_below="@id/accountFragment_deleteAccountTV" />
+
+        </RelativeLayout>
 
         <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/accountFragment_divider2"
+            android:id="@+id/accountFragment_bottomDivider"
             android:layout_width="match_parent"
             android:layout_height="@dimen/divider_height"
-            android:layout_below="@id/accountFragment_supprimerHistoTV" />
-
+            android:layout_below="@+id/accountFragment_deleteAccountRL" />
     </RelativeLayout>
 </ScrollView>

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -24,6 +26,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import iut.dam.sae_dam.MedFind;
 import iut.dam.sae_dam.R;
 import iut.dam.sae_dam.data.DatabaseConnection;
 import iut.dam.sae_dam.errors.ErrorManager;
@@ -68,6 +71,39 @@ public class ForgotPassword extends AppCompatActivity {
         signUpBTN.setOnClickListener(v -> {
             Intent intent = new Intent(ForgotPassword.this, CreateAccount.class);
             startActivity(intent);
+        });
+
+
+        //Password character limit
+        newPasswordET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > MedFind.getMaxCharLimit()) {
+                    newPasswordET.setText(s.subSequence(0, MedFind.getMaxCharLimit()));
+                    newPasswordET.setSelection(MedFind.getMaxCharLimit());
+                }
+            }
+        });
+        verifyNewPasswordET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > MedFind.getMaxCharLimit()) {
+                    verifyNewPasswordET.setText(s.subSequence(0, MedFind.getMaxCharLimit()));
+                    verifyNewPasswordET.setSelection(MedFind.getMaxCharLimit());
+                }
+            }
         });
     }
 

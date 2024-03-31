@@ -1,11 +1,13 @@
 package iut.dam.sae_dam.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
@@ -15,6 +17,7 @@ import androidx.navigation.ui.NavigationUI;
 import iut.dam.sae_dam.R;
 import iut.dam.sae_dam.data.DataHandling;
 import iut.dam.sae_dam.databinding.ActivityMainBinding;
+import iut.dam.sae_dam.ui.account.AccountFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,5 +44,21 @@ public class MainActivity extends AppCompatActivity {
                 headerTextView.setText(destination.getLabel());
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == AccountFragment.getRequestCodeChangePassword() && resultCode == RESULT_OK) {
+            // Update intent data if needed
+            // For example:
+            String newPassword = data.getStringExtra("password");
+            int secretQuestion = data.getIntExtra("secretQuestion", -1);
+            String secretAnswer = data.getStringExtra("secretAnswer");
+            getIntent().putExtra("password", newPassword);
+            getIntent().putExtra("secretQuestion", secretQuestion);
+            getIntent().putExtra("secretAnswer", secretAnswer);
+
+        }
     }
 }

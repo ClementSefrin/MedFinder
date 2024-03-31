@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -23,6 +25,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import iut.dam.sae_dam.MedFind;
 import iut.dam.sae_dam.data.DataHandling;
 import iut.dam.sae_dam.R;
 import iut.dam.sae_dam.data.DatabaseConnection;
@@ -90,6 +93,23 @@ public class Login extends AppCompatActivity {
         logInBTN.setOnClickListener(v -> {
             logIn();
         });
+
+        //Password character limit
+        passwordET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > MedFind.getMaxCharLimit()) {
+                    passwordET.setText(s.subSequence(0, MedFind.getMaxCharLimit()));
+                    passwordET.setSelection(MedFind.getMaxCharLimit());
+                }
+            }
+        });
     }
 
     private void logIn() {
@@ -108,8 +128,8 @@ public class Login extends AppCompatActivity {
     private class LogInTask extends AsyncTask<Void, Void, Void> {
         boolean exists = false;
         boolean passwordCorrect = false;
-        private int userId, admin, city;
-        private String password;
+        private int userId, admin, city, secretQuestionIdx;
+        private String password, secretAnswer;
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -129,7 +149,8 @@ public class Login extends AppCompatActivity {
                         password = resultSet.getString("Password");
                         admin = resultSet.getInt("Administrator");
                         city = resultSet.getInt("City");
-
+                        secretQuestionIdx = resultSet.getInt("QuestionSecrete");
+                        secretAnswer = resultSet.getString("ReponseSecrete");
                     }
                 }
 
@@ -149,8 +170,10 @@ public class Login extends AppCompatActivity {
                 Intent intent = new Intent(Login.this, MainActivity.class);
                 intent.putExtra("userId", userId);
                 intent.putExtra("password", password);
-                intent.putExtra("admin", admin);
+                intent.putExtra("admin", admin == 0);
                 intent.putExtra("city", city);
+                intent.putExtra("secretQuestion", secretQuestionIdx);
+                intent.putExtra("secretAnswer", secretAnswer);
                 DataHandling.getIntentData(userId, password, admin == 0, city);
                 startActivity(intent);
 

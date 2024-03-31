@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import java.sql.Date;
 import java.util.HashMap;
 
+import iut.dam.sae_dam.R;
 import iut.dam.sae_dam.data.DataHandling;
 import iut.dam.sae_dam.data.villes.Ville;
 import iut.dam.sae_dam.data.villes.VilleAdapter;
@@ -34,14 +35,13 @@ public class CisFragment extends Fragment {
     private FragmentCisBinding binding;
     private CisViewModel cisViewModel;
 
-
     AutoCompleteTextView codeCompleteTextView, pharmacieCompleteTextView, cityCompleteTextView;
     private TextView errorCisCodeTV, errorPharmacieTV, errorCityTV, medicamentNameTV;
     private HashMap<View, TextView> errorMessagesViews;
     private HashMap<View, Errors> errors;
     private Medicament med;
     private Pharmacie pharmacie;
-    private Ville city;
+    private Ville city, defaultCity;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -93,8 +93,12 @@ public class CisFragment extends Fragment {
                 }
 
                 int userId = getActivity().getIntent().getIntExtra("userId", 0);
+                if (city == null) {
+                    city = defaultCity;
+                }
                 Saisie saisie = new Saisie(userId, med, pharmacie, new Date(System.currentTimeMillis()), city, city.getZipCode());
                 DataHandling.addData(saisie);
+                addButton.requestFocus();
             }
         });
 
@@ -148,7 +152,8 @@ public class CisFragment extends Fragment {
 
         String cityName = cityCompleteTextView.getText().toString();
         if (cityName.isEmpty()) {
-            errors.put(cityCompleteTextView, Errors.EMPTY_FIELD);
+            if (defaultCity == null)
+                errors.put(cityCompleteTextView, Errors.EMPTY_FIELD);
         } else {
             int insee = Integer.parseInt(cityName.split(" - ")[1].trim());
             city = DataHandling.getCitybyInsee(insee);
@@ -158,6 +163,15 @@ public class CisFragment extends Fragment {
         }
 
         return errors;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        defaultCity = DataHandling.getCitybyInsee(getActivity().getIntent().getIntExtra("city", 0));
+        if (defaultCity != null)
+            cityCompleteTextView.setHint(getString(R.string.hintCityDefault) + defaultCity.toString() + ")");
     }
 
     @Override

@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,6 +25,7 @@ import iut.dam.sae_dam.data.villes.Ville;
 
 public class DataHandling {
     private static boolean dataLoaded = false;
+    private static int dataDeleted = 0;
     private static List<Medicament> medicaments = new LinkedList<>();
     private static List<Pharmacie> pharmacies = new LinkedList<>();
     private static LinkedList<Ville> villes = new LinkedList<>();
@@ -70,6 +72,22 @@ public class DataHandling {
     public static boolean isDataLoaded() {
         return dataLoaded;
     }
+
+    public static void deleteAccount() {
+        int val = dataDeleted;
+        supprimerHisto();
+        while (val == dataDeleted) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        new DeleteAccount().execute();
+    }
+
+
+
 
     private static class LoadData extends AsyncTask<Void, Void, Void> {
 
@@ -188,6 +206,29 @@ public class DataHandling {
                 Connection connection = DatabaseConnection.getConnection();
 
                 String query = "DELETE FROM Medicament_Signalement WHERE userId = ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1, userId);
+                preparedStatement.executeUpdate();
+
+                preparedStatement.close();
+
+                DatabaseConnection.closeConnection(connection);
+                dataDeleted++;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                Log.e("Database Error", e.getMessage());
+            }
+            return null;
+        }
+    }
+
+    private static class DeleteAccount extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                Connection connection = DatabaseConnection.getConnection();
+
+                String query = "DELETE FROM user WHERE Id = ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setInt(1, userId);
                 preparedStatement.executeUpdate();

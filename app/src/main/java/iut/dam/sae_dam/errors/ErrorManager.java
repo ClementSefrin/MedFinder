@@ -35,6 +35,8 @@ public class ErrorManager {
         errorMessages.put(Errors.UNKNOWN_MEDICINE, R.string.errorUnknownMedicine);
         errorMessages.put(Errors.UNKNOWN_PHARMACY, R.string.errorUnknownPharmacy);
         errorMessages.put(Errors.UNKNOWN_CITY, R.string.errorUnknownCity);
+        errorMessages.put(Errors.INVALID_OLD_PASSWORD, R.string.errorInvalidOldPassword);
+        errorMessages.put(Errors.SAME_PASSWORD, R.string.errorSamePassword);
     }
 
     public static String getErrorMessage(Context context, Errors error) {
@@ -70,6 +72,6 @@ public class ErrorManager {
         String mdpPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
         Pattern pattern = Pattern.compile(mdpPattern);
         Matcher matcher = pattern.matcher(mdp);
-        return matcher.matches();
+        return matcher.matches() && mdp.length() <= 30;
     }
 }

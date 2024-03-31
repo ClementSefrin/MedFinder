@@ -16,9 +16,8 @@
         <TextView
             android:id="@+id/mainActivity_headerTitle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_centerInParent="true"
-            android:text="Nom page"
             android:textSize="@dimen/titleTextSize"
             android:textStyle="bold" />
 
