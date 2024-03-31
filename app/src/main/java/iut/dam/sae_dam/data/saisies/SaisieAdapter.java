@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -41,7 +42,16 @@ public class SaisieAdapter extends ArrayAdapter<Saisie> {
         TextView cisTV = (TextView) layout.findViewById(R.id.itemSaisie_villeTV);
 
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(activity.getApplicationContext());
-
+        int padding = 20;
+        if (position == 0) {
+            RelativeLayout rl = layout.findViewById(R.id.itemSaisie_firstLastPaddingRL);
+            float density = getContext().getResources().getDisplayMetrics().density;
+            rl.setPadding(0, Math.round(padding * density), 0, 0);
+        } else if (position == items.size() - 1) {
+            RelativeLayout rl = layout.findViewById(R.id.itemSaisie_firstLastPaddingRL);
+            float density = getContext().getResources().getDisplayMetrics().density;
+            rl.setPadding(0, 0, 0, Math.round(padding * density));
+        }
         nomMedicamentTV.setText(items.get(position).getMedicament().getDenomination());
         codeCisTV.setText(String.valueOf(items.get(position).getMedicament().getCisCode()));
         pharmacieTV.setText(String.valueOf(items.get(position).getPharmacie().getName()));

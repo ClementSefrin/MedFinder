@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginStart="@dimen/horizontalMargin"
-    android:layout_marginTop="@dimen/verticalMargin"
     android:layout_marginEnd="@dimen/horizontalMargin"
-    android:layout_marginBottom="@dimen/verticalMargin"
     tools:context=".ui.home.HomeFragment">
 
     <ListView
