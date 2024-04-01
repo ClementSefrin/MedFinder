@@ -212,7 +212,7 @@
                         android:background="@android:color/transparent"
                         android:padding="@dimen/statsPadding"
                         app:egInnerPaddingColor="@android:color/transparent"
-                        />
+                        app:egInnerPaddingOutline="-200" />
 
 
                     <com.google.android.material.divider.MaterialDivider
@@ -268,7 +268,9 @@
                         android:id="@+id/statistics_cityPIE"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/pieChartHeight"
-                        android:padding="@dimen/statsPadding" />
+                        android:padding="@dimen/statsPadding"
+                        app:egInnerPaddingColor="@android:color/transparent"
+                        app:egInnerPaddingOutline="-200" />
 
                     <com.google.android.material.divider.MaterialDivider
                         android:layout_width="match_parent"
@@ -323,7 +325,9 @@
                         android:id="@+id/statistics_departementPIE"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/pieChartHeight"
-                        android:padding="@dimen/statsPadding" />
+                        android:padding="@dimen/statsPadding"
+                        app:egInnerPaddingColor="@android:color/transparent"
+                        app:egInnerPaddingOutline="-200" />
 
                     <com.google.android.material.divider.MaterialDivider
                         android:layout_width="match_parent"
@@ -375,7 +379,9 @@
                         android:id="@+id/statistics_regionPIE"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/pieChartHeight"
-                        android:padding="@dimen/statsPadding" />
+                        android:padding="@dimen/statsPadding"
+                        app:egInnerPaddingColor="@android:color/transparent"
+                        app:egInnerPaddingOutline="-200" />
 
                     <com.google.android.material.divider.MaterialDivider
                         android:layout_width="match_parent"
@@ -427,7 +433,9 @@
                         android:id="@+id/statistics_pharmaciePIE"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/pieChartHeight"
-                        android:padding="@dimen/statsPadding" />
+                        android:padding="@dimen/statsPadding"
+                        app:egInnerPaddingColor="@android:color/transparent"
+                        app:egInnerPaddingOutline="-200" />
 
                     <com.google.android.material.divider.MaterialDivider
                         android:layout_width="match_parent"
@@ -479,7 +487,9 @@
                         android:id="@+id/statistics_formeAdministrationPIE"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/pieChartHeight"
-                        android:padding="@dimen/statsPadding" />
+                        android:padding="@dimen/statsPadding"
+                        app:egInnerPaddingColor="@android:color/transparent"
+                        app:egInnerPaddingOutline="-200" />
 
                     <com.google.android.material.divider.MaterialDivider
                         android:layout_width="match_parent"
@@ -531,7 +541,9 @@
                         android:id="@+id/statistics_statutPIE"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/pieChartHeight"
-                        android:padding="@dimen/statsPadding" />
+                        android:padding="@dimen/statsPadding"
+                        app:egInnerPaddingColor="@android:color/transparent"
+                        app:egInnerPaddingOutline="-200" />
 
                     <com.google.android.material.divider.MaterialDivider
                         android:layout_width="match_parent"
@@ -583,7 +595,9 @@
                         android:id="@+id/statistics_procedureAutorisationPIE"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/pieChartHeight"
-                        android:padding="@dimen/statsPadding" />
+                        android:padding="@dimen/statsPadding"
+                        app:egInnerPaddingColor="@android:color/transparent"
+                        app:egInnerPaddingOutline="-200" />
 
                     <com.google.android.material.divider.MaterialDivider
                         android:layout_width="match_parent"
@@ -635,7 +649,9 @@
                         android:id="@+id/statistics_titulairePIE"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/pieChartHeight"
-                        android:padding="@dimen/statsPadding" />
+                        android:padding="@dimen/statsPadding"
+                        app:egInnerPaddingColor="@android:color/transparent"
+                        app:egInnerPaddingOutline="-200" />
 
                     <com.google.android.material.divider.MaterialDivider
                         android:layout_width="match_parent"
@@ -688,7 +704,9 @@
                         android:id="@+id/statistics_surveillancePIE"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/pieChartHeight"
-                        android:padding="@dimen/statsPadding" />
+                        android:padding="@dimen/statsPadding"
+                        app:egInnerPaddingColor="@android:color/transparent"
+                        app:egInnerPaddingOutline="-200" />
 
                     <com.google.android.material.divider.MaterialDivider
                         android:layout_width="match_parent"
@@ -717,10 +735,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:backgroundTint="?attr/colorPrimary"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:backgroundTint="?attr/colorPrimary"
         app:srcCompat="@drawable/ic_up_arrow" />
 
 </RelativeLayout>

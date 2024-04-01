@@ -87,8 +87,6 @@ public class DataHandling {
     }
 
 
-
-
     private static class LoadData extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -107,7 +105,7 @@ public class DataHandling {
                     String procedureAutorisation = resultSet.getString("Procedure_autorisation");
                     String etatCommercialisation = resultSet.getString("Etat_Commercialisation");
                     String titulaire = resultSet.getString("Titulaire");
-                    boolean surveillance = resultSet.getBoolean("Surveillance");
+                    boolean surveillance = (resultSet.getString("Surveillance").equalsIgnoreCase("Non")) ? false : true;
                     medicaments.add(new Medicament(cisCode, denomination, formeAdministration, statusAdministration, procedureAutorisation, etatCommercialisation, titulaire, surveillance));
                 }
 
