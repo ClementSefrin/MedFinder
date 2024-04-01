@@ -48,4 +48,8 @@ dependencies {
     implementation("org.json:json:20210307")
     implementation("com.google.code.gson:gson:2.10")
 
+
+    // Chart and graph library
+    implementation("com.github.blackfizz:eazegraph:1.2.5l@aar")
+    implementation("com.nineoldandroids:library:2.4.0")
 }

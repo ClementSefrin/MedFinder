@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SAE_DAM">
         <activity
+            android:name=".activities.StatisticsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ChangePasswordActivity"
             android:exported="false" />
         <activity

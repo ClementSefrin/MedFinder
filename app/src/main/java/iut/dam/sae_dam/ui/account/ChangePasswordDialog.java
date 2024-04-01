@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -30,6 +31,7 @@ import java.util.HashMap;
 import iut.dam.sae_dam.MedFind;
 import iut.dam.sae_dam.R;
 import iut.dam.sae_dam.activities.CreateAccount;
+import iut.dam.sae_dam.activities.ForgotPassword;
 import iut.dam.sae_dam.data.DatabaseConnection;
 import iut.dam.sae_dam.errors.ErrorManager;
 import iut.dam.sae_dam.errors.Errors;
@@ -42,7 +44,7 @@ public class ChangePasswordDialog extends Dialog {
     private TextView errorOldPasswordTV, errorNewPasswordTV, errorPasswordVerifyTV, errorSecretQuestion, errorSecretAnswerTV;
     private HashMap<View, TextView> errorMessagesViews;
     private HashMap<View, Errors> errors;
-    private Button changeBTN;
+    private Button changeBTN, forgotPasswordBTN, cancelBTN;
     private ImageButton passwordVisibilityBTN;
     private Activity activity;
     private Intent intent;
@@ -59,11 +61,8 @@ public class ChangePasswordDialog extends Dialog {
         // Set dialog width and height
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        // Add margins (optional)
-        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
-        layoutParams.horizontalMargin = 0; // Set horizontal margin
-        layoutParams.verticalMargin = 0; // Set vertical margin
-        getWindow().setAttributes(layoutParams);
+        // Set transparent background with rounded corners
+        getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         changeBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +73,13 @@ public class ChangePasswordDialog extends Dialog {
                 } else {
                     ErrorManager.updateBorder(activity, errors, errorMessagesViews);
                 }
+            }
+        });
+
+        cancelBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
             }
         });
 
@@ -132,6 +138,15 @@ public class ChangePasswordDialog extends Dialog {
                     passwordVerifyEt.setText(s.subSequence(0, MedFind.getMaxCharLimit()));
                     passwordVerifyEt.setSelection(MedFind.getMaxCharLimit());
                 }
+            }
+        });
+
+        forgotPasswordBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.finish();
+                Intent intent = new Intent(activity, ForgotPassword.class);
+                activity.startActivity(intent);
             }
         });
 
@@ -219,6 +234,8 @@ public class ChangePasswordDialog extends Dialog {
         errorSecretAnswerTV = findViewById(R.id.changePassword_errorSecretAnswerTV);
 
         changeBTN = findViewById(R.id.changePassword_changeBTN);
+        cancelBTN = findViewById(R.id.changePassword_cancelBTN);
+        forgotPasswordBTN = findViewById(R.id.changePassword_forgotPasswordBTN);
         passwordVisibilityBTN = findViewById(R.id.changePassword_passwordVisibilityBTN);
 
         errorMessagesViews.put(oldPasswordET, errorOldPasswordTV);

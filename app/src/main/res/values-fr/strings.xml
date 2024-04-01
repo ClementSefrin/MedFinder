@@ -29,6 +29,27 @@
 
     <string name="changeBTN">Modifier</string>
 
+    <!-- Statistics -->
+    <string name="statisticsMedicine">Médicament</string>
+    <string name="statisticsDepartment">Département</string>
+    <string name="statisticsRegion">Région</string>
+    <string name="statisticsFormeAdministration">Forme d\'administration</string>
+    <string name="statisticsAdministrationStatus">Statut d\'administration</string>
+    <string name="statisticsAuthorizationProcedure">Procédure d\'autorisation</string>
+    <string name="statisticsOwner">Titulaire</string>
+    <string name="statisticsReinforcedSurveillance">Surveillance renforcée</string>
+
+    <string name="statisticsMedicineTitle">Nombre de signalement par médicament</string>
+    <string name="statisticsCityTitle">Nombre de signalement par ville</string>
+    <string name="statisticsDepartmentTitle">Nombre de signalement par département</string>
+    <string name="statisticsRegionTitle">Nombre de signalement par région</string>
+    <string name="statisticsPharmacyTitle">Nombre de signalement par pharmacie</string>
+    <string name="statisticsFormeAdministrationTitle">Nombre de signalement par forme d\'administration</string>
+    <string name="statisticsAdministrationStatusTitle">Nombre de signalement par statut d\'administration</string>
+    <string name="statisticsAuthorizationProcedureTitle">Nombre de signalement par procédure d\'autorisation</string>
+    <string name="statisticsOwnerTitle">Nombre de signalement par titulaire</string>
+    <string name="statisticsReinforcedSurveillanceTitle">Nombre de signalement par surveillance renforcée</string>
+
     <!--Sign up-->
     <string name="signUpTitle">S\'inscrire</string>
     <string name="signUpHeader">Informations personnelles</string>

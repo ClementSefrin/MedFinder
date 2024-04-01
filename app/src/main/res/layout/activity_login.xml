@@ -15,23 +15,11 @@
         android:background="@drawable/top_background" />
 
     <TextView
-        android:id="@+id/login_headerTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/verticalMargin"
-        android:text="@string/logInTitle"
-        android:textSize="@dimen/titleTextSize"
-        android:textStyle="bold" />
-
-
-    <TextView
         android:id="@+id/login_errorDataTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/login_headerTV"
-        android:layout_marginTop="@dimen/divider_height"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/verticalMargin"
         android:layout_marginBottom="@dimen/divider_height"
         android:text="@string/waitingData"
         android:textAlignment="center"
@@ -50,7 +38,8 @@
         android:layout_marginEnd="@dimen/accountCardViewHorizontalMargin"
         android:layout_marginBottom="@dimen/verticalMargin"
         app:cardBackgroundColor="?attr/cardBackgroundColor"
-        app:cardElevation="@dimen/accountCardViewElevation">
+        app:cardElevation="@dimen/accountCardViewElevation"
+        app:cardCornerRadius="@dimen/cardCornerRadius">
 
         <ScrollView
             android:id="@+id/login_infosSV"
@@ -70,7 +59,7 @@
                     android:id="@+id/login_infosHeaderTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/logInHeader"
+                    android:text="@string/logInTitle"
                     android:textAlignment="center"
                     android:textSize="@dimen/titleTextSize"
                     android:textStyle="bold" />

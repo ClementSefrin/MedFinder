@@ -29,6 +29,27 @@
 
     <string name="changeBTN">Change</string>
 
+    <!-- Statistics -->
+    <string name="statisticsMedicine">Medicine</string>
+    <string name="statisticsDepartment">Department</string>
+    <string name="statisticsRegion">Region</string>
+    <string name="statisticsFormeAdministration">Administration form</string>
+    <string name="statisticsAdministrationStatus">Administration status</string>
+    <string name="statisticsAuthorizationProcedure">Authorization procedure</string>
+    <string name="statisticsOwner">Owner</string>
+    <string name="statisticsReinforcedSurveillance">Reinforced surveillance</string>
+
+    <string name="statisticsMedicineTitle">Number of reports per medicine</string>
+    <string name="statisticsCityTitle">Number of reports per city</string>
+    <string name="statisticsDepartmentTitle">Number of reports per department</string>
+    <string name="statisticsRegionTitle">Number of reports by region</string>
+    <string name="statisticsPharmacyTitle">Number of reports per pharmacy</string>
+    <string name="statisticsFormeAdministrationTitle">Number of reports by form of administration</string>
+    <string name="statisticsAdministrationStatusTitle">Number of reports by administration status</string>
+    <string name="statisticsAuthorizationProcedureTitle">Number of reports per authorization procedure</string>
+    <string name="statisticsOwnerTitle">Number of reports per owner</string>
+    <string name="statisticsReinforcedSurveillanceTitle">Number of reports by reinforced surveillance</string>
+
     <!--Sign up-->
     <string name="signUpTitle">Sign up</string>
     <string name="signUpHeader">Personal informations</string>

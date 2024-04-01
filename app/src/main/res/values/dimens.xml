@@ -2,6 +2,8 @@
     <dimen name="activity_horizontal_margin">15dp</dimen>
     <dimen name="activity_vertical_margin">25dp</dimen>
 
+    <dimen name="cardCornerRadius">30dp</dimen>
+    <dimen name="pieChartHeight">200dp</dimen>
 
     <dimen name="header_height">20dp</dimen>
     <dimen name="divider_height">2dp</dimen>
@@ -14,7 +16,12 @@
     <dimen name="verticalPadding">20dp</dimen>
     <dimen name="horizontalPadding">10dp</dimen>
 
+    <dimen name="statsPadding">10dp</dimen>
+    <dimen name="statsBottomGap">70dp</dimen>
+
     <dimen name="dialogWidth">300dp</dimen>
+
+
     <!-- AccountManagement -->
     <dimen name="accountBackgroundHeight">600dp</dimen>
 

@@ -30,7 +30,6 @@
                 android:layout_below="@id/accountFragment_historyTopDivider"
                 android:padding="@dimen/horizontalPadding"
                 android:text="@string/delete_history"
-                android:textColor="?attr/errorMessageColor"
                 android:textSize="@dimen/mediumTextSize"
                 android:textStyle="bold" />
 

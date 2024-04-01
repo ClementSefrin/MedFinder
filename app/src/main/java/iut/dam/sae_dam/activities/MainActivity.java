@@ -45,20 +45,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == AccountFragment.getRequestCodeChangePassword() && resultCode == RESULT_OK) {
-            // Update intent data if needed
-            // For example:
-            String newPassword = data.getStringExtra("password");
-            int secretQuestion = data.getIntExtra("secretQuestion", -1);
-            String secretAnswer = data.getStringExtra("secretAnswer");
-            getIntent().putExtra("password", newPassword);
-            getIntent().putExtra("secretQuestion", secretQuestion);
-            getIntent().putExtra("secretAnswer", secretAnswer);
-
-        }
-    }
 }

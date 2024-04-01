@@ -2,6 +2,7 @@ package iut.dam.sae_dam.ui.account;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,17 +16,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import iut.dam.sae_dam.activities.Login;
+import iut.dam.sae_dam.activities.StatisticsActivity;
 import iut.dam.sae_dam.data.DataHandling;
 import iut.dam.sae_dam.R;
 import iut.dam.sae_dam.databinding.FragmentAccountBinding;
 
 public class AccountFragment extends Fragment {
-    private static final int REQUEST_CODE_CHANGE_PASSWORD = 1;
-
-    public static int getRequestCodeChangePassword() {
-        return REQUEST_CODE_CHANGE_PASSWORD;
-    }
-
     private FragmentAccountBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -49,6 +45,7 @@ public class AccountFragment extends Fragment {
             }
         });
 
+        //Changement de mot de passe
         changePasswordTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,10 +53,20 @@ public class AccountFragment extends Fragment {
             }
         });
 
+        //Statistiques
         if (!getActivity().getIntent().getBooleanExtra("admin", false)) {
             binding.accountFragmentStatisticsRL.setVisibility(View.GONE);
         }
 
+        statisticsTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), StatisticsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //Deconnexion
         logOutTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,12 +74,14 @@ public class AccountFragment extends Fragment {
             }
         });
 
+        //Suppression du compte
         deleteAccountTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Dialog dialog = new Dialog(getContext());
                 dialog.setContentView(R.layout.dialog_delete_account);
 
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 Button positiveButton = (Button) dialog.findViewById(R.id.dialogDeleteAccount_positiveButton);
                 positiveButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -103,6 +112,7 @@ public class AccountFragment extends Fragment {
         final Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.dialog_delete_history);
 
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         Button positiveButton = (Button) dialog.findViewById(R.id.dialogDeleteHistory_positiveButton);
         positiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,6 +142,7 @@ public class AccountFragment extends Fragment {
         final Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.dialog_log_out);
 
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         Button positiveButton = (Button) dialog.findViewById(R.id.dialogLogOut_positiveButton);
         positiveButton.setOnClickListener(new View.OnClickListener() {
             @Override

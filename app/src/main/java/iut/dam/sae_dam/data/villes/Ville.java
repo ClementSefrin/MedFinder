@@ -30,6 +30,10 @@ public class Ville {
         return nom + " - " + insee;
     }
 
+    public String getRegion() {
+        return region;
+    }
+
     public int getZipCode() {
         return zipCode;
     }

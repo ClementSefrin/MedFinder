@@ -53,7 +53,7 @@ public class Login extends AppCompatActivity {
                 step++;
                 handler.postDelayed(this, 500);
             } else {
-                errorDataTV.setVisibility(View.GONE);
+                errorDataTV.setVisibility(View.INVISIBLE);
                 dataLoaded = true;
             }
         }
