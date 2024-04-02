@@ -41,6 +41,8 @@ public class Login extends AppCompatActivity {
     private HashMap<View, TextView> errorMessagesViews;
     private HashMap<View, Errors> errors;
     ImageButton passwordVisibilityBTN;
+    private static final long SPLASH_SCREEN_DELAY = 2000;
+
 
 
     private Handler handler = new Handler();
@@ -63,6 +65,11 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        try {
+            Thread.sleep(SPLASH_SCREEN_DELAY);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         errors = new HashMap<>();
         errorMessagesViews = new HashMap<>();
         getViews();
