@@ -47,7 +47,9 @@ dependencies {
 
     implementation("org.json:json:20210307")
     implementation("com.google.code.gson:gson:2.10")
-
+    // CameraX
+    implementation ("com.google.android.gms:play-services-vision:20.1.3")
+    implementation ("com.google.mlkit:barcode-scanning:17.2.0")
 
     // Chart and graph library
     implementation("com.github.blackfizz:eazegraph:1.2.5l@aar")

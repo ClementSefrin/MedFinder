@@ -28,7 +28,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        Intent intent = getIntent();
+        String dataMatrix = intent.getStringExtra("dataMatrix");
+        if (dataMatrix != null) {
+            Bundle bundle = new Bundle();
+            bundle.putString("dataMatrix", dataMatrix); // Put DataMatrix in bundle
+            Navigation.findNavController(this, R.id.mainActivity_hostFragment)
+                    .navigate(R.id.navigation_cis, bundle); // Navigate to CisFragment
+        }
 
         BottomNavigationView navView = findViewById(R.id.mainActivity_navView);
 

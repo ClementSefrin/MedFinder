@@ -101,5 +101,6 @@
     <string name="errorDataLoaded">Please wait until all the data is loaded.</string>
     <string name="errorInvalidOldPassword">The old password is incorrect.</string>
     <string name="errorSamePassword">The new password must be different from the old one.</string>
+    <string name="scanner">SCANNER</string>
 
 </resources>

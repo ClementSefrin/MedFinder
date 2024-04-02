@@ -11,11 +11,11 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
-    <fragment
+   <!--<fragment
         android:id="@+id/navigation_scan"
         android:name="iut.dam.sae_dam.ui.scan.ScanFragment"
         android:label="@string/title_scan"
-        tools:layout="@layout/fragment_scan" />
+        tools:layout="@layout/fragment_scan" />-->
 
     <fragment
         android:id="@+id/navigation_cis"

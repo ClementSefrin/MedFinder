@@ -281,6 +281,14 @@ public class DataHandling {
         return null;
     }
 
+    public static boolean estUnMedicament(int cisCode) {
+        for (Medicament medicament : medicaments) {
+            if (medicament.getCisCode() == cisCode) {
+                return true;
+            }
+        }
+        return false;
+    }
     public static Pharmacie getPharmacieByName(String name) {
         for (Pharmacie pharmacie : pharmacies) {
             if (pharmacie.getName().equals(name)) {

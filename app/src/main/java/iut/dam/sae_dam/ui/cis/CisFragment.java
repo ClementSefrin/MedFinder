@@ -1,6 +1,7 @@
 package iut.dam.sae_dam.ui.cis;
 // CipFragment.java
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ import iut.dam.sae_dam.data.medicaments.MedicamentAdapter;
 import iut.dam.sae_dam.data.pharmacies.Pharmacie;
 import iut.dam.sae_dam.data.pharmacies.PharmacieAdapter;
 import iut.dam.sae_dam.data.saisies.Saisie;
+import iut.dam.sae_dam.scanDataMatrix.Scanner;
 
 public class CisFragment extends Fragment {
     private FragmentCisBinding binding;
@@ -42,21 +44,48 @@ public class CisFragment extends Fragment {
     private Medicament med;
     private Pharmacie pharmacie;
     private Ville city, defaultCity;
-
+    Button scanner;
+    private String dataMatrix;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCisBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        Bundle bundle = getArguments();
 
+        scanner = binding.scannerB;
         cisViewModel = new ViewModelProvider(this, new CisViewModel.Factory(requireContext())).get(CisViewModel.class);
-
+        scanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(requireContext(), Scanner.class);
+                startActivity(intent);
+            }
+        });
         errors = new HashMap<>();
         errorMessagesViews = new HashMap<>();
         getViews();
+        if (bundle != null) {
+            dataMatrix = bundle.getString("dataMatrix");
+            Toast.makeText(requireContext(), "Data Matrix détecté : " + dataMatrix, Toast.LENGTH_SHORT).show();
+            if (dataMatrix != null) {
+                try {
+                    int dataMatrixInt = Integer.parseInt(dataMatrix);
+                    if (DataHandling.estUnMedicament(dataMatrixInt)) {
+                        med = DataHandling.getMedicamentByCode(dataMatrixInt);
+                        medicamentNameTV.setText(DataHandling.getMedicamentByCode(dataMatrixInt).getDenomination());
+                        codeCompleteTextView.setText(dataMatrix);
+                    } else {
+                        Toast.makeText(requireContext(), "Le code DataMatrix ne correspond pas à un médicament", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (NumberFormatException e) {
+                    Toast.makeText(requireContext(), "Le code DataMatrix n'est pas valide", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
 
-        // Code autocomplete //
-        MedicamentAdapter codeAdapter = new MedicamentAdapter(requireContext(), DataHandling.getMedicaments());
-        codeCompleteTextView.setAdapter(codeAdapter);
+            // Code autocomplete //
+            MedicamentAdapter codeAdapter = new MedicamentAdapter(requireContext(), DataHandling.getMedicaments());
+            codeCompleteTextView.setAdapter(codeAdapter);
 
         codeCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

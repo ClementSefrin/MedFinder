@@ -14,7 +14,7 @@
         android:id="@+id/cisFragment_mainSV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/cisFragment_signalerBTN"
+        android:layout_above="@id/cisFragment_buttonLL"
         android:layout_alignParentTop="true">
 
         <RelativeLayout
@@ -130,16 +130,32 @@
 
         </RelativeLayout>
     </ScrollView>
-
-    <Button
-        android:id="@+id/cisFragment_signalerBTN"
+    <LinearLayout
+        android:id="@+id/cisFragment_buttonLL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
         android:layout_marginTop="@dimen/verticalMargin"
-        android:layout_marginBottom="@dimen/verticalMargin"
-        android:background="@drawable/button_background"
-        android:text="@string/report"
-        app:backgroundTint="?attr/buttonBackground" />
+        android:layout_marginBottom="@dimen/verticalMargin">
+
+        <Button
+            android:id="@+id/cisFragment_signalerBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
+            android:text="@string/report"
+            app:backgroundTint="?attr/buttonBackground" />
+
+        <Button
+            android:id="@+id/scannerB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontalMargin"
+            android:background="@drawable/button_background"
+            android:text="@string/scanner"
+            app:backgroundTint="?attr/buttonBackground" />
+
+    </LinearLayout>
 </RelativeLayout>
