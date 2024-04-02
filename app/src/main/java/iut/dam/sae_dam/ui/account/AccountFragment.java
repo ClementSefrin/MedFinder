@@ -54,7 +54,7 @@ public class AccountFragment extends Fragment {
         });
 
         //Statistiques
-        if (!getActivity().getIntent().getBooleanExtra("admin", false)) {
+        if (getActivity().getIntent().getBooleanExtra("admin", false)) {
             binding.accountFragmentStatisticsRL.setVisibility(View.GONE);
         }
 

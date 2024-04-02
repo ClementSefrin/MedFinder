@@ -159,13 +159,13 @@ public class ChangePasswordDialog extends Dialog {
             try {
                 Connection connection = DatabaseConnection.getConnection();
 
-                String query = "UPDATE user SET Password = ?, QuestionSecrete = ?, ReponseSecrete = ? WHERE id = ?";
+                String query = "UPDATE user SET Password = ?, QuestionSecrete = ?, ReponseSecrete = ? WHERE Id = ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, newPasswordET.getText().toString());
                 int selectedPosition = secretQuestionSP.getSelectedItemPosition();
                 preparedStatement.setInt(2, selectedPosition);
                 preparedStatement.setString(3, secretAnswerET.getText().toString());
-                preparedStatement.setInt(4, 30);
+                preparedStatement.setInt(4, intent.getIntExtra("userId", 0));
 
                 preparedStatement.executeUpdate();
 
@@ -182,7 +182,7 @@ public class ChangePasswordDialog extends Dialog {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            int userId = intent.getIntExtra("userId", -1);
+            int userId = intent.getIntExtra("userId", 0);
             boolean admin = intent.getBooleanExtra("admin", false);
             int city = intent.getIntExtra("city", -1);
 
