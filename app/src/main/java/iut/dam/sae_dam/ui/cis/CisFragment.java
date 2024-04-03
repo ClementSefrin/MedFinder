@@ -66,7 +66,6 @@ public class CisFragment extends Fragment {
         getViews();
         if (bundle != null) {
             dataMatrix = bundle.getString("dataMatrix");
-            Toast.makeText(requireContext(), "Data Matrix détecté : " + dataMatrix, Toast.LENGTH_SHORT).show();
             if (dataMatrix != null) {
                 try {
                     int dataMatrixInt = Integer.parseInt(dataMatrix);
@@ -76,9 +75,11 @@ public class CisFragment extends Fragment {
                         codeCompleteTextView.setText(dataMatrix);
                     } else {
                         Toast.makeText(requireContext(), "Le code DataMatrix ne correspond pas à un médicament", Toast.LENGTH_SHORT).show();
+                        errorMessagesViews.get(codeCompleteTextView).setVisibility(View.VISIBLE);
                     }
                 } catch (NumberFormatException e) {
                     Toast.makeText(requireContext(), "Le code DataMatrix n'est pas valide", Toast.LENGTH_SHORT).show();
+                    errorMessagesViews.get(codeCompleteTextView).setVisibility(View.VISIBLE);
                 }
             }
         }
