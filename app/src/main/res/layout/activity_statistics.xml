@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/statistics_mainRL"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/statistics_headerRL"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/header_height"
+        android:background="?attr/colorPrimary">
+
+        <TextView
+            android:id="@+id/statistics_headerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:textSize="@dimen/titleTextSize"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/statistics_mainSV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/statistics_headerRL"
+        android:background="?attr/background">
+
+        <RelativeLayout
+            android:id="@+id/statistics_pieChartsRL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/horizontalPadding"
+            android:paddingTop="@dimen/verticalPadding"
+            android:paddingEnd="@dimen/horizontalPadding"
+            android:paddingBottom="@dimen/verticalPadding"
+            tools:context=".activities.StatisticsActivity">
+
+            <LinearLayout
+                android:id="@+id/statistics_navigationButtonsLL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:orientation="vertical"
+                    android:padding="@dimen/horizontalMargin">
+
+                    <Button
+                        android:id="@+id/statistics_medicamentBTN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/horizontalMargin"
+                        android:background="@drawable/button_background"
+                        android:text="@string/statisticsMedicine"
+                        android:textAllCaps="false"
+                        android:textColor="?attr/accountButtonTextColor"
+                        app:backgroundTint="?attr/cardBackgroundColor" />
+
+                    <Button
+                        android:id="@+id/statistics_villeBTN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/horizontalMargin"
+                        android:background="@drawable/button_background"
+                        android:text="@string/hintCity"
+                        android:textAllCaps="false"
+                        android:textColor="?attr/accountButtonTextColor"
+                        app:backgroundTint="?attr/cardBackgroundColor" />
+
+                    <Button
+                        android:id="@+id/statistics_departementBTN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/horizontalMargin"
+                        android:background="@drawable/button_background"
+                        android:text="@string/statisticsDepartment"
+                        android:textAllCaps="false"
+                        android:textColor="?attr/accountButtonTextColor"
+                        app:backgroundTint="?attr/cardBackgroundColor" />
+
+                    <Button
+                        android:id="@+id/statistics_regionBTN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/horizontalMargin"
+                        android:background="@drawable/button_background"
+                        android:text="@string/statisticsRegion"
+                        android:textAllCaps="false"
+                        android:textColor="?attr/accountButtonTextColor"
+                        app:backgroundTint="?attr/cardBackgroundColor" />
+
+                    <Button
+                        android:id="@+id/statistics_pharmacieBTN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/horizontalMargin"
+                        android:background="@drawable/button_background"
+                        android:text="@string/pharmacy_title"
+                        android:textAllCaps="false"
+                        android:textColor="?attr/accountButtonTextColor"
+                        app:backgroundTint="?attr/cardBackgroundColor" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:orientation="vertical"
+                    android:padding="@dimen/horizontalMargin">
+
+                    <Button
+                        android:id="@+id/statistics_formeAdministrationBTN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/horizontalMargin"
+                        android:background="@drawable/button_background"
+                        android:text="@string/statisticsFormeAdministration"
+                        android:textAllCaps="false"
+                        android:textColor="?attr/accountButtonTextColor"
+                        app:backgroundTint="?attr/cardBackgroundColor" />
+
+                    <Button
+                        android:id="@+id/statistics_statutAdministrationBTN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/horizontalMargin"
+                        android:background="@drawable/button_background"
+                        android:text="@string/statisticsAdministrationStatus"
+                        android:textAllCaps="false"
+                        android:textColor="?attr/accountButtonTextColor"
+                        app:backgroundTint="?attr/cardBackgroundColor" />
+
+                    <Button
+                        android:id="@+id/statistics_procedureAutorisationBTN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/horizontalMargin"
+                        android:background="@drawable/button_background"
+                        android:text="@string/statisticsAuthorizationProcedure"
+                        android:textAllCaps="false"
+                        android:textColor="?attr/accountButtonTextColor"
+                        app:backgroundTint="?attr/cardBackgroundColor" />
+
+                    <Button
+                        android:id="@+id/statistics_titulaireBTN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/horizontalMargin"
+                        android:background="@drawable/button_background"
+                        android:text="@string/statisticsOwner"
+                        android:textAllCaps="false"
+                        android:textColor="?attr/accountButtonTextColor"
+                        app:backgroundTint="?attr/cardBackgroundColor" />
+
+                    <Button
+                        android:id="@+id/statistics_surveillanceRenforceeBTN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/horizontalMargin"
+                        android:background="@drawable/button_background"
+                        android:text="@string/statisticsReinforcedSurveillance"
+                        android:textAllCaps="false"
+                        android:textColor="?attr/accountButtonTextColor"
+                        app:backgroundTint="?attr/cardBackgroundColor" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/statistics_medicamentCV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/statistics_navigationButtonsLL"
+                android:layout_marginTop="@dimen/verticalMargin"
+                android:elevation="@dimen/accountCardViewElevation"
+                app:cardCornerRadius="@dimen/cardCornerRadius">
+
+                <LinearLayout
+                    android:id="@+id/statistics_medicamentLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/cardBackgroundColor"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/statistics_medicamentTitleTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/statsPadding"
+                        android:text="@string/statisticsMedicineTitle"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/textSize" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/statistics_medicamentPIE"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/pieChartHeight"
+                        android:background="@android:color/transparent"
+                        android:padding="@dimen/statsPadding"
+                        app:egInnerPaddingColor="@android:color/transparent"
+                        app:egInnerPaddingOutline="-200" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <LinearLayout
+                        android:id="@+id/statistics_medicamentLegendLL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/horizontalMargin"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="@dimen/statsPadding">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/statistics_cityCV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/statistics_medicamentCV"
+                android:layout_marginTop="@dimen/verticalMargin"
+                android:elevation="@dimen/accountCardViewElevation"
+                app:cardCornerRadius="@dimen/cardCornerRadius">
+
+                <LinearLayout
+                    android:id="@+id/statistics_cityLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/cardBackgroundColor"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/statistics_cityTitleTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/statsPadding"
+                        android:text="@string/statisticsCityTitle"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/textSize" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/statistics_cityPIE"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/pieChartHeight"
+                        android:padding="@dimen/statsPadding"
+                        app:egInnerPaddingColor="@android:color/transparent"
+                        app:egInnerPaddingOutline="-200" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <LinearLayout
+                        android:id="@+id/statistics_cityLegendLL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/horizontalMargin"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="@dimen/statsPadding">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/statistics_departementCV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/statistics_cityCV"
+                android:layout_marginTop="@dimen/verticalMargin"
+                android:elevation="@dimen/accountCardViewElevation"
+                app:cardCornerRadius="@dimen/cardCornerRadius">
+
+                <LinearLayout
+                    android:id="@+id/statistics_departementLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/cardBackgroundColor"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/statistics_departementTitleTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/statsPadding"
+                        android:text="@string/statisticsDepartmentTitle"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/textSize" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/statistics_departementPIE"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/pieChartHeight"
+                        android:padding="@dimen/statsPadding"
+                        app:egInnerPaddingColor="@android:color/transparent"
+                        app:egInnerPaddingOutline="-200" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <LinearLayout
+                        android:id="@+id/statistics_departementLegendLL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/horizontalMargin"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="@dimen/statsPadding"></LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/statistics_regionCV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/statistics_departementCV"
+                android:layout_marginTop="@dimen/verticalMargin"
+                android:elevation="@dimen/accountCardViewElevation"
+                app:cardCornerRadius="@dimen/cardCornerRadius">
+
+                <LinearLayout
+                    android:id="@+id/statistics_regionLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/cardBackgroundColor"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/statistics_regionTitleTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/statsPadding"
+                        android:text="@string/statisticsRegionTitle"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/textSize" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/statistics_regionPIE"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/pieChartHeight"
+                        android:padding="@dimen/statsPadding"
+                        app:egInnerPaddingColor="@android:color/transparent"
+                        app:egInnerPaddingOutline="-200" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <LinearLayout
+                        android:id="@+id/statistics_regionLegendLL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/horizontalMargin"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="@dimen/statsPadding"></LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/statistics_pharmacieCV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/statistics_regionCV"
+                android:layout_marginTop="@dimen/verticalMargin"
+                android:elevation="@dimen/accountCardViewElevation"
+                app:cardCornerRadius="@dimen/cardCornerRadius">
+
+                <LinearLayout
+                    android:id="@+id/statistics_pharmacieLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/cardBackgroundColor"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/statistics_pharmacieTitleTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/statsPadding"
+                        android:text="@string/statisticsPharmacyTitle"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/textSize" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/statistics_pharmaciePIE"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/pieChartHeight"
+                        android:padding="@dimen/statsPadding"
+                        app:egInnerPaddingColor="@android:color/transparent"
+                        app:egInnerPaddingOutline="-200" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <LinearLayout
+                        android:id="@+id/statistics_pharmacieLegendLL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/horizontalMargin"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="@dimen/statsPadding"></LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/statistics_formeAdministrationCV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/statistics_pharmacieCV"
+                android:layout_marginTop="@dimen/verticalMargin"
+                android:elevation="@dimen/accountCardViewElevation"
+                app:cardCornerRadius="@dimen/cardCornerRadius">
+
+                <LinearLayout
+                    android:id="@+id/statistics_formeAdministrationLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/cardBackgroundColor"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/statistics_formeAdministrationTitleTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/statsPadding"
+                        android:text="@string/statisticsFormeAdministrationTitle"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/textSize" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/statistics_formeAdministrationPIE"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/pieChartHeight"
+                        android:padding="@dimen/statsPadding"
+                        app:egInnerPaddingColor="@android:color/transparent"
+                        app:egInnerPaddingOutline="-200" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <LinearLayout
+                        android:id="@+id/statistics_formeAdministrationLegendLL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/horizontalMargin"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="@dimen/statsPadding"></LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/statistics_statutCV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/statistics_formeAdministrationCV"
+                android:layout_marginTop="@dimen/verticalMargin"
+                android:elevation="@dimen/accountCardViewElevation"
+                app:cardCornerRadius="@dimen/cardCornerRadius">
+
+                <LinearLayout
+                    android:id="@+id/statistics_statutLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/cardBackgroundColor"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/statistics_statutTitleTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/statsPadding"
+                        android:text="@string/statisticsAdministrationStatusTitle"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/textSize" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/statistics_statutPIE"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/pieChartHeight"
+                        android:padding="@dimen/statsPadding"
+                        app:egInnerPaddingColor="@android:color/transparent"
+                        app:egInnerPaddingOutline="-200" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <LinearLayout
+                        android:id="@+id/statistics_statutLegendLL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/horizontalMargin"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="@dimen/statsPadding"></LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/statistics_procedureAutorisationCV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/statistics_statutCV"
+                android:layout_marginTop="@dimen/verticalMargin"
+                android:elevation="@dimen/accountCardViewElevation"
+                app:cardCornerRadius="@dimen/cardCornerRadius">
+
+                <LinearLayout
+                    android:id="@+id/statistics_procedureAutorisationLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/cardBackgroundColor"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/statistics_procedureAutorisationTitleTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/statsPadding"
+                        android:text="@string/statisticsAuthorizationProcedureTitle"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/textSize" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/statistics_procedureAutorisationPIE"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/pieChartHeight"
+                        android:padding="@dimen/statsPadding"
+                        app:egInnerPaddingColor="@android:color/transparent"
+                        app:egInnerPaddingOutline="-200" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <LinearLayout
+                        android:id="@+id/statistics_procedureAutorisationLegendLL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/horizontalMargin"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="@dimen/statsPadding"></LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/statistics_titulaireCV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/statistics_procedureAutorisationCV"
+                android:layout_marginTop="@dimen/verticalMargin"
+                android:elevation="@dimen/accountCardViewElevation"
+                app:cardCornerRadius="@dimen/cardCornerRadius">
+
+                <LinearLayout
+                    android:id="@+id/statistics_titulaireLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/cardBackgroundColor"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/statistics_titulaireTitleTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/statsPadding"
+                        android:text="@string/statisticsOwnerTitle"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/textSize" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/statistics_titulairePIE"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/pieChartHeight"
+                        android:padding="@dimen/statsPadding"
+                        app:egInnerPaddingColor="@android:color/transparent"
+                        app:egInnerPaddingOutline="-200" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <LinearLayout
+                        android:id="@+id/statistics_titulaireLegendLL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/horizontalMargin"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="@dimen/statsPadding"></LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/statistics_surveillanceCV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/statistics_titulaireCV"
+                android:layout_marginTop="@dimen/verticalMargin"
+                android:layout_marginBottom="@dimen/statsBottomGap"
+                android:elevation="@dimen/accountCardViewElevation"
+                app:cardCornerRadius="@dimen/cardCornerRadius">
+
+                <LinearLayout
+                    android:id="@+id/statistics_surveillanceLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/cardBackgroundColor"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/statistics_surveillanceTitleTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/statsPadding"
+                        android:text="@string/statisticsReinforcedSurveillanceTitle"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/textSize" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/statistics_surveillancePIE"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/pieChartHeight"
+                        android:padding="@dimen/statsPadding"
+                        app:egInnerPaddingColor="@android:color/transparent"
+                        app:egInnerPaddingOutline="-200" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height" />
+
+                    <LinearLayout
+                        android:id="@+id/statistics_surveillanceLegendLL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/horizontalMargin"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="@dimen/statsPadding"></LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/statistics_scrollToTopBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:backgroundTint="?attr/colorPrimary"
+        app:srcCompat="@drawable/ic_up_arrow" />
+
+</RelativeLayout>

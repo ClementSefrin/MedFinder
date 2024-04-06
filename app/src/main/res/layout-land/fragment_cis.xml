@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/horizontalMargin"
+    android:paddingTop="@dimen/verticalMargin"
+    android:paddingEnd="@dimen/horizontalMargin"
+    android:paddingBottom="@dimen/divider_height"
+    tools:context=".ui.cis.CisFragment">
+
+    <ScrollView
+        android:id="@+id/cisFragment_mainSV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/cisFragment_buttonLL"
+        android:layout_alignParentTop="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/cisFragment_codeCisRL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/cisFragment_codeCisTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/code_cis_title"
+                    android:textSize="@dimen/textSize" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/cisFragment_codeCisACTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/auto_complete_height"
+                    android:layout_below="@id/cisFragment_codeCisTV"
+                    android:hint="@string/code_cis_search"
+                    android:inputType="text" />
+
+                <TextView
+                    android:id="@+id/cisFragment_errorCisCodeTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cisFragment_codeCisACTV"
+                    android:text="@string/errorEmptyField"
+                    android:textColor="?attr/errorMessageColor"
+                    android:textSize="@dimen/smallTextSize" />
+
+                <TextView
+                    android:id="@+id/cisFragment_medicamentNameTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cisFragment_errorCisCodeTV"
+                    android:gravity="center"
+                    android:textSize="@dimen/smallTextSize" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cisFragment_pharmacieRL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cisFragment_codeCisRL"
+                android:layout_alignStart="@id/cisFragment_codeCisRL"
+                android:layout_marginTop="@dimen/verticalMargin">
+
+                <TextView
+                    android:id="@+id/cisFragment_pharmacieTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/pharmacy_title"
+                    android:textSize="@dimen/textSize" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/cisFragment_pharmacieACTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/auto_complete_height"
+                    android:layout_below="@id/cisFragment_pharmacieTV"
+                    android:hint="@string/pharmacy_search"
+                    android:inputType="text" />
+
+                <TextView
+                    android:id="@+id/cisFragment_errorPharmacieTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cisFragment_pharmacieACTV"
+                    android:text="@string/errorEmptyField"
+                    android:textColor="?attr/errorMessageColor"
+                    android:textSize="@dimen/smallTextSize" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cisFragment_cityRL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cisFragment_pharmacieRL"
+                android:layout_alignStart="@id/cisFragment_codeCisRL"
+                android:layout_marginTop="@dimen/verticalMargin">
+
+                <TextView
+                    android:id="@+id/cisFragment_cityTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/hintCity"
+                    android:textSize="@dimen/textSize" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/cisFragment_cityACTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/auto_complete_height"
+                    android:layout_below="@id/cisFragment_cityTV"
+                    android:hint="@string/city_search"
+                    android:inputType="text" />
+
+                <TextView
+                    android:id="@+id/cisFragment_errorCityTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cisFragment_cityACTV"
+                    android:text="@string/errorEmptyField"
+                    android:textColor="?attr/errorMessageColor"
+                    android:textSize="@dimen/smallTextSize" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/cisFragment_buttonLL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/verticalMargin"
+        android:layout_marginBottom="@dimen/verticalMargin"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cisFragment_signalerBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
+            android:text="@string/report"
+            app:backgroundTint="?attr/buttonBackground" />
+
+        <Button
+            android:id="@+id/scannerB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontalMargin"
+            android:background="@drawable/button_background"
+            android:text="@string/scanner"
+            app:backgroundTint="?attr/buttonBackground" />
+
+    </LinearLayout>
+
+</RelativeLayout>

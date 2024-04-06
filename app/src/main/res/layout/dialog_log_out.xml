@@ -1,0 +1,56 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/dialogWidth"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/cardCornerRadius">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/cardBackgroundColor">
+
+        <TextView
+            android:id="@+id/dialogLogOut_descriptionTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="@string/log_out_dialog_confirm"
+            android:textAlignment="center"
+            android:textSize="@dimen/textSize" />
+
+        <LinearLayout
+            android:id="@+id/dialogLogOut_buttonsLL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dialogLogOut_descriptionTV"
+            android:layout_marginVertical="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_vertical_margin">
+
+            <Button
+                android:id="@+id/dialogLogOut_negativeButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/horizontalMargin"
+                android:layout_weight="0.5"
+                android:background="@drawable/button_background"
+                android:text="@string/cancel"
+                android:textSize="@dimen/saisieSmallTextSize"
+                app:backgroundTint="?attr/buttonBackground" />
+
+            <Button
+                android:id="@+id/dialogLogOut_positiveButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/horizontalMargin"
+                android:layout_weight="0.5"
+                android:background="@drawable/button_background"
+                android:text="@string/confirm"
+                android:textSize="@dimen/saisieSmallTextSize"
+                app:backgroundTint="?attr/buttonBackground" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

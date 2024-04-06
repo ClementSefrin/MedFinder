@@ -4,14 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="10dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginEnd="10dp"
-    android:layout_marginBottom="5dp"
+    android:layout_marginStart="@dimen/horizontalMargin"
+    android:layout_marginEnd="@dimen/horizontalMargin"
     tools:context=".ui.home.HomeFragment">
 
     <ListView
-        android:id="@+id/histoSaisieLV"
+        android:id="@+id/fragmentHome_HistoSaisieLV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="?attr/background"

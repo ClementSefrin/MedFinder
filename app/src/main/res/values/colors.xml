@@ -27,9 +27,6 @@
     <color name="text">@color/black</color>
     <color name="text_dark">#D1D1D1</color>
 
-
-
-
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="red">#FF0000</color>

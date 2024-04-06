@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/background"
-    tools:context=".activities.CreateAccount">
+    tools:context=".activities.CreateAccountActivity">
 
     <ImageView
         android:id="@+id/createAccount_backgroundIV"
@@ -14,29 +14,17 @@
         android:layout_height="@dimen/accountBackgroundHeight"
         android:background="@drawable/top_background" />
 
-    <TextView
-        android:id="@+id/createAccount_headerTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/baseVerticalMargin"
-        android:text="@string/signUpTitle"
-        android:textSize="@dimen/accountTitleTextSize"
-        android:textStyle="bold" />
-
-
     <androidx.cardview.widget.CardView
         android:id="@+id/createAccount_infosCV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/createAccount_signUpBTN"
-        android:layout_below="@id/createAccount_headerTV"
         android:layout_marginStart="@dimen/accountCardViewHorizontalMargin"
-        android:layout_marginTop="@dimen/baseVerticalMargin"
+        android:layout_marginTop="@dimen/auto_complete_height"
         android:layout_marginEnd="@dimen/accountCardViewHorizontalMargin"
-        android:layout_marginBottom="@dimen/baseVerticalMargin"
+        android:layout_marginBottom="@dimen/verticalMargin"
         app:cardBackgroundColor="?attr/cardBackgroundColor"
+        app:cardCornerRadius="@dimen/cardCornerRadius"
         app:cardElevation="@dimen/accountCardViewElevation">
 
         <ScrollView
@@ -48,18 +36,18 @@
                 android:id="@+id/createAccount_infosRL"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="@dimen/accountHorizontalPadding"
-                android:paddingTop="@dimen/accountVerticalPadding"
-                android:paddingEnd="@dimen/accountHorizontalPadding"
-                android:paddingBottom="@dimen/accountVerticalPadding">
+                android:paddingStart="@dimen/horizontalPadding"
+                android:paddingTop="@dimen/verticalPadding"
+                android:paddingEnd="@dimen/horizontalPadding"
+                android:paddingBottom="@dimen/verticalPadding">
 
                 <TextView
                     android:id="@+id/createAccount_infosHeaderTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/signUpHeader"
+                    android:text="@string/signUpTitle"
                     android:textAlignment="center"
-                    android:textSize="@dimen/accountTitleTextSize"
+                    android:textSize="@dimen/titleTextSize"
                     android:textStyle="bold" />
 
                 <EditText
@@ -67,12 +55,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_infosHeaderTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:autofillHints="InputNom"
                     android:drawableStart="@drawable/ic_edit"
                     android:hint="@string/hintFirstName"
                     android:inputType="textPersonName"
-                    android:textSize="@dimen/accountTextSize" />
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/createAccount_errorFirstNameTV"
@@ -81,19 +69,19 @@
                     android:layout_below="@id/createAccount_firstNameET"
                     android:text="@string/errorEmptyField"
                     android:textColor="?attr/errorMessageColor"
-                    android:textSize="@dimen/accountSmallTextSize" />
+                    android:textSize="@dimen/smallTextSize" />
 
                 <EditText
                     android:id="@+id/createAccount_lastNameET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_errorFirstNameTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:autofillHints="InputNom"
                     android:drawableStart="@drawable/ic_edit"
                     android:hint="@string/hintLastName"
                     android:inputType="textPersonName"
-                    android:textSize="@dimen/accountTextSize" />
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/createAccount_errorLastNameTV"
@@ -102,19 +90,19 @@
                     android:layout_below="@id/createAccount_lastNameET"
                     android:text="@string/errorEmptyField"
                     android:textColor="?attr/errorMessageColor"
-                    android:textSize="@dimen/accountSmallTextSize" />
+                    android:textSize="@dimen/smallTextSize" />
 
                 <EditText
                     android:id="@+id/createAccount_mailET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_errorLastNameTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:autofillHints="InputMail"
                     android:drawableStart="@drawable/ic_mail"
                     android:hint="@string/hintMail"
                     android:inputType="textEmailAddress"
-                    android:textSize="@dimen/accountTextSize" />
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/createAccount_errorMailTV"
@@ -123,19 +111,19 @@
                     android:layout_below="@id/createAccount_mailET"
                     android:text="@string/errorEmptyField"
                     android:textColor="?attr/errorMessageColor"
-                    android:textSize="@dimen/accountSmallTextSize" />
+                    android:textSize="@dimen/smallTextSize" />
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/createAccount_cityET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_errorMailTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:autofillHints="InputCommune"
                     android:drawableStart="@drawable/ic_city"
                     android:hint="@string/hintCity"
                     android:inputType="text"
-                    android:textSize="@dimen/accountTextSize" />
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/createAccount_errorCityTV"
@@ -144,14 +132,14 @@
                     android:layout_below="@id/createAccount_cityET"
                     android:text="@string/errorEmptyField"
                     android:textColor="?attr/errorMessageColor"
-                    android:textSize="@dimen/accountSmallTextSize" />
+                    android:textSize="@dimen/smallTextSize" />
 
                 <LinearLayout
                     android:id="@+id/createAccount_passwordLL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_errorCityTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -164,7 +152,7 @@
                         android:drawableStart="@drawable/ic_password"
                         android:hint="@string/hintPassword"
                         android:inputType="textPassword"
-                        android:textSize="@dimen/accountTextSize" />
+                        android:textSize="@dimen/textSize" />
 
                     <ImageButton
                         android:id="@+id/createAccount_passwordVisibilityBTN"
@@ -184,19 +172,19 @@
                     android:layout_below="@id/createAccount_passwordLL"
                     android:text="@string/errorEmptyField"
                     android:textColor="?attr/errorMessageColor"
-                    android:textSize="@dimen/accountSmallTextSize" />
+                    android:textSize="@dimen/smallTextSize" />
 
                 <EditText
                     android:id="@+id/createAccount_verifyPasswordET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_errorPasswordTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:autofillHints="InputMdp"
                     android:drawableStart="@drawable/ic_lock"
                     android:hint="@string/hintPasswordVerify"
                     android:inputType="textPassword"
-                    android:textSize="@dimen/accountTextSize" />
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/createAccount_errorVerifyPasswordTV"
@@ -205,14 +193,14 @@
                     android:layout_below="@id/createAccount_verifyPasswordET"
                     android:text="@string/errorEmptyField"
                     android:textColor="?attr/errorMessageColor"
-                    android:textSize="@dimen/accountSmallTextSize" />
+                    android:textSize="@dimen/smallTextSize" />
 
                 <Spinner
                     android:id="@+id/createAccount_secretQuestionSP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_errorVerifyPasswordTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:entries="@array/questionsSecretes" />
 
                 <TextView
@@ -222,19 +210,19 @@
                     android:layout_below="@id/createAccount_secretQuestionSP"
                     android:text="@string/errorEmptyField"
                     android:textColor="?attr/errorMessageColor"
-                    android:textSize="@dimen/accountSmallTextSize" />
+                    android:textSize="@dimen/smallTextSize" />
 
                 <EditText
                     android:id="@+id/createAccount_secretAnswerET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_errorSecretQuestionTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:autofillHints="InputSecretAnswer"
                     android:drawableStart="@drawable/ic_secret_answer"
                     android:hint="@string/hintSecretAnswer"
                     android:inputType="text"
-                    android:textSize="@dimen/accountTextSize" />
+                    android:textSize="@dimen/textSize" />
 
                 <TextView
                     android:id="@+id/createAccount_errorSecretAnswerTV"
@@ -243,20 +231,21 @@
                     android:layout_below="@id/createAccount_secretAnswerET"
                     android:text="@string/errorEmptyField"
                     android:textColor="?attr/errorMessageColor"
-                    android:textSize="@dimen/accountSmallTextSize" />
+                    android:textSize="@dimen/smallTextSize" />
 
                 <Button
                     android:id="@+id/createAccount_alreadySignedUpBTN"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/createAccount_errorSecretAnswerTV"
-                    android:layout_marginTop="@dimen/baseVerticalMargin"
+                    android:layout_marginTop="@dimen/verticalMargin"
                     android:background="@android:color/transparent"
                     android:drawableEnd="@drawable/ic_redirection_arrow"
                     android:text="@string/signUpAlreadySignedUp"
                     android:textAllCaps="false"
                     android:textColor="?attr/accountButtonTextColor"
-                    android:textSize="@dimen/accountSmallTextSize" />
+                    android:textSize="@dimen/smallTextSize" />
+
             </RelativeLayout>
 
         </ScrollView>
@@ -271,7 +260,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="@dimen/accountCardViewHorizontalMargin"
         android:layout_marginEnd="@dimen/accountCardViewHorizontalMargin"
-        android:layout_marginBottom="@dimen/baseVerticalMargin"
+        android:layout_marginBottom="@dimen/verticalMargin"
         android:background="@drawable/button_background"
         android:text="@string/signUpTitle"
         android:textColor="?attr/accountButtonTextColor"

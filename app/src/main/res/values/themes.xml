@@ -1,5 +1,5 @@
 <resources>
-    <!-- Base application theme. -->
+
     <style name="Theme.SAE_DAM" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <item name="colorPrimary">@color/primary</item>
@@ -23,6 +23,16 @@
     </style>
 
     <style name="Theme.SAE_DAM.Account" parent="Theme.SAE_DAM">
+
         <item name="android:navigationBarColor">?attr/background</item>
+
     </style>
+
+    <style name="Theme.SAE_DAM.ConnectionCheck" parent="Theme.SAE_DAM">
+
+        <item name="android:statusBarColor">?attr/background</item>
+        <item name="android:navigationBarColor">?attr/background</item>
+
+    </style>
+
 </resources>

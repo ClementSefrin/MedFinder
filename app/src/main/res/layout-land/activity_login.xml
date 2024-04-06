@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginRL"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/background"
+    tools:context=".activities.LoginActivity">
+
+    <ImageView
+        android:id="@+id/login_backgroundIV"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/accountBackgroundHeight"
+        android:background="@drawable/top_background" />
+
+    <TextView
+        android:id="@+id/login_errorDataTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/divider_height"
+        android:layout_marginBottom="@dimen/divider_height"
+        android:text="@string/waitingData"
+        android:textAlignment="center"
+        android:textColor="?attr/errorMessageColor"
+        android:textSize="@dimen/textSize"
+        android:textStyle="bold" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/login_infosCV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/login_logInBTN"
+        android:layout_below="@id/login_errorDataTV"
+        android:layout_marginStart="@dimen/accountCardViewHorizontalMargin"
+        android:layout_marginTop="@dimen/divider_height"
+        android:layout_marginEnd="@dimen/accountCardViewHorizontalMargin"
+        android:layout_marginBottom="@dimen/verticalMargin"
+        app:cardBackgroundColor="?attr/cardBackgroundColor"
+        app:cardCornerRadius="@dimen/cardCornerRadius"
+        app:cardElevation="@dimen/accountCardViewElevation">
+
+        <ScrollView
+            android:id="@+id/login_infosSV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/login_infosRL"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/horizontalPadding"
+                android:paddingTop="@dimen/verticalPadding"
+                android:paddingEnd="@dimen/horizontalPadding"
+                android:paddingBottom="@dimen/verticalPadding">
+
+                <TextView
+                    android:id="@+id/login_infosHeaderTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/logInTitle"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/titleTextSize"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/login_mailET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/login_infosHeaderTV"
+                    android:layout_marginTop="@dimen/verticalMargin"
+                    android:autofillHints="InputMail"
+                    android:drawableStart="@drawable/ic_mail"
+                    android:hint="@string/hintMail"
+                    android:inputType="textEmailAddress"
+                    android:textSize="@dimen/textSize" />
+
+                <TextView
+                    android:id="@+id/login_errorMailTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/login_mailET"
+                    android:text="@string/errorEmptyField"
+                    android:textColor="?attr/errorMessageColor"
+                    android:textSize="@dimen/smallTextSize" />
+
+                <LinearLayout
+                    android:id="@+id/login_passwordLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/login_errorMailTV"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/verticalMargin"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/login_passwordET"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:autofillHints="InputMdp"
+                        android:drawableStart="@drawable/ic_password"
+                        android:hint="@string/hintPassword"
+                        android:inputType="textPassword"
+                        android:textSize="@dimen/textSize" />
+
+                    <ImageButton
+                        android:id="@+id/login_passwordVisibilityBTN"
+                        android:layout_width="@dimen/passwordVisibilityIconSize"
+                        android:layout_height="@dimen/passwordVisibilityIconSize"
+                        android:layout_alignTop="@id/createAccount_passwordET"
+                        android:layout_marginLeft="@dimen/passwordVisibilityIconMargin"
+                        android:layout_toRightOf="@id/createAccount_passwordET"
+                        android:background="@drawable/ic_show_password" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/login_errorPasswordTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/login_passwordLL"
+                    android:text="@string/errorEmptyField"
+                    android:textColor="?attr/errorMessageColor"
+                    android:textSize="@dimen/smallTextSize" />
+
+                <Button
+                    android:id="@+id/login_noAccountBTN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/login_errorPasswordTV"
+                    android:layout_marginTop="@dimen/verticalMargin"
+                    android:background="@android:color/transparent"
+                    android:drawableEnd="@drawable/ic_redirection_arrow"
+                    android:text="@string/logInSignUp"
+                    android:textAllCaps="false"
+                    android:textColor="?attr/accountButtonTextColor"
+                    android:textSize="@dimen/smallTextSize" />
+
+                <Button
+                    android:id="@+id/login_forgotPasswordBTN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/login_noAccountBTN"
+                    android:background="@android:color/transparent"
+                    android:text="@string/logInForgotPassword"
+                    android:textAllCaps="false"
+                    android:textColor="?attr/accountButtonTextColor"
+                    android:textSize="@dimen/smallTextSize" />
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/login_logInBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="@dimen/accountCardViewHorizontalMargin"
+        android:layout_marginEnd="@dimen/accountCardViewHorizontalMargin"
+        android:layout_marginBottom="@dimen/verticalMargin"
+        android:background="@drawable/button_background"
+        android:text="@string/logInTitle"
+        android:textColor="?attr/accountButtonTextColor"
+        android:textStyle="bold"
+        app:backgroundTint="?attr/cardBackgroundColor" />
+
+</RelativeLayout>

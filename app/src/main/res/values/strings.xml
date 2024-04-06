@@ -10,20 +10,54 @@
 
     <string name="code_cis_search">Search for a medicine…</string>
     <string name="pharmacy_search">Search for a pharmacy…</string>
+    <string name="city_search">Search for a city…</string>
     <string name="report">Report</string>
-    <string name="delete_history_dialog_confirm">Are you sure you want to delete your history?</string>
+    <string name="delete_history_dialog_confirm">Do you really want to delete your history?</string>
+    <string name="log_out_dialog_confirm">Log out?</string>
+    <string name="delete_account_dialog_confirm">Do you really want to delete your account? All data, including your reports, will be deleted.</string>
+    <string name="connexion_dialog_confirm">This application requires an Internet connection.</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
+    <string name="confirm">Confirm</string>
+    <string name="retry">Retry</string>
+    <string name="quit">Leave</string>
     <string name="delete_history">Delete history</string>
+    <string name="change_password">Change password</string>
+    <string name="statistics">Statistics</string>
+    <string name="log_out">Log out</string>
+    <string name="delete_account">Delete account</string>
 
-    <!--Sign up-->
+    <string name="changeBTN">Change</string>
+
+    <string name="statisticsMedicine">Medicine</string>
+    <string name="statisticsDepartment">Department</string>
+    <string name="statisticsRegion">Region</string>
+    <string name="statisticsFormeAdministration">Administration form</string>
+    <string name="statisticsAdministrationStatus">Administration status</string>
+    <string name="statisticsAuthorizationProcedure">Authorization procedure</string>
+    <string name="statisticsOwner">Owner</string>
+    <string name="statisticsReinforcedSurveillance">Reinforced surveillance</string>
+
+    <string name="statisticsMedicineTitle">Number of reports per medicine</string>
+    <string name="statisticsCityTitle">Number of reports per city</string>
+    <string name="statisticsDepartmentTitle">Number of reports per department</string>
+    <string name="statisticsRegionTitle">Number of reports by region</string>
+    <string name="statisticsPharmacyTitle">Number of reports per pharmacy</string>
+    <string name="statisticsFormeAdministrationTitle">Number of reports by form of administration</string>
+    <string name="statisticsAdministrationStatusTitle">Number of reports by administration status</string>
+    <string name="statisticsAuthorizationProcedureTitle">Number of reports per authorization procedure</string>
+    <string name="statisticsOwnerTitle">Number of reports per owner</string>
+    <string name="statisticsReinforcedSurveillanceTitle">Number of reports by reinforced surveillance</string>
+
     <string name="signUpTitle">Sign up</string>
     <string name="signUpHeader">Personal informations</string>
     <string name="hintFirstName">First name</string>
     <string name="hintLastName">Last name</string>
     <string name="hintMail">Mail</string>
     <string name="hintCity">City</string>
+    <string name="hintCityDefault">City (default :\u0020</string>
     <string name="hintPassword">Password</string>
+    <string name="hintOldPassword">Old password</string>
     <string name="hintPasswordVerify">Confirm password</string>
     <string name="signUpAlreadySignedUp">Already have account ? Log in.</string>
     <string-array name="questionsSecretes">
@@ -34,29 +68,34 @@
         <item>What is the name of your best friend ?</item>
     </string-array>
     <string name="hintSecretAnswer">Answer</string>
+    <string name="accountCreatedMessage">Account created successfully!</string>
 
-    <!--Log in-->
     <string name="logInTitle">Log in</string>
     <string name="logInHeader">Connection</string>
     <string name="logInForgotPassword">Forgot password ?</string>
     <string name="logInSignUp">No account ? Sign up.</string>
 
-    <!--Forgot password-->
     <string name="forgotPasswordTitle">Forgot password</string>
     <string name="forgotPasswordHeader">Reset your password</string>
     <string name="hintNewPassword">New password</string>
     <string name="forgotPasswordButtonTextAltStep">Next</string>
 
-    <!-- Error messages -->
     <string name="errorEmptyField">This field is required.</string>
     <string name="errorInvalidMailFormat">The mail should respect the following format : example@example.com .</string>
-    <string name="errorInvalidPasswordFormat">The password needs to have at least 8 characters, one uppercase letter, one lowercase letter, one digit, and one special character.</string>
+    <string name="errorInvalidPasswordFormat">The password needs to have at least 8 characters and at most 30, one uppercase letter, one lowercase letter, one digit, and one special character.</string>
     <string name="errorInvalidPasswordConfirmation">The passwords are different.</string>
     <string name="errorAccountAlreadyExists">There is already an account using this email.</string>
     <string name="errorInvalidMailPassword">The mail or the password is incorrect.</string>
     <string name="errorInvalidQuestionAnswer">The secret question or answer is incorrect.</string>
     <string name="errorInvalidNewPassword">The new password must be different from the old one.</string>
     <string name="errorNoAccountFound">No account found with this mail.</string>
-
+    <string name="errorUnknownMedicine">Unknown medicine.</string>
+    <string name="errorUnknownPharmacy">Unknown pharmacy.</string>
+    <string name="errorUnknownCity">Unknown city.</string>
+    <string name="waitingData">Data is loading..</string>
+    <string name="errorDataLoaded">Please wait until all the data is loaded.</string>
+    <string name="errorInvalidOldPassword">The old password is incorrect.</string>
+    <string name="errorSamePassword">The new password must be different from the old one.</string>
+    <string name="scanner">SCANNER</string>
 
 </resources>

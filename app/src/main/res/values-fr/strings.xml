@@ -1,29 +1,65 @@
 <resources>
     <!-- Titles -->
-    <string name="title_home">Menu principale</string>
+    <string name="title_home">Menu principal</string>
     <string name="title_cis">Nouvelle saisie</string>
     <string name="title_account">Compte</string>
     <string name="code_cis_title">Code CIS</string>
     <string name="pharmacy_title">Pharmacie</string>
 
+
+
     <string name="code_cis_search">Chercher un médicament…</string>
     <string name="pharmacy_search">Chercher une pharmacie…</string>
+    <string name="city_search">Cherche une ville…</string>
     <string name="report">Signaler</string>
-    <string name="delete_history_dialog_confirm">Voulez-vous vraiment supprimer votre historique?</string>
+    <string name="delete_history_dialog_confirm">Voulez-vous vraiment supprimer votre historique ?</string>
+    <string name="log_out_dialog_confirm">Se déconnecter?</string>
+    <string name="delete_account_dialog_confirm">Voulez-vous vraiment supprimer votre compte ? Toutes vos données, dont vos signalements, seront supprimées.</string>
+    <string name="connexion_dialog_confirm">Cette application nécessite une connexion Internet.</string>
     <string name="cancel">Annuler</string>
     <string name="delete">Supprimer</string>
+    <string name="confirm">Confirmer</string>
+    <string name="retry">Réessayer</string>
+    <string name="quit">Quitter</string>
     <string name="delete_history">Supprimer l\'historique</string>
+    <string name="change_password">Modifier le mot de passe</string>
+    <string name="statistics">Statistiques</string>
+    <string name="log_out">Déconnexion</string>
+    <string name="delete_account">Supprimer le compte</string>
 
-    <!--Sign up-->
+    <string name="changeBTN">Modifier</string>
+
+    <string name="statisticsMedicine">Médicament</string>
+    <string name="statisticsDepartment">Département</string>
+    <string name="statisticsRegion">Région</string>
+    <string name="statisticsFormeAdministration">Forme d\'administration</string>
+    <string name="statisticsAdministrationStatus">Statut d\'administration</string>
+    <string name="statisticsAuthorizationProcedure">Procédure d\'autorisation</string>
+    <string name="statisticsOwner">Titulaire</string>
+    <string name="statisticsReinforcedSurveillance">Surveillance renforcée</string>
+
+    <string name="statisticsMedicineTitle">Nombre de signalement par médicament</string>
+    <string name="statisticsCityTitle">Nombre de signalement par ville</string>
+    <string name="statisticsDepartmentTitle">Nombre de signalement par département</string>
+    <string name="statisticsRegionTitle">Nombre de signalement par région</string>
+    <string name="statisticsPharmacyTitle">Nombre de signalement par pharmacie</string>
+    <string name="statisticsFormeAdministrationTitle">Nombre de signalement par forme d\'administration</string>
+    <string name="statisticsAdministrationStatusTitle">Nombre de signalement par statut d\'administration</string>
+    <string name="statisticsAuthorizationProcedureTitle">Nombre de signalement par procédure d\'autorisation</string>
+    <string name="statisticsOwnerTitle">Nombre de signalement par titulaire</string>
+    <string name="statisticsReinforcedSurveillanceTitle">Nombre de signalement par surveillance renforcée</string>
+
     <string name="signUpTitle">S\'inscrire</string>
     <string name="signUpHeader">Informations personnelles</string>
     <string name="hintFirstName">Prénom</string>
     <string name="hintLastName">Nom</string>
     <string name="hintMail">Email</string>
     <string name="hintCity">Ville</string>
+    <string name="hintCityDefault">Ville (defaut :\u0020</string>
     <string name="hintPassword">Mot de passe</string>
+    <string name="hintOldPassword">Ancien mot de passe</string>
     <string name="hintPasswordVerify">Confirmer le mot de passe</string>
-    <string name="signUpAlreadySignedUp">Déjà inscrit? Connectez-vous.</string>
+    <string name="signUpAlreadySignedUp">Déjà inscrit ? Connectez-vous.</string>
     <string-array name="questionsSecretes">
         <item>-</item>
         <item>Comment s\'appelle votre animal de compagnie ?</item>
@@ -32,28 +68,33 @@
         <item>Comment s\'appelle votre meilleur(e) amie(e) ?</item>
     </string-array>
     <string name="hintSecretAnswer">Réponse</string>
+    <string name="accountCreatedMessage">Compte créé avec succès!</string>
 
-    <!--Log in-->
     <string name="logInTitle">Se connecter</string>
     <string name="logInHeader">Connexion</string>
     <string name="logInForgotPassword">Mot de passe oublié ?</string>
     <string name="logInSignUp">Pas de compte ? Inscrivez-vous.</string>
 
-    <!--Forgot password-->
     <string name="forgotPasswordTitle">Mot de passe oublié</string>
     <string name="forgotPasswordHeader">Réinitialiser votre mot de passe</string>
     <string name="hintNewPassword">Nouveau mot de passe</string>
+    <string name="forgotPasswordButtonTextAltStep">Suivant</string>
 
-    <!-- Error messages -->
     <string name="errorEmptyField">Champs requis.</string>
     <string name="errorInvalidMailFormat">L\'email doit suivre le format suivant : exemple@exemple.com .</string>
-    <string name="errorInvalidPasswordFormat">Le mot de passe doit comporter au moins 8 caractères, une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.</string>
+    <string name="errorInvalidPasswordFormat">Le mot de passe doit comporter au moins 8 caractères et au plus 30, une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.</string>
     <string name="errorInvalidPasswordConfirmation">Les mots de passe sont différents.</string>
     <string name="errorAccountAlreadyExists">Il existe déjà un compte avec cet email.</string>
     <string name="errorInvalidMailPassword">L\'email ou le mot de passe est incorrect.</string>
     <string name="errorInvalidQuestionAnswer">La question secrète ou la réponse est incorrecte.</string>
     <string name="errorInvalidNewPassword">Le nouveau mot de passe doit être différent du précédent.</string>
     <string name="errorNoAccountFound">Aucun compte avec cet email.</string>
-
+    <string name="errorUnknownMedicine">Médicament inconnu.</string>
+    <string name="errorUnknownPharmacy">Pharmacie inconnue.</string>
+    <string name="errorUnknownCity">Ville inconnue.</string>
+    <string name="waitingData">Chargement des données..</string>
+    <string name="errorDataLoaded">Veuillez attendre la fin du chargement des données.</string>
+    <string name="errorInvalidOldPassword">L\'ancien mot de passe est incorrect.</string>
+    <string name="errorSamePassword">Le nouveau mot de passe doit être différent de l\'ancien.</string>
 
 </resources>
