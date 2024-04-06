@@ -22,7 +22,6 @@ import iut.dam.sae_dam.data.saisies.SaisieAdapter;
 import iut.dam.sae_dam.data.DataHandling;
 import iut.dam.sae_dam.databinding.FragmentHomeBinding;
 
-
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
 
@@ -33,10 +32,8 @@ public class HomeFragment extends Fragment {
         ListView histoSaisie = binding.fragmentHomeHistoSaisieLV;
         SaisieAdapter adapter = new SaisieAdapter(getActivity(), R.layout.item_saisie, DataHandling.getUserSaisies());
         histoSaisie.setAdapter(adapter);
-
         return root;
     }
-
 
     @Override
     public void onPause() {

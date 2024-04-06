@@ -86,9 +86,7 @@ public class DataHandling {
         new DeleteAccount().execute();
     }
 
-
     private static class LoadData extends AsyncTask<Void, Void, Void> {
-
         @Override
         protected Void doInBackground(Void... voids) {
             try {
@@ -145,17 +143,14 @@ public class DataHandling {
                     allSaisies.add(saisie);
                 }
 
-
                 preparedStatement.close();
 
                 DatabaseConnection.closeConnection(connection);
             } catch (SQLException e) {
                 e.printStackTrace();
-                Log.e("Database Error", e.getMessage());
             }
             return null;
         }
-
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
@@ -179,13 +174,11 @@ public class DataHandling {
                     preparedStatement.setInt(5, saisie.getCity().getInsee());
                     preparedStatement.executeUpdate();
                 }
-
                 preparedStatement.close();
 
                 DatabaseConnection.closeConnection(connection);
             } catch (SQLException e) {
                 e.printStackTrace();
-                Log.e("Database Error", e.getMessage());
             }
             return null;
         }
@@ -214,7 +207,6 @@ public class DataHandling {
                 dataDeleted++;
             } catch (SQLException e) {
                 e.printStackTrace();
-                Log.e("Database Error", e.getMessage());
             }
             return null;
         }
@@ -236,12 +228,10 @@ public class DataHandling {
                 DatabaseConnection.closeConnection(connection);
             } catch (SQLException e) {
                 e.printStackTrace();
-                Log.e("Database Error", e.getMessage());
             }
             return null;
         }
     }
-
 
     public static void loadUserSaisies() {
         userSaisies.clear();
@@ -289,19 +279,11 @@ public class DataHandling {
         }
         return false;
     }
+
     public static Pharmacie getPharmacieByName(String name) {
         for (Pharmacie pharmacie : pharmacies) {
             if (pharmacie.getName().equals(name)) {
                 return pharmacie;
-            }
-        }
-        return null;
-    }
-
-    public static Saisie getSaisie(int medicament, int pharmacie) {
-        for (Saisie saisie : allSaisies) {
-            if (saisie.getMedicament().getCisCode() == medicament && saisie.getPharmacie().getId() == pharmacie) {
-                return saisie;
             }
         }
         return null;

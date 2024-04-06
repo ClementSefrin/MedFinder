@@ -21,8 +21,6 @@
 
     <dimen name="dialogWidth">300dp</dimen>
 
-
-    <!-- AccountManagement -->
     <dimen name="accountBackgroundHeight">600dp</dimen>
 
     <dimen name="accountTextHeight">50dp</dimen>
@@ -39,9 +37,6 @@
 
     <dimen name="passwordVisibilityIconSize">30dp</dimen>
     <dimen name="passwordVisibilityIconMargin">5dp</dimen>
-
-
-    <!-- Histo saisie -->
 
     <dimen name="saisieTextSize">15sp</dimen>
     <dimen name="saisieSmallTextSize">12sp</dimen>

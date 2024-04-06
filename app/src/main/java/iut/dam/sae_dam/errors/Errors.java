@@ -16,5 +16,4 @@ public enum Errors {
     UNKNOWN_CITY,
     INVALID_OLD_PASSWORD,
     SAME_PASSWORD,
-
 }

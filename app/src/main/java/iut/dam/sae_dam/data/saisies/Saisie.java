@@ -12,11 +12,6 @@ public class Saisie {
     private Pharmacie pharmacie;
     private int userId, departement;
     private Ville ville;
-
-    public int getUserId() {
-        return userId;
-    }
-
     private Date dateSaisie;
 
     public Saisie(int userId, Medicament medicament, Pharmacie pharmacie, Date dateSaisie, Ville ville, int departement) {
@@ -26,6 +21,11 @@ public class Saisie {
         this.dateSaisie = dateSaisie;
         this.ville = ville;
         this.departement = departement;
+    }
+
+
+    public int getUserId() {
+        return userId;
     }
 
     public Medicament getMedicament() {

@@ -32,7 +32,7 @@ import iut.dam.sae_dam.data.DatabaseConnection;
 import iut.dam.sae_dam.errors.ErrorManager;
 import iut.dam.sae_dam.errors.Errors;
 
-public class ForgotPassword extends AppCompatActivity {
+public class ForgotPasswordActivity extends AppCompatActivity {
 
     private EditText mailET, newPasswordET, verifyNewPasswordET, secretAnswerET;
     private TextView errorMailTV, errorPasswordTV, errorPasswordVerifyTV, errorSecretQuestion, errorSecretAnswerTV;
@@ -55,26 +55,21 @@ public class ForgotPassword extends AppCompatActivity {
         errors = new HashMap<>();
         errorMessagesViews = new HashMap<>();
         getViews();
-
-
         setFirstStep();
 
         resetPasswordBTN.setOnClickListener(v -> {
             resetPassword();
         });
 
-
         passwordVisibilityBTN.setOnClickListener(v -> {
             changePasswordVisibility();
         });
 
         signUpBTN.setOnClickListener(v -> {
-            Intent intent = new Intent(ForgotPassword.this, CreateAccount.class);
+            Intent intent = new Intent(ForgotPasswordActivity.this, CreateAccountActivity.class);
             startActivity(intent);
         });
 
-
-        //Password character limit
         newPasswordET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -90,6 +85,7 @@ public class ForgotPassword extends AppCompatActivity {
                 }
             }
         });
+
         verifyNewPasswordET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -145,7 +141,6 @@ public class ForgotPassword extends AppCompatActivity {
                     this.exists = true;
                 } else {
                     this.exists = false;
-                    Log.e("Database Connection", "Aucun compte avec cet email!");
                 }
 
                 DatabaseConnection.closeConnection(connection);
@@ -161,11 +156,11 @@ public class ForgotPassword extends AppCompatActivity {
             super.onPostExecute(aVoid);
             if (exists) {
                 errors.clear();
-                ErrorManager.updateBorder(ForgotPassword.this, errors, errorMessagesViews);
+                ErrorManager.updateBorder(ForgotPasswordActivity.this, errors, errorMessagesViews);
                 setSecondStep();
             } else {
                 errors.put(mailET, Errors.NO_ACCOUNT_FOUND);
-                ErrorManager.updateBorder(ForgotPassword.this, errors, errorMessagesViews);
+                ErrorManager.updateBorder(ForgotPasswordActivity.this, errors, errorMessagesViews);
             }
         }
     }
@@ -194,9 +189,9 @@ public class ForgotPassword extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            Toast.makeText(ForgotPassword.this, "Mot de passe réinitialisé avec succès!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ForgotPasswordActivity.this, "Mot de passe réinitialisé avec succès!", Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(ForgotPassword.this, Login.class);
+            Intent intent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
             startActivity(intent);
         }
 
@@ -222,7 +217,6 @@ public class ForgotPassword extends AppCompatActivity {
         errorPasswordVerifyTV = findViewById(R.id.forgotPassword_errorNewPasswordVerifyTV);
         errorSecretQuestion = findViewById(R.id.forgotPassword_errorSecretQuestionTV);
         errorSecretAnswerTV = findViewById(R.id.forgotPassword_errorSecretAnswerTV);
-
 
         errorMessagesViews.put(mailET, errorMailTV);
         errorMessagesViews.put(newPasswordET, errorPasswordTV);
@@ -331,7 +325,6 @@ public class ForgotPassword extends AppCompatActivity {
             verifyNewPasswordET.setTransformationMethod(PasswordTransformationMethod.getInstance());
             passwordVisibilityBTN.setBackgroundResource(R.drawable.ic_show_password);
         }
-
         newPasswordET.setSelection(passwordSelectionStart, passwordSelectionEnd);
         verifyNewPasswordET.setSelection(passwordVerifySelectionStart, passwordVerifySelectionEnd);
     }

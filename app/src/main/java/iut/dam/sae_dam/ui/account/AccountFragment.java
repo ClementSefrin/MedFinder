@@ -13,9 +13,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import iut.dam.sae_dam.activities.Login;
+import iut.dam.sae_dam.activities.LoginActivity;
 import iut.dam.sae_dam.activities.StatisticsActivity;
 import iut.dam.sae_dam.data.DataHandling;
 import iut.dam.sae_dam.R;
@@ -27,7 +28,6 @@ public class AccountFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         AccountViewModel accountViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
-
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -37,7 +37,6 @@ public class AccountFragment extends Fragment {
         TextView logOutTV = binding.accountFragmentLogOutTV;
         TextView deleteAccountTV = binding.accountFragmentDeleteAccountTV;
 
-        //Suppression de l'historique
         deleteHistoryTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,7 +44,6 @@ public class AccountFragment extends Fragment {
             }
         });
 
-        //Changement de mot de passe
         changePasswordTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +51,6 @@ public class AccountFragment extends Fragment {
             }
         });
 
-        //Statistiques
         if (!getActivity().getIntent().getBooleanExtra("admin", false)) {
             binding.accountFragmentStatisticsRL.setVisibility(View.GONE);
         }
@@ -66,7 +63,6 @@ public class AccountFragment extends Fragment {
             }
         });
 
-        //Deconnexion
         logOutTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +70,6 @@ public class AccountFragment extends Fragment {
             }
         });
 
-        //Suppression du compte
         deleteAccountTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +84,7 @@ public class AccountFragment extends Fragment {
                         dialog.dismiss();
                         DataHandling.deleteAccount();
                         getActivity().finishAffinity();
-                        Intent intent = new Intent(getContext(), Login.class);
+                        Intent intent = new Intent(getContext(), LoginActivity.class);
                         startActivity(intent);
                     }
                 });
@@ -148,7 +143,7 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().finishAffinity();
-                Intent intent = new Intent(getContext(), Login.class);
+                Intent intent = new Intent(getContext(), LoginActivity.class);
                 startActivity(intent);
             }
         });

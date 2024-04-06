@@ -1,5 +1,4 @@
 package iut.dam.sae_dam.data.medicaments;
-// MedicineAdapter.java
 
 import android.content.Context;
 import android.widget.ArrayAdapter;
@@ -12,14 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MedicamentAdapter extends ArrayAdapter<Medicament> implements Filterable {
-
     private List<Medicament> medicineListFull;
 
     public MedicamentAdapter(Context context, List<Medicament> medicineList) {
         super(context, android.R.layout.simple_dropdown_item_1line, medicineList);
         medicineListFull = new ArrayList<>(medicineList);
     }
-
     @NonNull
     @Override
     public Filter getFilter() {
@@ -42,7 +39,6 @@ public class MedicamentAdapter extends ArrayAdapter<Medicament> implements Filte
                 suggestions.addAll(medicineListFull);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
-
                 for (Medicament medicine : medicineListFull) {
                     if (String.valueOf(medicine.getCisCode()).contains(filterPattern) ||
                             medicine.getDenomination().toLowerCase().contains(filterPattern)) {

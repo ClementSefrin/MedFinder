@@ -1,4 +1,4 @@
-package iut.dam.sae_dam.scanDataMatrix;
+package iut.dam.sae_dam.activities;
 
 import android.Manifest;
 import android.content.Intent;
@@ -21,10 +21,9 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 import java.io.IOException;
 
 import iut.dam.sae_dam.R;
-import iut.dam.sae_dam.activities.MainActivity;
 
 
-public class Scanner extends AppCompatActivity {
+public class ScannerActivity extends AppCompatActivity {
     public interface OnDataMatrixDetectedListener {
         void onDataMatrixDetected(String data);
     }
@@ -40,7 +39,7 @@ public class Scanner extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner_camera);
-        surfaceView = findViewById(R.id.surfaceView);
+        surfaceView = findViewById(R.id.scanner_cameraView);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             requestCameraPermission();
         } else {
@@ -70,7 +69,7 @@ public class Scanner extends AppCompatActivity {
             @Override
             public void surfaceCreated(@NonNull SurfaceHolder holder) {
                 try {
-                    if (ActivityCompat.checkSelfPermission(Scanner.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(ScannerActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                         cameraSource.start(holder);
                     }
                 } catch (IOException e) {

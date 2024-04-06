@@ -1,4 +1,3 @@
-// Medicament.java
 package iut.dam.sae_dam.data.medicaments;
 
 import java.util.Objects;
@@ -35,10 +34,6 @@ public class Medicament {
 
     public String getProcedureAutorisation() {
         return procedureAutorisation;
-    }
-
-    public String getEtatCommercialisation() {
-        return etatCommercialisation;
     }
 
     public String getTitulaire() {

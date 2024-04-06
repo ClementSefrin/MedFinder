@@ -56,7 +56,6 @@
                 android:text="Ville"
                 android:textSize="@dimen/saisieTextSize" />
 
-
             <TextView
                 android:id="@+id/itemSaisie_dateSaisieTV"
                 android:layout_width="wrap_content"
@@ -68,6 +67,9 @@
                 android:padding="10dp"
                 android:text="01/01/01"
                 android:textSize="@dimen/saisieSmallTextSize" />
+
         </LinearLayout>
+
     </RelativeLayout>
+
 </RelativeLayout>

@@ -13,13 +13,11 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -30,15 +28,12 @@ import java.util.HashMap;
 
 import iut.dam.sae_dam.MedFind;
 import iut.dam.sae_dam.R;
-import iut.dam.sae_dam.activities.CreateAccount;
-import iut.dam.sae_dam.activities.ForgotPassword;
+import iut.dam.sae_dam.activities.ForgotPasswordActivity;
 import iut.dam.sae_dam.data.DatabaseConnection;
 import iut.dam.sae_dam.errors.ErrorManager;
 import iut.dam.sae_dam.errors.Errors;
 
 public class ChangePasswordDialog extends Dialog {
-
-
     private EditText oldPasswordET, newPasswordET, passwordVerifyEt, secretAnswerET;
     private Spinner secretQuestionSP;
     private TextView errorOldPasswordTV, errorNewPasswordTV, errorPasswordVerifyTV, errorSecretQuestion, errorSecretAnswerTV;
@@ -58,10 +53,8 @@ public class ChangePasswordDialog extends Dialog {
         errors = new HashMap<>();
         getViews();
 
-        // Set dialog width and height
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        // Set transparent background with rounded corners
         getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         changeBTN.setOnClickListener(new View.OnClickListener() {
@@ -83,12 +76,10 @@ public class ChangePasswordDialog extends Dialog {
             }
         });
 
-
         passwordVisibilityBTN.setOnClickListener(v -> {
             changePasswordVisibility();
         });
 
-        //Password character limit
         oldPasswordET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -106,6 +97,7 @@ public class ChangePasswordDialog extends Dialog {
                 }
             }
         });
+
         newPasswordET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -123,6 +115,7 @@ public class ChangePasswordDialog extends Dialog {
                 }
             }
         });
+
         passwordVerifyEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -145,11 +138,10 @@ public class ChangePasswordDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 activity.finish();
-                Intent intent = new Intent(activity, ForgotPassword.class);
+                Intent intent = new Intent(activity, ForgotPasswordActivity.class);
                 activity.startActivity(intent);
             }
         });
-
     }
 
 
@@ -173,7 +165,6 @@ public class ChangePasswordDialog extends Dialog {
                 DatabaseConnection.closeConnection(connection);
             } catch (SQLException e) {
                 e.printStackTrace();
-                Log.e("Database Error", "AAAAAA\n" + e.getMessage());
             }
             return null;
         }
@@ -270,7 +261,6 @@ public class ChangePasswordDialog extends Dialog {
             passwordVerifyEt.setTransformationMethod(PasswordTransformationMethod.getInstance());
             passwordVisibilityBTN.setBackgroundResource(R.drawable.ic_show_password);
         }
-
         oldPasswordET.setSelection(oldPasswordSelectionStart, oldPasswordSelectionEnd);
         newPasswordET.setSelection(newPasswordSelectionStart, newPasswordSelectionEnd);
         passwordVerifyEt.setSelection(passwordVerifySelectionStart, passwordVerifySelectionEnd);

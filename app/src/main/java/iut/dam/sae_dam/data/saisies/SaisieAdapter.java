@@ -34,7 +34,6 @@ public class SaisieAdapter extends ArrayAdapter<Saisie> {
             layout = inflater.inflate(itemRessourceId, parent, false);
         }
 
-        //Récupérer les view
         TextView nomMedicamentTV = (TextView) layout.findViewById(R.id.itemSaisie_nomMedicamentTV);
         TextView codeCisTV = (TextView) layout.findViewById(R.id.itemSaisie_codeCisTV);
         TextView pharmacieTV = (TextView) layout.findViewById(R.id.itemSaisie_pharmacieTV);

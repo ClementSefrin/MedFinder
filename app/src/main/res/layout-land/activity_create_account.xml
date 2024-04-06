@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/background"
-    tools:context=".activities.CreateAccount">
+    tools:context=".activities.CreateAccountActivity">
 
     <ImageView
         android:id="@+id/createAccount_backgroundIV"
@@ -24,8 +24,8 @@
         android:layout_marginEnd="@dimen/accountCardViewHorizontalMargin"
         android:layout_marginBottom="@dimen/verticalMargin"
         app:cardBackgroundColor="?attr/cardBackgroundColor"
-        app:cardElevation="@dimen/accountCardViewElevation"
-        app:cardCornerRadius="@dimen/cardCornerRadius">
+        app:cardCornerRadius="@dimen/cardCornerRadius"
+        app:cardElevation="@dimen/accountCardViewElevation">
 
         <ScrollView
             android:id="@+id/createAccount_infosSV"
@@ -245,6 +245,7 @@
                     android:textAllCaps="false"
                     android:textColor="?attr/accountButtonTextColor"
                     android:textSize="@dimen/smallTextSize" />
+
             </RelativeLayout>
 
         </ScrollView>

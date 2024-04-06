@@ -20,7 +20,6 @@ import iut.dam.sae_dam.databinding.ActivityMainBinding;
 import iut.dam.sae_dam.ui.account.AccountFragment;
 
 public class MainActivity extends AppCompatActivity {
-
     private ActivityMainBinding binding;
 
     @Override
@@ -32,16 +31,15 @@ public class MainActivity extends AppCompatActivity {
         String dataMatrix = intent.getStringExtra("dataMatrix");
         if (dataMatrix != null) {
             Bundle bundle = new Bundle();
-            bundle.putString("dataMatrix", dataMatrix); // Put DataMatrix in bundle
+            bundle.putString("dataMatrix", dataMatrix);
             Navigation.findNavController(this, R.id.mainActivity_hostFragment)
-                    .navigate(R.id.navigation_cis, bundle); // Navigate to CisFragment
+                    .navigate(R.id.navigation_cis, bundle);
         }
 
         BottomNavigationView navView = findViewById(R.id.mainActivity_navView);
 
         NavController navController = Navigation.findNavController(this, R.id.mainActivity_hostFragment);
         NavigationUI.setupWithNavController(binding.mainActivityNavView, navController);
-
 
         final TextView headerTextView = findViewById(R.id.mainActivity_headerTitle);
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {

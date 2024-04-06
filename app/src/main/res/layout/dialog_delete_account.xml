@@ -49,6 +49,9 @@
                 android:textColor="?attr/errorMessageColor"
                 android:textSize="@dimen/saisieSmallTextSize"
                 app:backgroundTint="?attr/buttonBackground" />
+
         </LinearLayout>
+
     </RelativeLayout>
+
 </androidx.cardview.widget.CardView>

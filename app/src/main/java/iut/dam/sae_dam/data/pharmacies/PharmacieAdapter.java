@@ -12,14 +12,12 @@ import java.util.List;
 
 
 public class PharmacieAdapter extends ArrayAdapter<Pharmacie> implements Filterable {
-
-    private List<Pharmacie> pharmaciesListFull;  // Full list of medicines for filtering
+    private List<Pharmacie> pharmaciesListFull;
 
     public PharmacieAdapter(Context context, List<Pharmacie> pharmaciesList) {
         super(context, android.R.layout.simple_dropdown_item_1line, pharmaciesList);
         pharmaciesListFull = new ArrayList<>(pharmaciesList);
     }
-
 
     public boolean contains(int id, String name) {
         return pharmaciesListFull.contains(new Pharmacie(id, name));

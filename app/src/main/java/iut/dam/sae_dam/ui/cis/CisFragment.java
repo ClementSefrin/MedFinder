@@ -1,5 +1,4 @@
 package iut.dam.sae_dam.ui.cis;
-// CipFragment.java
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,20 +22,20 @@ import iut.dam.sae_dam.R;
 import iut.dam.sae_dam.data.DataHandling;
 import iut.dam.sae_dam.data.villes.Ville;
 import iut.dam.sae_dam.data.villes.VilleAdapter;
-import iut.dam.sae_dam.databinding.FragmentCisBinding;
 import iut.dam.sae_dam.errors.ErrorManager;
 import iut.dam.sae_dam.errors.Errors;
+import iut.dam.sae_dam.databinding.FragmentCisBinding;
 import iut.dam.sae_dam.data.medicaments.Medicament;
 import iut.dam.sae_dam.data.medicaments.MedicamentAdapter;
 import iut.dam.sae_dam.data.pharmacies.Pharmacie;
 import iut.dam.sae_dam.data.pharmacies.PharmacieAdapter;
 import iut.dam.sae_dam.data.saisies.Saisie;
-import iut.dam.sae_dam.scanDataMatrix.Scanner;
+import iut.dam.sae_dam.activities.ScannerActivity;
+import iut.dam.sae_dam.ui.account.AccountViewModel;
 
 public class CisFragment extends Fragment {
     private FragmentCisBinding binding;
     private CisViewModel cisViewModel;
-
     AutoCompleteTextView codeCompleteTextView, pharmacieCompleteTextView, cityCompleteTextView;
     private TextView errorCisCodeTV, errorPharmacieTV, errorCityTV, medicamentNameTV;
     private HashMap<View, TextView> errorMessagesViews;
@@ -53,11 +52,11 @@ public class CisFragment extends Fragment {
         Bundle bundle = getArguments();
 
         scanner = binding.scannerB;
-        cisViewModel = new ViewModelProvider(this, new CisViewModel.Factory(requireContext())).get(CisViewModel.class);
+        cisViewModel = new ViewModelProvider(this).get(CisViewModel.class);
         scanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(requireContext(), Scanner.class);
+                Intent intent = new Intent(requireContext(), ScannerActivity.class);
                 startActivity(intent);
             }
         });
@@ -74,19 +73,16 @@ public class CisFragment extends Fragment {
                         medicamentNameTV.setText(DataHandling.getMedicamentByCode(dataMatrixInt).getDenomination());
                         codeCompleteTextView.setText(dataMatrix);
                     } else {
-                        Toast.makeText(requireContext(), "Le code DataMatrix ne correspond pas à un médicament", Toast.LENGTH_SHORT).show();
-                        errorMessagesViews.get(codeCompleteTextView).setVisibility(View.VISIBLE);
+                        Toast.makeText(requireContext(), "Aucun médicament trouvé.", Toast.LENGTH_SHORT).show();
                     }
                 } catch (NumberFormatException e) {
-                    Toast.makeText(requireContext(), "Le code DataMatrix n'est pas valide", Toast.LENGTH_SHORT).show();
-                    errorMessagesViews.get(codeCompleteTextView).setVisibility(View.VISIBLE);
+                    Toast.makeText(requireContext(), "Aucun médicament trouvé.", Toast.LENGTH_SHORT).show();
                 }
             }
         }
 
-            // Code autocomplete //
-            MedicamentAdapter codeAdapter = new MedicamentAdapter(requireContext(), DataHandling.getMedicaments());
-            codeCompleteTextView.setAdapter(codeAdapter);
+        MedicamentAdapter codeAdapter = new MedicamentAdapter(requireContext(), DataHandling.getMedicaments());
+        codeCompleteTextView.setAdapter(codeAdapter);
 
         codeCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -96,14 +92,11 @@ public class CisFragment extends Fragment {
             }
         });
 
-        // Pharmacie autocomplete //
         PharmacieAdapter pharmacieAdapter = new PharmacieAdapter(requireContext(), DataHandling.getPharmacies());
         pharmacieCompleteTextView.setAdapter(pharmacieAdapter);
 
-        // City autocomplete //
         VilleAdapter cityAdapter = new VilleAdapter(requireContext(), DataHandling.getVilles());
         cityCompleteTextView.setAdapter(cityAdapter);
-
 
         Button addButton = binding.cisFragmentSignalerBTN;
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +114,6 @@ public class CisFragment extends Fragment {
                     medicamentNameTV.setText("");
                     cityCompleteTextView.setText("");
                 }
-
                 int userId = getActivity().getIntent().getIntExtra("userId", 0);
                 if (city == null) {
                     city = defaultCity;
@@ -134,7 +126,6 @@ public class CisFragment extends Fragment {
 
         return root;
     }
-
 
     private void getViews() {
         codeCompleteTextView = binding.cisFragmentCodeCisACTV;
@@ -191,14 +182,12 @@ public class CisFragment extends Fragment {
                 errors.put(cityCompleteTextView, Errors.UNKNOWN_CITY);
             }
         }
-
         return errors;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
         defaultCity = DataHandling.getCitybyInsee(getActivity().getIntent().getIntExtra("city", 0));
         if (defaultCity != null)
             cityCompleteTextView.setHint(getString(R.string.hintCityDefault) + defaultCity.toString() + ")");

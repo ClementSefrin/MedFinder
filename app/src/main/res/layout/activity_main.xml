@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mainActivity_mainRL"
     android:layout_width="match_parent"
-    android:theme="@style/Theme.SAE_DAM"
     android:layout_height="match_parent"
-    android:background="?attr/background">
+    android:background="?attr/background"
+    android:theme="@style/Theme.SAE_DAM">
 
     <RelativeLayout
         android:id="@+id/mainActivity_headerRL"
@@ -48,6 +48,5 @@
         app:itemIconTint="@color/navigation_color_state_list"
         app:itemTextColor="@color/navigation_color_state_list"
         app:menu="@menu/bottom_nav_menu" />
-
 
 </RelativeLayout>

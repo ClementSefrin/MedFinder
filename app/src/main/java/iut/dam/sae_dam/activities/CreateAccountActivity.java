@@ -33,7 +33,7 @@ import iut.dam.sae_dam.data.villes.VilleAdapter;
 import iut.dam.sae_dam.errors.ErrorManager;
 import iut.dam.sae_dam.errors.Errors;
 
-public class CreateAccount extends AppCompatActivity {
+public class CreateAccountActivity extends AppCompatActivity {
     private EditText firstNameET, lastNameET, mailET, passwordET, passwordVerifyEt, secretAnswerET;
     private AutoCompleteTextView cityET;
     private TextView errorFirstNameTV, errorLastNameTV, errorMailTV, errorCityTV, errorPasswordTV, errorPasswordVerifyTV, errorSecretQuestion, errorSecretAnswerTV;
@@ -53,7 +53,7 @@ public class CreateAccount extends AppCompatActivity {
         getViews();
 
         logInBTN.setOnClickListener(v -> {
-            Intent intent = new Intent(CreateAccount.this, Login.class);
+            Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
             startActivity(intent);
         });
 
@@ -65,7 +65,6 @@ public class CreateAccount extends AppCompatActivity {
             createAccount();
         });
 
-        //Password character limit
         passwordET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -81,6 +80,7 @@ public class CreateAccount extends AppCompatActivity {
                 }
             }
         });
+
         passwordVerifyEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -121,17 +121,14 @@ public class CreateAccount extends AppCompatActivity {
                 preparedStatement.setString(1, mailET.getText().toString());
                 ResultSet resultSet = preparedStatement.executeQuery();
                 if (resultSet.next()) {
-                    Log.e("Database Connection", "Un compte existe déjà avec cet email!");
                     this.exists = true;
                 } else {
                     this.exists = false;
-                    Log.e("Database Connection", "Aucun compte trouvé avec cet email!");
                 }
 
                 DatabaseConnection.closeConnection(connection);
             } catch (SQLException e) {
                 e.printStackTrace();
-                Log.e("Database Error", e.getMessage());
             }
             return null;
         }
@@ -199,9 +196,9 @@ public class CreateAccount extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            Toast.makeText(CreateAccount.this, getString(R.string.accountCreatedMessage), Toast.LENGTH_SHORT).show();
+            Toast.makeText(CreateAccountActivity.this, getString(R.string.accountCreatedMessage), Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(CreateAccount.this, MainActivity.class);
+            Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
             intent.putExtra("userId", userId);
             intent.putExtra("password", passwordET.getText().toString());
             intent.putExtra("admin", admin == 0);

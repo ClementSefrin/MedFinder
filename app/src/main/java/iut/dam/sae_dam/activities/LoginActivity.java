@@ -1,6 +1,5 @@
 package iut.dam.sae_dam.activities;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,7 +32,7 @@ import iut.dam.sae_dam.errors.ErrorManager;
 import iut.dam.sae_dam.errors.Errors;
 
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private boolean dataLoaded = false;
     EditText mailET, passwordET;
     TextView errorMailTV, errorPasswordTV, errorDataTV;
@@ -42,9 +41,6 @@ public class Login extends AppCompatActivity {
     private HashMap<View, Errors> errors;
     ImageButton passwordVisibilityBTN;
     private static final long SPLASH_SCREEN_DELAY = 2000;
-
-
-
     private Handler handler = new Handler();
     private int step = 0;
     private Runnable CheckDataLoadedRunnable = new Runnable() {
@@ -77,7 +73,7 @@ public class Login extends AppCompatActivity {
 
         forgotPasswordBTN.setOnClickListener(v -> {
             if (dataLoaded) {
-                Intent intent = new Intent(Login.this, ForgotPassword.class);
+                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
                 startActivity(intent);
             } else {
                 Toast.makeText(this, getString(R.string.errorDataLoaded), Toast.LENGTH_SHORT).show();
@@ -86,7 +82,7 @@ public class Login extends AppCompatActivity {
 
         signUpBTN.setOnClickListener(v -> {
             if (dataLoaded) {
-                Intent intent = new Intent(Login.this, CreateAccount.class);
+                Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
                 startActivity(intent);
             } else {
                 Toast.makeText(this, getString(R.string.errorDataLoaded), Toast.LENGTH_SHORT).show();
@@ -101,7 +97,6 @@ public class Login extends AppCompatActivity {
             logIn();
         });
 
-        //Password character limit
         passwordET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -164,7 +159,6 @@ public class Login extends AppCompatActivity {
                 DatabaseConnection.closeConnection(connection);
             } catch (SQLException e) {
                 e.printStackTrace();
-                Log.e("Database Error", e.getMessage());
             }
             return null;
         }
@@ -174,7 +168,7 @@ public class Login extends AppCompatActivity {
             super.onPostExecute(aVoid);
             if (exists && passwordCorrect) {
                 ErrorManager.updateBorder(getApplicationContext(), errors, errorMessagesViews);
-                Intent intent = new Intent(Login.this, MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.putExtra("userId", userId);
                 intent.putExtra("password", password);
                 intent.putExtra("admin", admin == 0);

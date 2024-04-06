@@ -17,7 +17,6 @@ import java.util.regex.Pattern;
 import iut.dam.sae_dam.R;
 
 public class ErrorManager {
-
     private static HashMap<Errors, Integer> errorMessages;
 
     static {

@@ -9,7 +9,6 @@
         android:layout_height="match_parent"
         android:background="?attr/cardBackgroundColor">
 
-
         <TextView
             android:id="@+id/dialogLogOut_descriptionTV"
             android:layout_width="match_parent"
@@ -49,6 +48,9 @@
                 android:text="@string/confirm"
                 android:textSize="@dimen/saisieSmallTextSize"
                 app:backgroundTint="?attr/buttonBackground" />
+
         </LinearLayout>
+
     </RelativeLayout>
+
 </androidx.cardview.widget.CardView>

@@ -1,5 +1,4 @@
 package iut.dam.sae_dam.data.villes;
-// MedicineAdapter.java
 
 import android.content.Context;
 import android.widget.ArrayAdapter;
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VilleAdapter extends ArrayAdapter<Ville> implements Filterable {
-
     private List<Ville> cityListFull;
 
     public VilleAdapter(Context context, List<Ville> cityList) {

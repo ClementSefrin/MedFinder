@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.view.ViewCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -39,7 +40,6 @@ import iut.dam.sae_dam.data.saisies.Saisie;
 import iut.dam.sae_dam.data.villes.Ville;
 
 public class StatisticsActivity extends AppCompatActivity {
-
     private ScrollView mainSV;
 
     @Override
@@ -56,86 +56,26 @@ public class StatisticsActivity extends AppCompatActivity {
         initButtons();
     }
 
+    private void setListener(Button button, View view) {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scrollTo(view);
+            }
+        });
+    }
+
     private void initButtons() {
-        Button medicamentBTN = findViewById(R.id.statistics_medicamentBTN);
-        medicamentBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scrollTo(findViewById(R.id.statistics_medicamentCV));
-            }
-        });
-
-        Button cityBTN = findViewById(R.id.statistics_villeBTN);
-        cityBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scrollTo(findViewById(R.id.statistics_cityCV));
-            }
-        });
-
-        Button departementBTN = findViewById(R.id.statistics_departementBTN);
-        departementBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scrollTo(findViewById(R.id.statistics_departementCV));
-            }
-        });
-
-        Button regionBTN = findViewById(R.id.statistics_regionBTN);
-        regionBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scrollTo(findViewById(R.id.statistics_regionCV));
-            }
-        });
-
-        Button pharmacieBTN = findViewById(R.id.statistics_pharmacieBTN);
-        pharmacieBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scrollTo(findViewById(R.id.statistics_pharmacieCV));
-            }
-        });
-
-        Button formeAdministrationBTN = findViewById(R.id.statistics_formeAdministrationBTN);
-        formeAdministrationBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scrollTo(findViewById(R.id.statistics_formeAdministrationCV));
-            }
-        });
-
-        Button statutBTN = findViewById(R.id.statistics_statutAdministrationBTN);
-        statutBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scrollTo(findViewById(R.id.statistics_statutCV));
-            }
-        });
-
-        Button procedureAutorisationBTN = findViewById(R.id.statistics_procedureAutorisationBTN);
-        procedureAutorisationBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scrollTo(findViewById(R.id.statistics_procedureAutorisationCV));
-            }
-        });
-
-        Button titulaireBTN = findViewById(R.id.statistics_titulaireBTN);
-        titulaireBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scrollTo(findViewById(R.id.statistics_titulaireCV));
-            }
-        });
-
-        Button surveillanceBTN = findViewById(R.id.statistics_surveillanceRenforceeBTN);
-        surveillanceBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scrollTo(findViewById(R.id.statistics_surveillanceCV));
-            }
-        });
+        setListener(findViewById(R.id.statistics_medicamentBTN), findViewById(R.id.statistics_medicamentCV));
+        setListener(findViewById(R.id.statistics_villeBTN), findViewById(R.id.statistics_cityCV));
+        setListener(findViewById(R.id.statistics_departementBTN), findViewById(R.id.statistics_departementCV));
+        setListener(findViewById(R.id.statistics_regionBTN), findViewById(R.id.statistics_regionCV));
+        setListener(findViewById(R.id.statistics_pharmacieBTN), findViewById(R.id.statistics_pharmacieCV));
+        setListener(findViewById(R.id.statistics_formeAdministrationBTN), findViewById(R.id.statistics_formeAdministrationCV));
+        setListener(findViewById(R.id.statistics_statutAdministrationBTN), findViewById(R.id.statistics_statutCV));
+        setListener(findViewById(R.id.statistics_procedureAutorisationBTN), findViewById(R.id.statistics_procedureAutorisationCV));
+        setListener(findViewById(R.id.statistics_titulaireBTN), findViewById(R.id.statistics_titulaireCV));
+        setListener(findViewById(R.id.statistics_surveillanceRenforceeBTN), findViewById(R.id.statistics_surveillanceCV));
 
         FloatingActionButton backBTN = findViewById(R.id.statistics_scrollToTopBTN);
         backBTN.setOnClickListener(new View.OnClickListener() {
@@ -145,7 +85,6 @@ public class StatisticsActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private void initData() {
         mainSV = findViewById(R.id.statistics_mainSV);
@@ -389,7 +328,6 @@ public class StatisticsActivity extends AppCompatActivity {
     }
 
     private void displayStats(LinearLayout legendLL, PieChart pie, String contentText, Integer number) {
-
         int density = (int) getResources().getDisplayMetrics().density;
         int marginItem = 5 * density;
         int colorSize = 15 * density;
@@ -402,7 +340,6 @@ public class StatisticsActivity extends AppCompatActivity {
         legendItemRL.setPadding(marginItem, marginItem, marginItem, marginItem);
         legendItemRL.setBackground(getDrawable(R.drawable.stats_item_background));
         legendItemRL.setLayoutParams(itemParams);
-
 
         View color = new View(this);
         RelativeLayout.LayoutParams colorParams = new RelativeLayout.LayoutParams(colorSize, RelativeLayout.LayoutParams.MATCH_PARENT);
@@ -441,17 +378,14 @@ public class StatisticsActivity extends AppCompatActivity {
         content.setText(contentText);
         legendItemRL.addView(content);
 
-
         legendLL.addView(legendItemRL);
 
         String colorString = "#" + Integer.toHexString(randomColor).substring(2);
-        pie.addPieSlice(
-                new PieModel(
-                        contentText,
-                        number,
-                        Color.parseColor(colorString)));
-
-
+        pie.addPieSlice(new PieModel(
+                contentText,
+                number,
+                Color.parseColor(colorString)
+        ));
     }
 
     private int getRandomColor(Set<Integer> usedColors) {

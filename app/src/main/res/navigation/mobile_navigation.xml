@@ -11,12 +11,6 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
-   <!--<fragment
-        android:id="@+id/navigation_scan"
-        android:name="iut.dam.sae_dam.ui.scan.ScanFragment"
-        android:label="@string/title_scan"
-        tools:layout="@layout/fragment_scan" />-->
-
     <fragment
         android:id="@+id/navigation_cis"
         android:name="iut.dam.sae_dam.ui.cis.CisFragment"
@@ -27,6 +21,6 @@
         android:id="@+id/navigation_account"
         android:name="iut.dam.sae_dam.ui.account.AccountFragment"
         android:label="@string/title_account"
-        tools:layout="@layout/fragment_account" >
-    </fragment>
+        tools:layout="@layout/fragment_account" />
+
 </navigation>
