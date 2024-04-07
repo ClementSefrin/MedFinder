@@ -1,6 +1,6 @@
 <resources>
     <!-- Titles -->
-    <string name="app_name" translatable="false">MedFind</string>
+    <string name="app_name" translatable="false">MedFinder</string>
     <string name="title_home">Home</string>
     <string name="title_scan" translatable="false">Scan</string>
     <string name="title_cis">New entry</string>
